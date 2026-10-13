@@ -18,14 +18,24 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api', apiRoutes);
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Chủ tịch Hồ Chí Minh Heritage API Server is running',
-    timestamp: new Date().toISOString()
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDist = path.join(__dirname, '../client/dist');
+
+// Serve built frontend files in production
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path === '/health') {
+      return next();
+    }
+    res.sendFile(path.join(clientDist, 'index.html'));
   });
-});
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
