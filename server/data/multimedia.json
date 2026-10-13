@@ -1,0 +1,224 @@
+{
+  "gallery": [
+    {
+      "id": "di-tich-kim-lien",
+      "title": "Khu di tích lịch sử Kim Liên",
+      "year": "1890",
+      "location": "Kim Liên, Nam Đàn, Nghệ An",
+      "category": "Cội nguồn quê hương",
+      "description": "Khu di tích lịch sử Quốc gia đặc biệt Kim Liên – Nơi lưu giữ trọn vẹn ký ức tuổi thơ êm đềm và cái nôi nuôi dưỡng nhân cách cao đẹp của Bác Hồ.",
+      "imageUrl": "/images/gallery/di-tich-kim-lien.png",
+      "alt": "Khu di tích lịch sử Kim Liên"
+    },
+    {
+      "id": "lang-sen",
+      "title": "Nếp nhà tranh Làng Sen quê Bác",
+      "year": "1890 - 1906",
+      "location": "Làng Sen, Kim Liên, Nghệ An",
+      "category": "Cội nguồn quê hương",
+      "description": "Ngôi nhà gỗ 5 gian lợp mái tranh đơn sơ mộc mạc bên rặng tre và vườn cây xanh ngát – nơi gắn bó với những năm tháng thiếu thời của Bác.",
+      "imageUrl": "/images/gallery/lang-sen.png",
+      "alt": "Làng Sen quê Bác"
+    },
+    {
+      "id": "kinh-thanh-hue",
+      "title": "Kinh thành Huế - Dấu ấn tuổi hoa niên",
+      "year": "1895 - 1909",
+      "location": "Thừa Thiên - Huế",
+      "category": "Thời niên thiếu",
+      "description": "Nơi ghi dấu những năm tháng Bác Hồ theo cha vào kinh đô học tập chữ Hán và tiếng Pháp, sớm chứng kiến nỗi đau mất nước và mất mẹ hiền.",
+      "imageUrl": "/images/gallery/kinh-thanh-hue.png",
+      "alt": "Kinh thành Huế"
+    },
+    {
+      "id": "ben-nha-rong",
+      "title": "Bến cảng Nhà Rồng năm 1911",
+      "year": "1911",
+      "location": "Sài Gòn",
+      "category": "Hành trình cứu nước",
+      "description": "Nơi người thanh niên yêu nước Nguyễn Tất Thành bước lên con tàu Đô đốc Latouche-Tréville ra đi tìm đường cứu nước, bắt đầu cuộc hành trình vĩ đại 30 năm bôn ba qua 3 đại dương, 4 châu lục.",
+      "imageUrl": "/images/gallery/ben-nha-rong.jpg",
+      "alt": "Bến cảng Nhà Rồng năm 1911"
+    },
+    {
+      "id": "bac-tai-dai-hoi-tours",
+      "title": "Đồng chí Nguyễn Ái Quốc tại Đại hội Tours (Pháp)",
+      "year": "1920",
+      "location": "Tours, Pháp",
+      "category": "Hoạt động quốc tế",
+      "description": "Nguyễn Ái Quốc bỏ phiếu tán thành gia nhập Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp, trở thành người cộng sản Việt Nam đầu tiên trên chính trường quốc tế.",
+      "imageUrl": "/images/gallery/dai-hoi-tours.jpg",
+      "alt": "Nguyễn Ái Quốc tại Đại hội Tours"
+    },
+    {
+      "id": "bac-ve-pac-bo",
+      "title": "Hang Pác Bó - Suối Lê-nin",
+      "year": "1941",
+      "location": "Cao Bằng",
+      "category": "Trở về Tổ quốc",
+      "description": "'Bàn đá chông chênh dịch sử Đảng / Cuộc đời cách mạng thật là sang'. Căn cứ địa đầu tiên khi Bác trở về nước vào mùa xuân 1941 sau đúng 30 năm bôn ba.",
+      "imageUrl": "/images/gallery/pac-bo.jpg",
+      "alt": "Khu di tích lịch sử Hang Pác Bó"
+    },
+    {
+      "id": "tuyen-ngon-doc-lap",
+      "title": "Bác đọc Tuyên ngôn Độc lập tại Ba Đình",
+      "year": "1945",
+      "location": "Quảng trường Ba Đình, Hà Nội",
+      "category": "Mùa thu Độc lập",
+      "description": "Ngày 2/9/1945, trước hơn 50 vạn đồng bào tại Quảng trường Ba Đình lịch sử, Bác Hồ đọc bản Tuyên ngôn Độc lập khai sinh nước Việt Nam Dân chủ Cộng hòa.",
+      "imageUrl": "/images/gallery/tuyen-ngon-doc-lap.jpg",
+      "alt": "Bác Hồ đọc Tuyên ngôn Độc lập"
+    },
+    {
+      "id": "chien-dich-bien-gioi",
+      "title": "Bác Hồ tại Chiến dịch Biên giới",
+      "year": "1950",
+      "location": "Đông Khê, Cao Bằng",
+      "category": "Kháng chiến chống Pháp",
+      "description": "Bức ảnh bất hủ của nhiếp ảnh gia Vũ Năng An ghi lại hình ảnh Bác Hồ ngồi quan sát trên đỉnh núi trong Chiến dịch Biên giới Thu - Đông 1950, thể hiện tầm vóc vị Tổng tư lệnh tối cao.",
+      "imageUrl": "/images/gallery/chien-dich-bien-gioi.jpg",
+      "alt": "Bác Hồ tại chiến trường Biên giới 1950"
+    },
+    {
+      "id": "dien-bien-phu-1954",
+      "title": "Họp bàn Kế hoạch Tác chiến Điện Biên Phủ",
+      "year": "1954",
+      "location": "Chiến khu Định Hóa, Thái Nguyên",
+      "category": "Kháng chiến chống Pháp",
+      "description": "Chủ tịch Hồ Chí Minh cùng các đồng chí Trường Chinh, Phạm Văn Đồng, Võ Nguyên Giáp họp bàn kế hoạch tác chiến Chiến dịch Điện Biên Phủ, dẫn đến chiến thắng 'lừng lẫy năm châu, chấn động địa cầu'.",
+      "imageUrl": "/images/gallery/dien-bien-phu.jpg",
+      "alt": "Bác Hồ và Bộ Chính trị họp bàn chiến dịch"
+    },
+    {
+      "id": "nha-san-bac-ho",
+      "title": "Nhà sàn Bác Hồ tại Phủ Chủ tịch",
+      "year": "1958 - 1969",
+      "location": "Hà Nội",
+      "category": "Phong cách sống",
+      "description": "Ngôi nhà sàn bằng gỗ đơn sơ bên bờ ao cá, nơi Bác đã sống và làm việc suốt 11 năm cuối đời trong sự thanh bạch, thanh tao và tận tụy hết lòng vì dân, vì nước.",
+      "imageUrl": "/images/gallery/nha-san-bac-ho.jpg",
+      "alt": "Nhà sàn Bác Hồ tại Phủ Chủ tịch"
+    },
+    {
+      "id": "bac-voi-thieu-nhi",
+      "title": "Bác Hồ với các cháu Thiếu niên Nhi đồng",
+      "year": "1960",
+      "location": "Hà Nội",
+      "category": "Tình thương bao la",
+      "description": "'Ai yêu nhi đồng bằng Bác Hồ Chí Minh / Ai yêu Bác Hồ Chí Minh bằng chúng em nhi đồng'. Bác luôn dành cho thế hệ măng non tình cảm đặc biệt thiêng liêng và trìu mến.",
+      "imageUrl": "/images/gallery/bac-voi-thieu-nhi.jpg",
+      "alt": "Bác Hồ quây quần cùng các cháu thiếu nhi"
+    },
+    {
+      "id": "lang-bac-ho",
+      "title": "Lăng Chủ tịch Hồ Chí Minh tại Ba Đình",
+      "year": "1975 - Nay",
+      "location": "Quảng trường Ba Đình, Hà Nội",
+      "category": "Di sản bất tử",
+      "description": "Nơi an nghỉ vĩnh hằng của Người cha già kính yêu của dân tộc, biểu tượng thiêng liêng quy tụ niềm tin và tình cảm sâu nặng của hàng triệu trái tim con Lạc cháu Hồng và bạn bè khắp năm châu.",
+      "imageUrl": "/images/gallery/lang-bac-ho.jpg",
+      "alt": "Lăng Chủ tịch Hồ Chí Minh"
+    }
+  ],
+  "videos": [
+    {
+      "id": "tuyen-ngon-doc-lap-video",
+      "title": "Lễ Tuyên ngôn Độc lập tại Ba Đình (2/9/1945)",
+      "youtubeId": "j20bKry4jbA",
+      "year": "1945",
+      "duration": "14:20",
+      "category": "Mùa thu Độc lập",
+      "description": "Thước phim tư liệu màu lịch sử vô giá ghi lại khoảnh khắc Chủ tịch Hồ Chí Minh đọc bản Tuyên ngôn Độc lập khai sinh nước Việt Nam Dân chủ Cộng hòa."
+    },
+    {
+      "id": "ho-chi-minh-chan-dung-video",
+      "title": "Hồ Chí Minh - Chân dung một con người",
+      "youtubeId": "6_7kySziIvk",
+      "year": "1989",
+      "duration": "58:30",
+      "category": "Phim tài liệu kinh điển",
+      "description": "Bộ phim tài liệu kinh điển của Hãng phim Tài liệu & Khoa học Trung ương, khắc họa trọn vẹn cuộc đời, đạo đức và cốt cách thanh cao của Bác Hồ."
+    },
+    {
+      "id": "bac-ho-voi-thieu-nhi-video",
+      "title": "Bác Hồ với các cháu Thiếu nhi",
+      "youtubeId": "ETTxpUI9XPU",
+      "year": "Tư liệu",
+      "duration": "08:15",
+      "category": "Tình thương bao la",
+      "description": "Những hình ảnh và thước phim ấm áp ghi lại cảnh Bác Hồ âu yếm phát kẹo, múa hát và trò chuyện thân mật cùng các cháu thiếu niên nhi đồng trong và ngoài nước."
+    },
+    {
+      "id": "khu-di-tich-nha-san-video",
+      "title": "Khu di tích Nhà sàn Bác Hồ trong Phủ Chủ tịch",
+      "youtubeId": "n0IQrIwHAC8",
+      "year": "Tư liệu",
+      "duration": "18:45",
+      "category": "Không gian di sản",
+      "description": "Hành trình khám phá ngôi nhà sàn gỗ đơn sơ, vườn cây, ao cá và những kỷ vật gắn liền với những năm tháng Người sống, cống hiến trọn vẹn cho non sông đất nước."
+    }
+  ],
+  "songs": [
+    {
+      "id": "nhu-co-bac-trong-ngay-vui-dai-thang",
+      "title": "Như có Bác trong ngày vui đại thắng",
+      "composer": "Phạm Tuyên",
+      "artist": "Dàn hợp xướng & Nhân dân cả nước",
+      "year": "1975",
+      "youtubeId": "BVYAR96ASig",
+      "excerpt": "Như có Bác Hồ trong ngày vui đại thắng, lời Bác nay đã thành chiến thắng huy hoàng. Ba mươi năm đấu tranh giành toàn vẹn non sông, ba mươi năm dân chủ cộng hòa kháng chiến đã thành công...",
+      "duration": "3:20",
+      "melodyNotes": [523.25, 523.25, 587.33, 659.25, 587.33, 523.25, 440, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25],
+      "story": "Nhạc sĩ Phạm Tuyên sáng tác chỉ trong vòng 2 tiếng đồng hồ trong đêm 28/4/1975 khi tin tức đại thắng dồn dập từ tiền tuyến báo về. Bài hát đã vang lên hào hùng trong ngày non sông thu về một mối."
+    },
+    {
+      "id": "bac-ho-mot-tinh-yeu-bao-la",
+      "title": "Bác Hồ một tình yêu bao la",
+      "composer": "Thuận Yến",
+      "artist": "NSND Thu Hiền",
+      "year": "1979",
+      "youtubeId": "T7JavXPjxwY",
+      "excerpt": "Bác Hồ, Người là tình yêu thiết tha nhất trong lòng dân và trong trái tim nhân loại. Cả cuộc đời Bác chăm lo cho hạnh phúc nhân dân, cả cuộc đời Bác hy sinh cho dân tộc Việt Nam...",
+      "duration": "4:15",
+      "melodyNotes": [392, 440, 523.25, 587.33, 659.25, 587.33, 523.25, 440, 392, 440, 523.25],
+      "story": "Khúc ca trữ tình sâu lắng ca ngợi tấm lòng yêu thương mênh mông như biển cả của Người dành cho đồng bào, chiến sĩ, các cháu thiếu nhi khắp mọi miền đất nước."
+    },
+    {
+      "id": "dem-nghe-hat-do-dua-nho-bac",
+      "title": "Đêm nghe hát đò đưa nhớ Bác",
+      "composer": "An Thuyên",
+      "artist": "NSND Thu Hiền",
+      "year": "1974",
+      "youtubeId": "WEfC8jSW6k0",
+      "excerpt": "À ơi, non nước bao la, lắng nghe câu hò quê mẹ... Làng Sen quê hương Bác ơi, ngọt ngào câu hát đò đưa đưa Bác đi tìm đường cứu nước...",
+      "duration": "5:10",
+      "melodyNotes": [329.63, 392, 440, 523.25, 440, 392, 329.63, 293.66, 329.63],
+      "story": "Mang đậm âm hưởng dân ca ví giặm xứ Nghệ - điệu hò ngọt ngào nuôi dưỡng tâm hồn người thiếu niên Nguyễn Sinh Cung từ thuở ấu thơ bên cánh võng của mẹ."
+    },
+    {
+      "id": "tieng-hat-giua-rung-pac-bo",
+      "title": "Tiếng hát giữa rừng Pác Bó",
+      "composer": "Nguyễn Tài Tuệ",
+      "artist": "NSND Thu Hiền / NSND Quốc Hương",
+      "year": "1959",
+      "youtubeId": "wRPVLu7kWcc",
+      "excerpt": "Trông rừng Pác Bó vi vu trông suối Lê-nin kìa hoa đào nở thắm... Bác về đây đưa đường chỉ lối cho dân tộc thoát cảnh lầm than...",
+      "duration": "4:05",
+      "melodyNotes": [440, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 440],
+      "story": "Giai điệu trong trẻo mang âm hưởng then núi rừng Việt Bắc, tái hiện niềm vui ngập tràn của đồng bào các dân tộc khi đón Người trở về Tổ quốc mùa xuân năm 1941."
+    },
+    {
+      "id": "ho-chi-minh-dep-nhat-ten-nguoi",
+      "title": "Hồ Chí Minh đẹp nhất tên Người",
+      "composer": "Trần Kiết Tường",
+      "artist": "NSND Quang Thọ",
+      "year": "1962",
+      "youtubeId": "FUjkRF3yuHA",
+      "excerpt": "Tôi nghe giai điệu quê hương ngân vang tên Bác... Hỡi hoa sen ngát hương thơm đời, Hồ Chí Minh đẹp nhất tên Người...",
+      "duration": "3:45",
+      "melodyNotes": [523.25, 659.25, 783.99, 880, 783.99, 659.25, 523.25],
+      "story": "Ra đời từ tình cảm tha thiết, niềm tin son sắt của đồng bào chiến sĩ miền Nam luôn hướng về Bác kính yêu trong những năm tháng kháng chiến gian khổ chống Mỹ cứu nước."
+    }
+  ]
+}

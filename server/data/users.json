@@ -1,0 +1,32 @@
+[
+  {
+    "id": "user-demo-1",
+    "username": "OngVangTienPhong",
+    "password": "123",
+    "createdAt": "2026-10-10",
+    "highScore": 1450,
+    "gamesPlayed": 5,
+    "correctAnswers": 45,
+    "title": "Ong Chúa Tri Thức"
+  },
+  {
+    "id": "user-demo-2",
+    "username": "TuoiTreDatSen",
+    "password": "123",
+    "createdAt": "2026-10-11",
+    "highScore": 1180,
+    "gamesPlayed": 4,
+    "correctAnswers": 36,
+    "title": "Ong Thợ Chăm Chỉ"
+  },
+  {
+    "id": "user-demo-3",
+    "username": "NgonDuocBaDinh",
+    "password": "123",
+    "createdAt": "2026-10-12",
+    "highScore": 950,
+    "gamesPlayed": 3,
+    "correctAnswers": 28,
+    "title": "Ong Trinh Sát Lịch Sử"
+  }
+]

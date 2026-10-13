@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #160e08;
+    color: #e5ded6;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', 'Merriweather', Georgia, serif;
+  }
+}
+
+.font-brand {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e140d;
+}
+::-webkit-scrollbar-thumb {
+  background: #8b3814;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b45309;
+}
+
+/* Background textures */
+.duocsang-dark-bg {
+  background: radial-gradient(circle at 50% 20%, #2b1a10 0%, #1a1009 50%, #120b06 100%);
+}
+
+.duocsang-card {
+  background: rgba(36, 22, 14, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.duocsang-card:hover {
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 15px 30px -5px rgba(139, 37, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.duocsang-btn {
+  background: linear-gradient(135deg, #a33818 0%, #7c240e 50%, #5c1808 100%);
+  border: 1px solid rgba(245, 158, 11, 0.6);
+  box-shadow: 0 4px 15px rgba(163, 56, 24, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
+}
+
+.duocsang-btn:hover {
+  background: linear-gradient(135deg, #b8431f 0%, #8f2a12 50%, #6d1d0a 100%);
+  border-color: rgba(251, 191, 36, 0.9);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  transform: scale(1.03);
+}
+
+.duocsang-btn:active {
+  transform: scale(0.97);
+}
+
+/* Glowing text */
+.glow-gold {
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.5), 0 0 24px rgba(217, 119, 6, 0.25);
+}

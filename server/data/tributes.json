@@ -1,0 +1,29 @@
+[
+  {
+    "id": "trib-1",
+    "name": "Nguyễn Văn Hùng",
+    "role": "Sinh viên Đại học Bách Khoa Hà Nội",
+    "location": "Hà Nội",
+    "content": "Đời đời nhớ ơn Bác Hồ vĩ đại! Thế hệ trẻ chúng cháu hôm nay nguyện nỗ lực học tập, rèn luyện và làm chủ công nghệ để đưa đất nước sánh vai với các cường quốc năm châu như Bác hằng mong ước.",
+    "date": "10/10/2026",
+    "likes": 42
+  },
+  {
+    "id": "trib-2",
+    "name": "Trần Thị Mai Anh",
+    "role": "Giáo viên tiểu học",
+    "location": "Nghệ An",
+    "content": "Mỗi lần về thăm quê Bác tại làng Sen, lòng con lại bồi hồi xúc động. Những lời Bác dạy thiếu niên nhi đồng mãi là kim chỉ nam trong sự nghiệp trồng người của chúng con.",
+    "date": "08/10/2026",
+    "likes": 36
+  },
+  {
+    "id": "trib-3",
+    "name": "Lê Hoàng Long",
+    "role": "Đoàn viên thanh niên",
+    "location": "TP. Hồ Chí Minh",
+    "content": "Thành phố mang tên Bác hôm nay ngày càng phát triển hiện đại. Tinh thần 'Không có gì quý hơn độc lập, tự do' và đức tính chí công vô tư của Người luôn soi sáng mọi nẻo đường thế hệ trẻ bước đi.",
+    "date": "05/10/2026",
+    "likes": 58
+  }
+]

@@ -1,0 +1,126 @@
+{
+  "fiveTeachings": [
+    {
+      "number": 1,
+      "text": "Yêu Tổ quốc, yêu đồng bào",
+      "detail": "Nuôi dưỡng tình cảm thiêng liêng đối với quê hương đất nước, tự hào về truyền thống dân tộc; thương yêu, đoàn kết và giúp đỡ đồng bào xung quanh mình."
+    },
+    {
+      "number": 2,
+      "text": "Học tập tốt, lao động tốt",
+      "detail": "Chăm chỉ học hành, trau dồi tri thức khoa học, rèn luyện kỹ năng thực hành; quý trọng giọt mồ hôi và thành quả lao động của bản thân và xã hội."
+    },
+    {
+      "number": 3,
+      "text": "Đoàn kết tốt, kỷ luật tốt",
+      "detail": "Tập thể gắn kết keo sơn, không chia rẽ bè phái; nghiêm túc chấp hành nội quy trường lớp, pháp luật nhà nước và nếp sống văn minh cộng đồng."
+    },
+    {
+      "number": 4,
+      "text": "Giữ gìn vệ sinh thật tốt",
+      "detail": "Vệ sinh thân thể, giữ gìn môi trường sống xanh - sạch - đẹp, bảo vệ sức khỏe bản thân và cộng đồng từ những hành động nhỏ nhất."
+    },
+    {
+      "number": 5,
+      "text": "Khiêm tốn, thật thà, dũng cảm",
+      "detail": "Không kiêu căng tự mãn khi đạt thành tích; luôn trung thực trong lời nói và việc làm; dũng cảm nhận lỗi, bảo vệ lẽ phải và đấu tranh với cái sai."
+    }
+  ],
+  "youthTeachings": {
+    "title": "Lời dạy thanh niên - Rường cột của nước nhà",
+    "poem": "Không có việc gì khó\nChỉ sợ lòng không bền\nĐào núi và lấp biển\nQuyết chí ắt làm nên.",
+    "context": "Bác đọc tặng Liên phân đội thanh niên xung phong tại Nà Tu (Bắc Kạn) ngày 20/3/1951.",
+    "coreValues": [
+      {
+        "title": "Đâu cần thanh niên có, việc gì khó có thanh niên",
+        "description": "Tinh thần xung kích đi đầu, không ngại gian khổ, sẵn sàng dấn thân cống hiến vì đất nước."
+      },
+      {
+        "title": "Học để làm việc, làm người, làm cán bộ",
+        "description": "Học tập không chỉ để lấy bằng cấp mà là để phụng sự nhân dân, rèn luyện nhân cách đạo đức cách mạng."
+      },
+      {
+        "title": "Thanh niên là chủ tương lai của nước nhà",
+        "description": "Nước nhà thịnh hay suy, yếu hay mạnh một phần lớn là do các thanh niên."
+      }
+    ]
+  },
+  "moralPrinciples": [
+    {
+      "keyword": "Cần",
+      "meaning": "Lao động cần cù, siêng năng, có kế hoạch, sáng tạo, có năng suất cao, không lười biếng, ỷ lại."
+    },
+    {
+      "keyword": "Kiệm",
+      "meaning": "Tiết kiệm thời gian, tiền bạc, của cải của nhân dân và Nhà nước; không xa xỉ hoang phí, không phô trương hình thức."
+    },
+    {
+      "keyword": "Liêm",
+      "meaning": "Trong sạch, không tham lam địa vị, tiền tài, của bất chính; luôn tôn trọng và giữ gìn của công."
+    },
+    {
+      "keyword": "Chính",
+      "meaning": "Thẳng thắn, đứng đắn; việc phải thì dẫu nhỏ cũng làm, việc trái thì dẫu nhỏ cũng tránh; tâm hồn ngay thẳng."
+    },
+    {
+      "keyword": "Chí công vô tư",
+      "meaning": "Đặt lợi ích của Tổ quốc, của nhân dân lên trên hết, trước hết; không màng tư lợi cá nhân hay thiên vị bè cánh."
+    }
+  ],
+  "testamentExcerpts": [
+    {
+      "topic": "Trước hết nói về Đảng",
+      "content": "Nhờ đoàn kết chặt chẽ, một lòng một dạ phục vụ giai cấp, phục vụ nhân dân... mà Đảng ta đã đoàn kết, lãnh đạo toàn dân hăng hái đấu tranh từ thắng lợi này đến thắng lợi khác. Các đồng chí từ Trung ương đến các chi bộ cần phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn con ngươi của mắt mình."
+    },
+    {
+      "topic": "Đoàn viên và thanh niên",
+      "content": "Đoàn viên và thanh niên ta nói chung là tốt, mọi việc đều hăng hái xung phong, không ngại khó khăn, có chí tiến thủ. Đảng cần phải chăm lo giáo dục đạo đức cách mạng cho họ, đào tạo họ thành những người thừa kế xây dựng chủ nghĩa xã hội vừa 'hồng' vừa 'chuyên'."
+    },
+    {
+      "topic": "Nhân dân lao động",
+      "content": "Nhân dân lao động ta ở miền xuôi cũng như ở miền núi, đã bao đời chịu đựng gian khổ... Đảng ta phải có kế hoạch thật tốt để phát triển kinh tế và văn hóa, nhằm không ngừng nâng cao đời sống của nhân dân."
+    },
+    {
+      "topic": "Điều mong muốn cuối cùng",
+      "content": "Điều mong muốn cuối cùng của tôi là: Toàn Đảng, toàn dân ta đoàn kết phấn đấu, xây dựng một nước Việt Nam hòa bình, thống nhất, độc lập, dân chủ và giàu mạnh, và góp phần xứng đáng vào sự nghiệp cách mạng thế giới."
+    }
+  ],
+  "famousQuotes": [
+    {
+      "id": 1,
+      "quote": "Không có gì quý hơn độc lập, tự do!",
+      "year": "1966",
+      "context": "Lời kêu gọi đồng bào và chiến sĩ cả nước chống Mỹ cứu nước."
+    },
+    {
+      "id": 2,
+      "quote": "Tôi chỉ có một sự ham muốn, ham muốn tột bậc, là làm sao cho nước ta được hoàn toàn độc lập, dân ta được hoàn toàn tự do, đồng bào ai cũng có cơm ăn, áo mặc, ai cũng được học hành.",
+      "year": "1946",
+      "context": "Trả lời các nhà báo nước ngoài sau Cách mạng Tháng Tám."
+    },
+    {
+      "id": 3,
+      "quote": "Các Vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước.",
+      "year": "1954",
+      "context": "Nói chuyện với cán bộ Đại đoàn Quân Tiên phong tại Đền Hùng trước khi về tiếp quản Thủ đô."
+    },
+    {
+      "id": 4,
+      "quote": "Dễ trăm lần không dân cũng chịu, khó vạn lần dân liệu cũng xong.",
+      "year": "1964",
+      "context": "Khẳng định sức mạnh vô địch của quần chúng nhân dân."
+    },
+    {
+      "id": 5,
+      "quote": "Đoàn kết, đoàn kết, đại đoàn kết. Thành công, thành công, đại thành công.",
+      "year": "1961",
+      "context": "Bài học chiến lược sống còn của cách mạng Việt Nam."
+    },
+    {
+      "id": 6,
+      "quote": "Vì lợi ích mười năm thì phải trồng cây, vì lợi ích trăm năm thì phải trồng người.",
+      "year": "1958",
+      "context": "Tầm nhìn chiến lược vĩ đại về sự nghiệp giáo dục và phát triển con người."
+    }
+  ]
+}

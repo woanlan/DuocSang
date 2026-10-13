@@ -1,0 +1,1202 @@
+[
+  {
+    "id": 1,
+    "question": "Chủ tịch Hồ Chí Minh cất tiếng khóc chào đời tại vùng đất nào?",
+    "options": [
+      "Làng Hoàng Trù, Kim Liên, Nam Đàn, Nghệ An",
+      "Kinh thành Huế, Thừa Thiên Huế",
+      "Phan Thiết, Bình Thuận",
+      "Gia Định, Sài Gòn"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chủ tịch Hồ Chí Minh sinh ngày 19/5/1890 tại quê ngoại - làng Hoàng Trù (Chùa), và lớn lên ở làng Sen (quê nội), xã Kim Liên, huyện Nam Đàn, tỉnh Nghệ An."
+  },
+  {
+    "id": 2,
+    "question": "Tên khai sinh thời thơ ấu của Bác Hồ là gì?",
+    "options": [
+      "Nguyễn Sinh Cung",
+      "Nguyễn Tất Thành",
+      "Nguyễn Ái Quốc",
+      "Nguyễn Sinh Sắc"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tên khai sinh của Bác là Nguyễn Sinh Cung. Đến năm 1901, khi thân phụ đỗ Phó bảng, Người được đặt tên mới là Nguyễn Tất Thành."
+  },
+  {
+    "id": 3,
+    "question": "Thân phụ của Bác Hồ là ai?",
+    "options": [
+      "Cụ Phó bảng Nguyễn Sinh Sắc",
+      "Cụ Nguyễn Sinh Nhậm",
+      "Cụ Phan Bội Châu",
+      "Cụ Đặng Thúc Hứa"
+    ],
+    "correctIndex": 0,
+    "explanation": "Thân phụ Bác là cụ Nguyễn Sinh Sắc (Nguyễn Sinh Huy, 1862-1929), một nhà Nho thanh liêm, đỗ Phó bảng khoa thi Hội năm Tân Sửu (1901)."
+  },
+  {
+    "id": 4,
+    "question": "Thân mẫu của Chủ tịch Hồ Chí Minh là ai?",
+    "options": [
+      "Bà Hoàng Thị Loan",
+      "Bà Nguyễn Thị Thanh",
+      "Bà Hoàng Thị An",
+      "Bà Hà Thị Hy"
+    ],
+    "correctIndex": 0,
+    "explanation": "Thân mẫu của Bác là bà Hoàng Thị Loan (1868-1901), một người phụ nữ Việt Nam hiền thục, tần tảo, hết lòng vì chồng vì con."
+  },
+  {
+    "id": 5,
+    "question": "Chị gái ruột của Bác Hồ thường được nhân dân gọi thân mật là gì?",
+    "options": [
+      "Bạch Liên (bà Nguyễn Thị Thanh)",
+      "Hoàng Oanh",
+      "Bà Định",
+      "Cô Ba Thi"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chị gái Bác là bà Nguyễn Thị Thanh (hiệu Bạch Liên, 1884-1954), một phụ nữ giàu lòng yêu nước, từng tích cực tham gia phong trào chống Pháp."
+  },
+  {
+    "id": 6,
+    "question": "Anh trai ruột của Bác Hồ tên là gì?",
+    "options": [
+      "Nguyễn Sinh Khiêm (Tất Đạt)",
+      "Nguyễn Sinh Nhuận",
+      "Nguyễn Sinh Sắc",
+      "Nguyễn Sinh Nam"
+    ],
+    "correctIndex": 0,
+    "explanation": "Anh trai của Bác là ông Nguyễn Sinh Khiêm (tự Tất Đạt, thường gọi là thầy Nho Điền, 1888-1950), cũng là một người yêu nước kiên trung."
+  },
+  {
+    "id": 7,
+    "question": "Trước khi vào Sài Gòn tìm đường cứu nước, người thanh niên Nguyễn Tất Thành từng dạy học tại ngôi trường nào?",
+    "options": [
+      "Trường Dục Thanh (Phan Thiết)",
+      "Trường Quốc Học Huế",
+      "Trường Đông Kinh Nghĩa Thục",
+      "Trường Bưởi (Hà Nội)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tháng 9/1910, Người đến Phan Thiết dạy học chữ Hán và chữ Quốc ngữ tại trường Dục Thanh do các sĩ phu yêu nước sáng lập."
+  },
+  {
+    "id": 8,
+    "question": "Ngôi trường danh tiếng tại Huế mà Bác Hồ từng theo học thời niên thiếu là trường nào?",
+    "options": [
+      "Trường Quốc Học Huế",
+      "Trường Khải Định",
+      "Trường Đồng Khánh",
+      "Trường Bác Cổ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tháng 9/1907, Nguyễn Tất Thành vào học tại Trường Quốc Học Huế - nơi hun đúc thêm tinh thần yêu nước và tư tưởng tiến bộ."
+  },
+  {
+    "id": 9,
+    "question": "Lần đầu tiên Nguyễn Tất Thành tham gia phong trào yêu nước chống thuế của nhân dân là vào năm nào tại Huế?",
+    "options": [
+      "Năm 1908",
+      "Năm 1905",
+      "Năm 1911",
+      "Năm 1901"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tháng 4/1908, Nguyễn Tất Thành tham gia cuộc biểu tình chống sưu thuế của nông dân Thừa Thiên Huế với vai trò người thông ngôn."
+  },
+  {
+    "id": 10,
+    "question": "Cụ Phó bảng Nguyễn Sinh Sắc sau này về sống và an nghỉ tại tỉnh nào ở Nam Bộ?",
+    "options": [
+      "Đồng Tháp (thành phố Cao Lãnh)",
+      "Bến Tre",
+      "An Giang",
+      "Kiên Giang"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cụ Nguyễn Sinh Sắc về sống thanh bạch, làm nghề bốc thuốc chữa bệnh cho người nghèo và qua đời tại làng Hòa An, Cao Lãnh, Đồng Tháp."
+  },
+  {
+    "id": 11,
+    "question": "Khi dạy học ở Trường Dục Thanh, thầy giáo Nguyễn Tất Thành dạy môn học gì?",
+    "options": [
+      "Thể dục và chữ Quốc ngữ, chữ Hán, chữ Pháp",
+      "Toán học và Vật lý",
+      "Hóa học và Sinh học",
+      "Địa lý và Thiên văn"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại Trường Dục Thanh, thầy Thành dạy thể dục, chữ Quốc ngữ, chữ Hán và kiêm dạy tiếng Pháp cho các học sinh."
+  },
+  {
+    "id": 12,
+    "question": "Bác Hồ rời Phan Thiết vào Sài Gòn vào khoảng thời gian nào?",
+    "options": [
+      "Tháng 2 năm 1911",
+      "Tháng 6 năm 1910",
+      "Tháng 12 năm 1911",
+      "Tháng 5 năm 1912"
+    ],
+    "correctIndex": 0,
+    "explanation": "Khoảng tháng 2/1911, Nguyễn Tất Thành rời trường Dục Thanh vào Sài Gòn để chuẩn bị cho kế hoạch xuất dương cứu nước."
+  },
+  {
+    "id": 13,
+    "question": "Địa điểm Bác Hồ lưu lại tại Sài Gòn trước khi xuống tàu ra đi cứu nước ngày nay là di tích nào?",
+    "options": [
+      "Nhà số 5 đường Châu Văn Liêm (Quận 5, TP.HCM)",
+      "Bến Bình Đông",
+      "Chợ Lớn",
+      "Dinh Gia Long"
+    ],
+    "correctIndex": 0,
+    "explanation": "Di tích số 5 Châu Văn Liêm (trước là số 1-2-3 Tổng đốc Phương) là chi nhánh phân cuộc của Liên Thành Thương Quán nơi Bác ở trước khi xuống tàu."
+  },
+  {
+    "id": 14,
+    "question": "Cụm từ thể hiện chí hướng độc lập, không đi theo lối mòn của các bậc tiền bối của Nguyễn Tất Thành là gì?",
+    "options": [
+      "Đi sang phương Tây để tìm hiểu xem nước Pháp và các nước khác làm thế nào rồi trở về giúp đồng bào",
+      "Cầu viện Nhật Bản theo phong trào Đông Du",
+      "Dựa vào triều đình phong kiến Mãn Thanh",
+      "Khởi nghĩa vũ trang cục bộ trong nước"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác nhận thấy các con đường của cụ Phan Bội Châu, Phan Châu Trinh, Hoàng Hoa Thám đều chưa thành công nên quyết định sang tận phương Tây tìm hiểu cội nguồn văn minh và cách mạng."
+  },
+  {
+    "id": 15,
+    "question": "Người bạn thân cùng trao đổi về ý định ra đi cứu nước với Nguyễn Tất Thành tại Sài Gòn thường được nhắc đến là ai?",
+    "options": [
+      "Anh Tư Lê (Lê Văn Đạt)",
+      "Anh Cả Khiêm",
+      "Bác Ba Phi",
+      "Cụ Huỳnh Thúc Kháng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nguyễn Tất Thành từng rủ anh Tư Lê cùng đi, nói rằng 'Chúng ta sẽ làm việc, chúng ta sẽ làm bất cứ việc gì để sống và để đi'."
+  },
+  {
+    "id": 16,
+    "question": "Ngày 5/6/1911, người thanh niên Nguyễn Tất Thành rời Bến cảng Nhà Rồng trên con tàu nào?",
+    "options": [
+      "Tàu Đô đốc Latouche-Tréville",
+      "Tàu Titanic",
+      "Tàu Victoria",
+      "Tàu Aurora"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ngày 5/6/1911, Người bước lên tàu buôn Đô đốc Latouche-Tréville của hãng Năm Sao (Pháp) làm phụ bếp với tên gọi Văn Ba, bắt đầu cuộc hành trình 30 năm."
+  },
+  {
+    "id": 17,
+    "question": "Bác Hồ đã dùng tên gì khi làm phụ bếp trên con tàu Đô đốc Latouche-Tréville?",
+    "options": [
+      "Văn Ba (anh Ba)",
+      "Nguyễn Ái Quốc",
+      "Lý Thụy",
+      "Tống Văn Sơ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người ghi tên là Văn Ba (mọi người thân mật gọi là anh Ba) để nhận công việc phụ bếp vất vả trên tàu xuyên đại dương."
+  },
+  {
+    "id": 18,
+    "question": "Khi người bạn hỏi 'Lấy tiền đâu mà đi?', Nguyễn Tất Thành đã giơ hai bàn tay và nói gì?",
+    "options": [
+      "'Đây, tiền đây! Chúng ta sẽ làm việc, chúng ta sẽ làm bất cứ việc gì để sống và để đi.'",
+      "'Tôi đã vay được tiền từ bạn bè.'",
+      "'Chính phủ sẽ chu cấp.'",
+      "'Không cần tiền chúng ta vẫn đi được.'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Câu nói khẳng định ý chí tự lập phi thường: 'Đây, tiền đây! Chúng ta sẽ làm việc, chúng ta sẽ làm bất cứ việc gì để sống và để đi'."
+  },
+  {
+    "id": 19,
+    "question": "Hải cảng đầu tiên của nước Pháp mà con tàu chở Nguyễn Tất Thành cập bến là cảng nào?",
+    "options": [
+      "Cảng Marseille",
+      "Cảng Le Havre",
+      "Cảng Bordeaux",
+      "Cảng Nice"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đầu tháng 7/1911, tàu cập cảng Marseille (Pháp), lần đầu tiên Người đặt chân lên đất nước thực dân đang đô hộ Tổ quốc mình."
+  },
+  {
+    "id": 20,
+    "question": "Trong giai đoạn 1912 - 1913, Bác Hồ đã đến làm việc và khảo sát đời sống nhân dân tại quốc gia châu Mỹ nào?",
+    "options": [
+      "Hợp chúng quốc Hoa Kỳ (Mỹ)",
+      "Canada",
+      "Brazil",
+      "Cuba"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người đến Boston và New York (Mỹ), làm thợ làm bánh tại khách sạn Parker House và tìm hiểu Tuyên ngôn Độc lập năm 1776 của Mỹ."
+  },
+  {
+    "id": 21,
+    "question": "Tại thủ đô London (nước Anh), Nguyễn Tất Thành từng làm công việc gì tại khách sạn Carlton nổi tiếng?",
+    "options": [
+      "Phụ bếp làm bánh dưới sự chỉ dẫn của đầu bếp huyền thoại Escoffier",
+      "Lễ tân khách sạn",
+      "Lái xe riêng",
+      "Thợ may âu phục"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại khách sạn Carlton ở London, Người học nghề làm bánh với đầu bếp trứ danh Escoffier và tích cực tự học tiếng Anh."
+  },
+  {
+    "id": 22,
+    "question": "Năm 1917, Bác Hồ từ nước Anh trở lại quốc gia nào để trực tiếp hoạt động trong phong trào công nhân?",
+    "options": [
+      "Nước Pháp",
+      "Nước Đức",
+      "Nước Nga",
+      "Nước Ý"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cuối năm 1917, Người trở lại Paris (Pháp), hòa mình vào phong trào công nhân và phong trào yêu nước của kiều bào Việt Nam tại Pháp."
+  },
+  {
+    "id": 23,
+    "question": "Bản 'Yêu sách của nhân dân An Nam' gồm 8 điểm được gửi tới Hội nghị Versailles vào năm nào?",
+    "options": [
+      "Năm 1919",
+      "Năm 1917",
+      "Năm 1920",
+      "Năm 1925"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ngày 18/6/1919, thay mặt Hội những người Việt Nam yêu nước tại Pháp, bản Yêu sách ký tên Nguyễn Ái Quốc được gửi tới Hội nghị hòa bình Versailles."
+  },
+  {
+    "id": 24,
+    "question": "Cái tên 'Nguyễn Ái Quốc' bắt đầu xuất hiện công khai trên văn đàn quốc tế gắn liền với sự kiện nào?",
+    "options": [
+      "Bản Yêu sách của nhân dân An Nam gửi Hội nghị Versailles (1919)",
+      "Khi rời Bến Nhà Rồng (1911)",
+      "Khi thành lập Đảng (1930)",
+      "Khi về Pác Bó (1941)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cái tên Nguyễn Ái Quốc (Người họ Nguyễn yêu nước) lần đầu tiên làm rung chuyển dư luận Pháp và quốc tế khi ký dưới bản Yêu sách 8 điểm năm 1919."
+  },
+  {
+    "id": 25,
+    "question": "Tác phẩm lý luận vĩ đại nào của V.I. Lênin đã giúp Nguyễn Ái Quốc tìm thấy con đường giải phóng cho dân tộc vào tháng 7/1920?",
+    "options": [
+      "Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa",
+      "Làm gì?",
+      "Nhà nước và cách mạng",
+      "Tư bản luận"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đọc Luận cương của Lênin trên báo L'Humanité, Bác xúc động reo lên: 'Hỡi đồng bào bị đọa đày đau khổ! Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!'."
+  },
+  {
+    "id": 26,
+    "question": "Tháng 12/1920, tại Đại hội Tours (Pháp), Nguyễn Ái Quốc đã bỏ phiếu tán thành sự kiện lịch sử nào?",
+    "options": [
+      "Gia nhập Quốc tế III (Quốc tế Cộng sản) và tham gia sáng lập Đảng Cộng sản Pháp",
+      "Ở lại Đảng Xã hội Pháp",
+      "Thành lập Đảng Lao động Anh",
+      "Rút lui khỏi chính trường"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người trở thành một trong những người sáng lập Đảng Cộng sản Pháp và là người cộng sản đầu tiên của dân tộc Việt Nam."
+  },
+  {
+    "id": 27,
+    "question": "Ngôi nhà số 9 ngõ Compoint (quận 17, Paris) gắn liền với kỷ niệm gian khổ nào của Bác Hồ?",
+    "options": [
+      "Dùng một viên gạch nung sưởi ấm qua mùa đông tuyết giá để viết báo và hoạt động cách mạng",
+      "Mở xưởng làm bánh lớn",
+      "Mở trường dạy chữ Hán",
+      "In sách truyền đơn bí mật"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại căn phòng trọ lạnh giá ngõ Compoint, buổi sáng Bác đặt viên gạch vào lò bếp, tối về bọc báo để dưới đệm sưởi ấm để chống chọi mùa đông Paris."
+  },
+  {
+    "id": 28,
+    "question": "Tờ báo nổi tiếng do Nguyễn Ái Quốc chủ trì sáng lập tại Paris năm 1922 có tên là gì?",
+    "options": [
+      "Le Paria (Người cùng khổ)",
+      "L'Humanité (Nhân đạo)",
+      "Thanh niên",
+      "Việt Nam Độc lập"
+    ],
+    "correctIndex": 0,
+    "explanation": "Báo Le Paria ra số đầu tiên ngày 1/4/1922 do Bác làm chủ nhiệm kiêm chủ bút, là diễn đàn vạch trần tội ác của chủ nghĩa thực dân ở các thuộc địa."
+  },
+  {
+    "id": 29,
+    "question": "Tác phẩm văn chính luận sắc sảo xuất bản tại Paris năm 1925 của Nguyễn Ái Quốc có tên là gì?",
+    "options": [
+      "Bản án chế độ thực dân Pháp (Le Procès de la colonisation française)",
+      "Đường Kách mệnh",
+      "Nhật ký trong tù",
+      "Tuyên ngôn Độc lập"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bản án chế độ thực dân Pháp là cáo trạng đanh thép tố cáo tội ác tày trời của thực dân Pháp đối với các dân tộc thuộc địa."
+  },
+  {
+    "id": 30,
+    "question": "Nghề nghiệp kiếm sống chính của Bác Hồ trong những năm tháng hoạt động tại Paris là gì?",
+    "options": [
+      "Vẽ quạt, phóng đại ảnh và viết bài cho các báo tiến bộ",
+      "Thợ may âu phục cao cấp",
+      "Bán hàng lưu niệm",
+      "Thông dịch viên tòa án"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người kiếm sống bằng nghề rửa ảnh, phóng đại ảnh tại ngõ Compoint và viết báo, dành dụm từng đồng xu cho hoạt động cách mạng."
+  },
+  {
+    "id": 31,
+    "question": "Tháng 6/1923, Nguyễn Ái Quốc rời nước Pháp bí mật sang quốc gia nào?",
+    "options": [
+      "Liên Xô (quê hương Cách mạng Tháng Mười)",
+      "Trung Quốc",
+      "Nước Đức",
+      "Thụy Sĩ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người bí mật rời Paris sang Liên Xô dự Hội nghị Quốc tế Nông dân và Đại hội V Quốc tế Cộng sản."
+  },
+  {
+    "id": 32,
+    "question": "Nhà thơ, nhà báo Xô Viết nổi tiếng nào đã viết bài ký ca ngợi vẻ đẹp văn hóa và cốt cách của Nguyễn Ái Quốc năm 1923?",
+    "options": [
+      "Ô-xíp Man-đen-xtam (Osip Mandelstam)",
+      "M. Gorki",
+      "V. Mayakovsky",
+      "Ilya Ehrenburg"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mandelstam viết: 'Từ Nguyễn Ái Quốc tỏa ra một nền văn hóa, không phải văn hóa Âu châu, mà có lẽ là một nền văn hóa của tương lai...'"
+  },
+  {
+    "id": 33,
+    "question": "Cuối năm 1924, Nguyễn Ái Quốc từ Mát-xcơ-va về Quảng Châu (Trung Quốc) với bí danh là gì?",
+    "options": [
+      "Lý Thụy",
+      "Văn Ba",
+      "Tống Văn Sơ",
+      "Già Thu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người về Quảng Châu làm cố vấn cho phái đoàn Borodin của Liên Xô bên cạnh chính phủ Tôn Trung Sơn với bí danh Lý Thụy."
+  },
+  {
+    "id": 34,
+    "question": "Tháng 6/1925, tại Quảng Châu, Nguyễn Ái Quốc thành lập tổ chức cách mạng tiền thân nào?",
+    "options": [
+      "Hội Việt Nam Cách mạng Thanh niên",
+      "Việt Nam Quang phục hội",
+      "Đông Du hội",
+      "Tân Việt Cách mạng Đảng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hội Việt Nam Cách mạng Thanh niên (với nòng cốt là Cộng sản đoàn) là bước chuẩn bị then chốt về tổ chức cho việc thành lập Đảng."
+  },
+  {
+    "id": 35,
+    "question": "Tờ báo cách mạng đầu tiên của cách mạng vô sản Việt Nam ra số đầu ngày 21/6/1925 tại Quảng Châu là báo gì?",
+    "options": [
+      "Báo Thanh Niên",
+      "Báo Nhân Dân",
+      "Báo Tiền Phong",
+      "Báo Cứu Quốc"
+    ],
+    "correctIndex": 0,
+    "explanation": "Báo Thanh Niên do Bác sáng lập, ngày 21/6 sau này trở thành Ngày Báo chí Cách mạng Việt Nam."
+  },
+  {
+    "id": 36,
+    "question": "Cuốn sách tập hợp các bài giảng huấn luyện chính trị của Nguyễn Ái Quốc tại Quảng Châu xuất bản năm 1927 có tên là gì?",
+    "options": [
+      "Đường Kách mệnh",
+      "Bản án chế độ thực dân Pháp",
+      "Sửa đổi lối làm việc",
+      "Nhật ký trong tù"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đường Kách mệnh là cuốn cẩm nang lý luận gối đầu giường truyền bá chủ nghĩa Mác - Lênin vào phong trào công nhân và phong trào yêu nước Việt Nam."
+  },
+  {
+    "id": 37,
+    "question": "Trong tác phẩm 'Đường Kách mệnh', điều đầu tiên Bác Hồ nhấn mạnh về 'Tư cách một người kách mệnh' là gì?",
+    "options": [
+      "Tự mình phải: Cần kiệm, Hòa mà không tư, Cả quyết sửa lỗi mình, Cẩn thận mà không nhút nhát...",
+      "Phải có tiền bạc dồi dào",
+      "Phải có bằng cấp cao",
+      "Phải biết dùng vũ khí hiện đại"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mở đầu cuốn sách, Bác đặt đạo đức cách mạng lên hàng đầu với 23 tiêu chuẩn tư cách của người cách mạng."
+  },
+  {
+    "id": 38,
+    "question": "Những người học trò xuất sắc đầu tiên được Bác đào tạo tại Quảng Châu bao gồm ai?",
+    "options": [
+      "Trần Phú, Lê Hồng Phong, Nguyễn Đức Cảnh, Phùng Chí Kiên...",
+      "Phan Bội Châu, Phan Châu Trinh",
+      "Đề Thám, Lương Ngọc Quyến",
+      "Nguyễn Tri Phương, Hoàng Diệu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Họ là những hạt giống đỏ đầu tiên gieo mầm cho phong trào cộng sản Việt Nam phát triển rực rỡ sau này."
+  },
+  {
+    "id": 39,
+    "question": "Giai đoạn 1928 - 1929, Bác Hồ hoạt động bí mật tại vương quốc Xiêm (Thái Lan) với bí danh nào?",
+    "options": [
+      "Thầu Chín",
+      "Ông Ké",
+      "Bác Ba",
+      "Chú Chín"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại vùng Udon Thani, Phichit (Thái Lan), bà con Việt kiều luôn kính trọng gọi Bác là Thầu Chín (Bác Chín)."
+  },
+  {
+    "id": 40,
+    "question": "Tại Thái Lan, Bác Hồ đã vận động bà con kiều bào làm những công việc gì?",
+    "options": [
+      "Mở trường dạy chữ Việt và chữ Thái, khai hoang làm vườn, đoàn kết hữu nghị với người dân bản xứ",
+      "Buôn bán xuất nhập khẩu",
+      "Tập hợp quân đội đánh giáp hạt",
+      "Lập hội tôn giáo"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người hòa mình cùng bà con khai hoang, dạy học, dịch báo và củng cố khối đại đoàn kết Việt kiều hướng về quê hương."
+  },
+  {
+    "id": 41,
+    "question": "Ngôi trường đào tạo cán bộ do Bác mở tại nhà số 13-13A đường Văn Minh, Quảng Châu mang tên gì?",
+    "options": [
+      "Lớp huấn luyện chính trị đặc biệt của Hội Việt Nam Cách mạng Thanh niên",
+      "Trường Quân sự Hoàng Phố",
+      "Trường Đại học Phương Đông",
+      "Trường Bưởi"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nơi đây Bác trực tiếp mở 3 khóa huấn luyện chính trị đào tạo 75 chiến sĩ cách mạng tiên phong."
+  },
+  {
+    "id": 42,
+    "question": "Bác Hồ từng tham dự Đại hội thành lập Liên đoàn chống đế quốc tại thủ đô nào của châu Âu năm 1927?",
+    "options": [
+      "Brussels (Bỉ)",
+      "Berlin (Đức)",
+      "Paris (Pháp)",
+      "London (Anh)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tháng 2/1927, Người tham dự Đại hội tại Brussels, khẳng định tình đoàn kết giữa các dân tộc bị áp bức."
+  },
+  {
+    "id": 43,
+    "question": "Khi hoạt động ở nước ngoài, Bác Hồ thường gửi bài viết về nước qua những con đường nào?",
+    "options": [
+      "Qua các thủy thủ tàu biển yêu nước và đường giao thông bí mật",
+      "Qua đường bưu điện công khai",
+      "Qua các đại sứ quán phương Tây",
+      "Qua đường hàng không thương mại"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hệ thống giao thông bí mật từ cảng biển Hải Phòng, Sài Gòn và biên giới đã đưa tài liệu, sách báo của Bác về Tổ quốc an toàn."
+  },
+  {
+    "id": 44,
+    "question": "Trước sự chia rẽ của 3 tổ chức cộng sản trong nước năm 1929, Quốc tế Cộng sản đã giao nhiệm vụ gì cho Nguyễn Ái Quốc?",
+    "options": [
+      "Chủ trì hợp nhất các tổ chức cộng sản thành một Đảng duy nhất",
+      "Thành lập thêm một tổ chức thứ tư",
+      "Giải tán tất cả các tổ chức",
+      "Ở lại Liên Xô nghiên cứu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nhận thức được yêu cầu cấp bách, Bác chủ động triệu tập đại biểu các nhóm cộng sản về Hương Cảng để thống nhất Đảng."
+  },
+  {
+    "id": 45,
+    "question": "Ba tổ chức cộng sản ra đời ở Việt Nam năm 1929 trước khi hợp nhất là những tổ chức nào?",
+    "options": [
+      "Đông Dương Cộng sản Đảng, An Nam Cộng sản Đảng và Đông Dương Cộng sản Liên đoàn",
+      "Đảng Dân chủ, Đảng Xã hội và Đảng Cộng sản",
+      "Việt Minh, Cứu quốc quân và Du kích Ba Tơ",
+      "Thanh niên Cách mạng, Tân Việt và Việt Nam Quốc dân Đảng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ba tổ chức này tuy cùng tôn chỉ nhưng hoạt động riêng rẽ, đòi hỏi một sự thống nhất lãnh đạo toàn diện."
+  },
+  {
+    "id": 46,
+    "question": "Đảng Cộng sản Việt Nam được thành lập vào ngày tháng năm nào?",
+    "options": [
+      "Ngày 3 tháng 2 năm 1930",
+      "Ngày 19 tháng 5 năm 1941",
+      "Ngày 2 tháng 9 năm 1945",
+      "Ngày 22 tháng 12 năm 1944"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hội nghị hợp nhất họp từ ngày 6/1/1930 tại bán đảo Cửu Long (Hương Cảng) dưới sự chủ trì của Bác, lấy ngày 3/2 làm ngày kỷ niệm thành lập Đảng."
+  },
+  {
+    "id": 47,
+    "question": "Địa điểm diễn ra Hội nghị thành lập Đảng Cộng sản Việt Nam đầu năm 1930 là ở đâu?",
+    "options": [
+      "Bán đảo Cửu Long (Kowloon), Hương Cảng (Hồng Kông)",
+      "Quảng Châu, Trung Quốc",
+      "Ma Cao",
+      "Băng Cốc, Thái Lan"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hội nghị họp bí mật tại một khán đài bóng đá và nhà riêng ở bán đảo Cửu Long (Hương Cảng)."
+  },
+  {
+    "id": 48,
+    "question": "Văn kiện cương lĩnh chính trị đầu tiên của Đảng do Bác trực tiếp soạn thảo năm 1930 gồm những gì?",
+    "options": [
+      "Chính cương vắn tắt, Sách lược vắn tắt và Điều lệ vắn tắt của Đảng",
+      "Tuyên ngôn Độc lập",
+      "Đường Kách mệnh",
+      "Lời kêu gọi Toàn quốc kháng chiến"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chính cương và Sách lược vắn tắt đã vạch ra con đường cách mạng vô sản: làm cách mạng tư sản dân quyền và thổ địa cách mạng để đi tới xã hội cộng sản."
+  },
+  {
+    "id": 49,
+    "question": "Ngày 6/6/1931, Nguyễn Ái Quốc bị cảnh sát thực dân Anh bắt giữ tại Hồng Kông dưới tên gọi nào?",
+    "options": [
+      "Tống Văn Sơ (Sung Man Cho)",
+      "Lý Thụy",
+      "Văn Ba",
+      "Hồ Chí Minh"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người bị bắt tại số nhà 186 phố Tam Công (Cửu Long) với thẻ căn cước mang tên Tống Văn Sơ."
+  },
+  {
+    "id": 50,
+    "question": "Luật sư tiến bộ người Anh đã hết lòng bào chữa giúp Bác Hồ thoát khỏi án tử hình và ngục tù Hồng Kông là ai?",
+    "options": [
+      "Luật sư Frank Loseby",
+      "Luật sư Thomas Smith",
+      "Luật sư David George",
+      "Luật sư John Watson"
+    ],
+    "correctIndex": 0,
+    "explanation": "Luật sư Loseby cùng phu nhân với tinh thần trượng nghĩa đã cãi thắng tại Tòa án Tối cao Hồng Kông và Hội đồng Cơ mật Hoàng gia Anh để cứu Bác."
+  },
+  {
+    "id": 51,
+    "question": "Âm mưu thâm độc của mật thám thực dân Pháp trong vụ án Tống Văn Sơ là gì?",
+    "options": [
+      "Cấu kết với chính quyền Anh để dẫn độ Người về Đông Dương xử tử",
+      "Bắt Người đi đày ở châu Phi",
+      "Giam giữ vĩnh viễn ở London",
+      "Trục xuất sang Mỹ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tòa án thực dân tại Vinh từng xử tử hình vắng mặt Nguyễn Ái Quốc năm 1929, Pháp tìm mọi cách dẫn độ Người về để thi hành án."
+  },
+  {
+    "id": 52,
+    "question": "Sau khi được trả tự do khỏi nhà tù Hồng Kông năm 1933, Bác đã bí mật lên tàu đi đâu?",
+    "options": [
+      "Thượng Hải rồi sang Liên Xô",
+      "Về thẳng Việt Nam",
+      "Sang Nhật Bản",
+      "Sang Ấn Độ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nhờ sự giúp đỡ của gia đình luật sư Loseby và bà Tống Khánh Linh tại Thượng Hải, Người đã an toàn lên tàu sang Liên Xô."
+  },
+  {
+    "id": 53,
+    "question": "Tại Moscow (Liên Xô) trong những năm 1934 - 1938, Bác Hồ học tập và nghiên cứu tại viện nghiên cứu nào?",
+    "options": [
+      "Viện Nghiên cứu các vấn đề dân tộc và thuộc địa (Trường Quốc tế Lênin)",
+      "Đại học Tổng hợp Lomonosov",
+      "Học viện Quân sự Frunze",
+      "Viện Hàn lâm Khoa học Liên Xô"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người theo học lớp nghiên cứu sinh tại Viện Lênin với bí danh Linov, trang bị thêm tầm nhìn lý luận sâu sắc."
+  },
+  {
+    "id": 54,
+    "question": "Đại hội lần thứ mấy của Quốc tế Cộng sản năm 1935 tại Moscow mà Nguyễn Ái Quốc tham dự?",
+    "options": [
+      "Đại hội VII",
+      "Đại hội V",
+      "Đại hội II",
+      "Đại hội III"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đại hội VII Quốc tế Cộng sản đề ra chủ trương thành lập Mặt trận Nhân dân chống chủ nghĩa phát xít."
+  },
+  {
+    "id": 55,
+    "question": "Mối quan hệ cảm động giữa gia đình luật sư Loseby và Bác Hồ sau này được thể hiện thế nào?",
+    "options": [
+      "Năm 1960, Chủ tịch Hồ Chí Minh đã mời gia đình luật sư Loseby sang thăm Hà Nội như những người thân thiết nhất",
+      "Bác gửi thư cảm ơn qua bưu điện",
+      "Hai gia đình không liên lạc lại",
+      "Luật sư Loseby chuyển sang sống ở Hà Nội"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mùa xuân năm 1960, Bác đón tiếp gia đình ân nhân Loseby tại Phủ Chủ tịch với tình cảm chân tình, thủy chung son sắt."
+  },
+  {
+    "id": 56,
+    "question": "Sau 30 năm bôn ba tìm đường cứu nước, Bác Hồ trở về Tổ quốc vào ngày tháng năm nào?",
+    "options": [
+      "Ngày 28 tháng 1 năm 1941",
+      "Ngày 19 tháng 5 năm 1941",
+      "Ngày 2 tháng 9 năm 1945",
+      "Ngày 3 tháng 2 năm 1930"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ngày 28/1/1941 (mùng 2 Tết Tân Tỵ), Bác bước qua cột mốc 108 biên giới Việt - Trung trở về mảnh đất quê hương sau 30 năm xa cách."
+  },
+  {
+    "id": 57,
+    "question": "Cột mốc biên giới lịch sử nơi Bác Hồ đặt bước chân đầu tiên trở về Tổ quốc là cột mốc số mấy?",
+    "options": [
+      "Cột mốc 108 (nay là mốc 675)",
+      "Cột mốc 0",
+      "Cột mốc 100",
+      "Cột mốc Lũng Cú"
+    ],
+    "correctIndex": 0,
+    "explanation": "Cột mốc 108 tại xã Trường Hà, huyện Hà Quảng, tỉnh Cao Bằng đánh dấu thời khắc thiêng liêng Người về lại đất mẹ."
+  },
+  {
+    "id": 58,
+    "question": "Bác Hồ đã đặt tên cho dòng suối và ngọn núi nơi Người ở tại Pác Bó là gì?",
+    "options": [
+      "Suối Lênin và Núi Các Mác",
+      "Suối Hòa Bình và Núi Tự Do",
+      "Suối Độc Lập và Núi Hạnh Phúc",
+      "Suối Giải Phóng và Núi Ba Đình"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Bàn đá chông chênh dịch sử Đảng / Cuộc đời cách mạng thật là sang'. Bác đặt tên suối Lênin trong vắt và núi Các Mác hùng vĩ."
+  },
+  {
+    "id": 59,
+    "question": "Mặt trận Việt Minh (Việt Nam Độc lập Đồng minh) được Bác Hồ sáng lập vào thời gian nào?",
+    "options": [
+      "Tháng 5 năm 1941 (Hội nghị Trung ương 8)",
+      "Năm 1930",
+      "Năm 1945",
+      "Năm 1944"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại lán Khuổi Nặm (Pác Bó), Hội nghị TƯ 8 do Bác chủ trì quyết định đặt nhiệm vụ giải phóng dân tộc lên hàng đầu và lập Mặt trận Việt Minh."
+  },
+  {
+    "id": 60,
+    "question": "Tên gọi 'Hồ Chí Minh' bắt đầu được Người sử dụng chính thức từ sự kiện nào vào tháng 8/1942?",
+    "options": [
+      "Khi lên đường sang Trung Quốc công tác với tư cách đại biểu Mặt trận Việt Minh và Hội Quốc tế Phản xâm lược",
+      "Khi đọc Tuyên ngôn Độc lập",
+      "Khi ở Pháp năm 1920",
+      "Khi rời Bến Nhà Rồng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ngày 13/8/1942, với tên mới Hồ Chí Minh, Người sang Trung Quốc liên lạc với lực lượng đồng minh chống phát xít."
+  },
+  {
+    "id": 61,
+    "question": "Tập thơ chữ Hán bất hủ 'Nhật ký trong tù' (Ngục trung nhật ký) được Bác sáng tác trong hoàn cảnh nào?",
+    "options": [
+      "Bị chính quyền Tưởng Giới Thạch bắt giam vô cớ qua gần 30 nhà tù tỉnh Quảng Tây (1942 - 1943)",
+      "Khi bị giam ở ngục Côn Đảo",
+      "Khi hoạt động ở Thái Lan",
+      "Khi ở chiến khu Việt Bắc"
+    ],
+    "correctIndex": 0,
+    "explanation": "Suốt 14 tháng bị giải đi khắp 13 huyện tỉnh Quảng Tây, Người đã viết 133 bài thơ chữ Hán thể hiện tinh thần thép và tâm hồn thi sĩ lạc quan."
+  },
+  {
+    "id": 62,
+    "question": "Hai câu thơ mở đầu tập thơ 'Nhật ký trong tù' là gì?",
+    "options": [
+      "'Thân thể ở trong lao / Tinh thần ở ngoài lao'",
+      "'Muốn nên sự nghiệp lớn / Tinh thần càng phải cao'",
+      "'Gạo đem vào giã bao đau đớn / Gạo giã xong rồi trắng tựa bông'",
+      "'Ví không có cảnh đông tàn / Thì đâu có cảnh huy hoàng ngày xuân'"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Thân thể ở trong lao / Tinh thần ở ngoài lao / Muốn nên sự nghiệp lớn / Tinh thần càng phải cao' - tuyên ngôn của người chiến sĩ cách mạng."
+  },
+  {
+    "id": 63,
+    "question": "Ngày 22/12/1944, Bác Hồ ra chỉ thị thành lập đội quân tiền thân nào của Quân đội nhân dân Việt Nam?",
+    "options": [
+      "Đội Việt Nam Tuyên truyền Giải phóng quân",
+      "Cứu quốc quân",
+      "Vệ quốc đoàn",
+      "Du kích Ba Tơ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đội được thành lập tại khu rừng Trần Hưng Đạo (Cao Bằng) gồm 34 chiến sĩ do đồng chí Võ Nguyên Giáp chỉ huy theo chỉ thị của Bác."
+  },
+  {
+    "id": 64,
+    "question": "Trong Chỉ thị thành lập Đội VN Tuyên truyền Giải phóng quân, Bác dặn nguyên tắc hoạt động là gì?",
+    "options": [
+      "'Chính trị trọng hơn quân sự', 'tuyên truyền trọng hơn tác chiến'",
+      "'Tác chiến quy mô lớn ngay từ đầu'",
+      "'Chỉ phòng thủ, không tiến công'",
+      "'Tập trung đánh các thành phố lớn'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác chỉ rõ: Tên Đội là 'Tuyên truyền giải phóng quân', nghĩa là chính trị trọng hơn quân sự, người trước súng sau."
+  },
+  {
+    "id": 65,
+    "question": "Hai chiến thắng đầu tiên giòn giã của Đội VN Tuyên truyền Giải phóng quân là ở đâu?",
+    "options": [
+      "Phai Khắt và Nà Ngần (Cao Bằng)",
+      "Đông Khê và Thất Khê",
+      "Điện Biên Phủ",
+      "Tân Trào và Đình Cả"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chỉ sau vài ngày thành lập, Đội đã mưu trí diệt đồn Phai Khắt (25/12) và Nà Ngần (26/12/1944), mở đầu truyền thống bách chiến bách thắng."
+  },
+  {
+    "id": 66,
+    "question": "Tháng 5/1945, Bác Hồ chuyển từ Pác Bó (Cao Bằng) về căn cứ địa nào ở Tuyên Quang để chỉ đạo cách mạng cả nước?",
+    "options": [
+      "Tân Trào (Sơn Dương, Tuyên Quang)",
+      "Định Hóa (Thái Nguyên)",
+      "Chợ Đồn (Bắc Kạn)",
+      "Bắc Sơn (Lạng Sơn)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tân Trào trở thành 'Thủ đô Khu Giải phóng', nơi đặt cơ quan đầu não chuẩn bị Tổng khởi nghĩa Tháng Tám."
+  },
+  {
+    "id": 67,
+    "question": "Câu nói nổi tiếng của Bác Hồ với đồng chí Võ Nguyên Giáp khi Người ốm nặng tại lán Nà Nưa (Tân Trào) là gì?",
+    "options": [
+      "'Dù phải đốt cháy cả dãy Trường Sơn cũng phải kiên quyết giành cho được độc lập!'",
+      "'Hãy chờ đợi thời cơ thuận lợi hơn'",
+      "'Chúng ta cần thêm vũ khí hiện đại'",
+      "'Hãy đàm phán hòa bình với phát xít Nhật'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lời dặn lịch sử thể hiện ý chí gang thép của dân tộc: 'Lúc này thời cơ thuận lợi đã tới, dù hy sinh tới đâu, dù phải đốt cháy cả dãy Trường Sơn cũng phải kiên quyết giành cho được độc lập'."
+  },
+  {
+    "id": 68,
+    "question": "Quốc dân Đại hội Tân Trào họp ngày 16-17/8/1945 đã quyết định những nội dung lịch sử gì?",
+    "options": [
+      "Tán thành lệnh Tổng khởi nghĩa, thông qua 10 chính sách Việt Minh, bầu Ủy ban Dân tộc Giải phóng do Hồ Chí Minh làm Chủ tịch",
+      "Thành lập Mặt trận Liên Việt",
+      "Kêu gọi kháng chiến chống Pháp",
+      "Ký kết hiệp định với Đồng minh"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đại hội Tân Trào được ví như Hội nghị Diên Hồng của thế kỷ XX, đặt nền móng pháp lý cho chính quyền cách mạng mới."
+  },
+  {
+    "id": 69,
+    "question": "Ngày 2/9/1945, tại Quảng trường Ba Đình, Bác Hồ đã đọc bản văn kiện lịch sử khai sinh ra nước Việt Nam Dân chủ Cộng hòa là gì?",
+    "options": [
+      "Tuyên ngôn Độc lập",
+      "Lời kêu gọi Toàn quốc kháng chiến",
+      "Bản Di chúc",
+      "Bản án chế độ thực dân Pháp"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bản Tuyên ngôn Độc lập bất hủ khẳng định: 'Nước Việt Nam có quyền hưởng tự do và độc lập, và sự thật đã thành một nước tự do, độc lập'."
+  },
+  {
+    "id": 70,
+    "question": "Ngôi nhà nơi Bác Hồ ngồi viết bản Tuyên ngôn Độc lập tại Hà Nội nằm ở địa chỉ nào?",
+    "options": [
+      "Số 48 phố Hàng Ngang (quận Hoàn Kiếm, Hà Nội)",
+      "Số 90 phố Thợ Nhuộm",
+      "Nhà sàn Phủ Chủ tịch",
+      "Số 5 phố Châu Văn Liêm"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại tầng 2 căn nhà số 48 Hàng Ngang của gia đình nhà tư sản yêu nước Trịnh Văn Bô, Bác đã khởi thảo bản Tuyên ngôn Độc lập lịch sử."
+  },
+  {
+    "id": 71,
+    "question": "Trong khi đọc Tuyên ngôn Độc lập, Bác Hồ đã dừng lại và hỏi câu nói gần gũi nào với hàng vạn đồng bào?",
+    "options": [
+      "'Tôi nói đồng bào nghe rõ không?'",
+      "'Đồng bào có khỏe không?'",
+      "'Mọi người có vui mừng không?'",
+      "'Đồng bào đã sẵn sàng chưa?'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Câu nói ấm áp, giản dị 'Tôi nói đồng bào nghe rõ không?' đã xóa nhòa mọi khoảng cách giữa vị nguyên thủ quốc gia và nhân dân."
+  },
+  {
+    "id": 72,
+    "question": "Ngay sau khi giành độc lập, đứng trước muôn vàn khó khăn, Bác Hồ đã phát động cuộc chiến chống lại ba thứ giặc nào?",
+    "options": [
+      "Giặc đói, giặc dốt và giặc ngoại xâm",
+      "Giặc cướp, giặc lửa và giặc nước",
+      "Giặc dịch bệnh, giặc lụt và giặc hạn",
+      "Giặc nội xâm, giặc tham ô và giặc lãng phí"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người phát động phong trào 'Hũ gạo cứu đói', 'Bình dân học vụ' diệt giặc dốt và củng cố lực lượng vũ trang chống giặc ngoại xâm."
+  },
+  {
+    "id": 73,
+    "question": "Phong trào do Bác Hồ phát động để toàn dân nhường cơm sẻ áo cứu đói năm 1945 là gì?",
+    "options": [
+      "Cứ 10 ngày nhịn ăn một bữa, mỗi tháng nhịn 3 bữa, đem gạo ấy để cứu dân nghèo",
+      "Thu thuế nông nghiệp gấp đôi",
+      "Nhập khẩu gạo từ nước ngoài",
+      "Tịch thu lúa của địa chủ"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác nêu gương sáng: cứ 10 ngày nhịn ăn một bữa, đem phần gạo của mình bỏ vào hũ cứu đói ủng hộ đồng bào."
+  },
+  {
+    "id": 74,
+    "question": "Để giải quyết nạn mù chữ cho hơn 90% dân số sau Cách mạng Tháng Tám, phong trào học tập nào được thành lập?",
+    "options": [
+      "Nha Bình dân học vụ",
+      "Phong trào Duy Tân",
+      "Đông Kinh Nghĩa Thục",
+      "Hội Khuyến học"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chỉ sau một năm phát động Bình dân học vụ, hơn 2,5 triệu người dân Việt Nam đã biết đọc, biết viết chữ Quốc ngữ."
+  },
+  {
+    "id": 75,
+    "question": "Ngày 19/12/1946, Chủ tịch Hồ Chí Minh đã ra lời hiệu triệu thiêng liêng nào kêu gọi cả dân tộc đứng lên?",
+    "options": [
+      "Lời kêu gọi Toàn quốc kháng chiến",
+      "Tuyên ngôn Độc lập",
+      "Hiệp định Sơ bộ",
+      "Chỉ thị Kháng chiến kiến quốc"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Chúng ta thà hy sinh tất cả, chứ nhất định không chịu mất nước, nhất định không chịu làm nô lệ! Hỡi đồng bào! Chúng ta phải đứng lên!'."
+  },
+  {
+    "id": 76,
+    "question": "Nơi Bác Hồ viết 'Lời kêu gọi Toàn quốc kháng chiến' vào đêm 19/12/1946 là làng nào?",
+    "options": [
+      "Làng Vạn Phúc (Hà Đông, Hà Nội)",
+      "Làng Bát Tràng",
+      "Làng Sen",
+      "Làng Đình Bảng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại căn nhà của ông Nguyễn Văn Dương ở làng lụa Vạn Phúc (Hà Đông), Bác đã soạn thảo Lời kêu gọi lịch sử."
+  },
+  {
+    "id": 77,
+    "question": "Chiến dịch quân sự lớn đầu tiên năm 1950 mà Chủ tịch Hồ Chí Minh trực tiếp ra mặt trận quan sát chỉ đạo là chiến dịch nào?",
+    "options": [
+      "Chiến dịch Biên giới Thu - Đông 1950",
+      "Chiến dịch Việt Bắc 1947",
+      "Chiến dịch Điện Biên Phủ 1954",
+      "Chiến dịch Hòa Bình 1951"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hình ảnh Bác Hồ chống gậy trên đỉnh núi Báo Đông quan sát trận đánh Đông Khê đã trở thành biểu tượng bất tử của vị Tổng tư lệnh tối cao."
+  },
+  {
+    "id": 78,
+    "question": "Bài thơ 'Không ngủ được' được Bác viết ở chiến khu Việt Bắc có những câu thơ nổi tiếng nào?",
+    "options": [
+      "'Một canh... hai canh... lại ba canh / Trằn trọc băn khoăn, giấc chẳng thành / Canh bốn, canh năm vừa chợp mắt / Sao vàng năm cánh mộng hồn quanh'",
+      "'Trăng lồng cổ thụ bóng lồng hoa'",
+      "'Rừng sâu trăng lặn gương nga rạng'",
+      "'Tiếng suối trong như tiếng hát xa'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bài thơ thể hiện nỗi niềm thao thức khôn nguôi vì vận mệnh độc lập tự do của non sông đất nước."
+  },
+  {
+    "id": 79,
+    "question": "Trước khi Đại tướng Võ Nguyên Giáp lên đường chỉ huy Chiến dịch Điện Biên Phủ (1954), Bác Hồ đã căn dặn điều cốt lõi gì?",
+    "options": [
+      "'Trận này rất quan trọng, phải đánh cho thắng. Chắc thắng mới đánh, không chắc thắng không đánh'",
+      "'Phải đánh thật nhanh trong vài ngày'",
+      "'Bằng mọi giá phải chiếm đồn ngay đêm nay'",
+      "'Không cần lo lắng về thương vong'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lời dặn dò sáng suốt của Bác là cơ sở để Đại tướng chuyển từ phương châm 'Đánh nhanh thắng nhanh' sang 'Đánh chắc tiến chắc', làm nên chiến thắng lịch sử."
+  },
+  {
+    "id": 80,
+    "question": "Chiến thắng lịch sử Điện Biên Phủ ngày 7/5/1954 được ngợi ca bằng câu nói nào?",
+    "options": [
+      "'Lừng lẫy năm châu, chấn động địa cầu'",
+      "'Đánh cho Mỹ cút, đánh cho Ngụy nhào'",
+      "'Nước Việt Nam là một, dân tộc Việt Nam là một'",
+      "'Bách chiến bách thắng'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Chiến thắng đập tan tập đoàn cứ điểm ngạo mạn của thực dân Pháp, buộc Pháp phải ký Hiệp định Genève chấm dứt chiến tranh xâm lược Đông Dương."
+  },
+  {
+    "id": 81,
+    "question": "Sau ngày giải phóng Thủ đô 10/1954, Bác Hồ từ chối ở dinh thự sang trọng của Toàn quyền Pháp mà chọn ở đâu?",
+    "options": [
+      "Ngôi nhà nhỏ của người thợ điện, sau đó chuyển sang Ngôi nhà sàn bằng gỗ giản dị",
+      "Khách sạn Metropole",
+      "Biệt thự Tây Hồ",
+      "Khu nghỉ dưỡng Ba Vì"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác sống và làm việc tại ngôi nhà sàn gỗ mộc mạc bên bờ ao cá trong khuôn viên Phủ Chủ tịch từ năm 1958 cho đến ngày đi xa."
+  },
+  {
+    "id": 82,
+    "question": "Phong trào tết trồng cây do Chủ tịch Hồ Chí Minh phát động bắt đầu vào mùa xuân năm nào?",
+    "options": [
+      "Mùa xuân năm 1960",
+      "Mùa xuân năm 1954",
+      "Mùa xuân năm 1945",
+      "Mùa xuân năm 1969"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Mùa xuân là Tết trồng cây / Làm cho đất nước càng ngày càng xuân'. Lời Bác dạy nay đã trở thành nét đẹp văn hóa truyền thống của nhân dân ta."
+  },
+  {
+    "id": 83,
+    "question": "Ngày 17/7/1966, trước sự leo thang ném bom ác liệt của đế quốc Mỹ, Bác Hồ ra lời kêu gọi khẳng định chân lý thời đại nào?",
+    "options": [
+      "'Không có gì quý hơn độc lập, tự do!'",
+      "'Thà hy sinh tất cả'",
+      "'Đoàn kết, đoàn kết, đại đoàn kết'",
+      "'Nước Việt Nam là một'"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Chiến tranh có thể kéo dài 5 năm, 10 năm, 20 năm hoặc lâu hơn nữa... Hà Nội, Hải Phòng và một số thành phố, xí nghiệp có thể bị tàn phá, song nhân dân Việt Nam quyết không sợ! Không có gì quý hơn độc lập, tự do!'."
+  },
+  {
+    "id": 84,
+    "question": "Tình cảm đặc biệt của Bác Hồ đối với đồng bào và chiến sĩ miền Nam ruột thịt được thể hiện qua câu nói nào?",
+    "options": [
+      "'Miền Nam luôn ở trong trái tim tôi'",
+      "'Miền Nam là tiền tuyến của thế giới'",
+      "'Miền Nam sẽ tự đứng lên'",
+      "'Tôi sẽ vào miền Nam sau cùng'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác luôn đau đáu nỗi niềm thống nhất non sông: 'Miền Nam yêu quý luôn ở trong trái tim tôi', 'Bác đi tới đâu cũng như ở nhà mình'."
+  },
+  {
+    "id": 85,
+    "question": "Bác Hồ bắt đầu viết tài liệu tuyệt đối bí mật - Bản Di chúc thiêng liêng vào dịp sinh nhật năm nào?",
+    "options": [
+      "Tháng 5 năm 1965 (dịp mừng thọ 75 tuổi)",
+      "Năm 1960",
+      "Năm 1968",
+      "Năm 1969"
+    ],
+    "correctIndex": 0,
+    "explanation": "Từ ngày 10/5 đến 15/5/1965, vào lúc 9 giờ sáng mỗi ngày, Bác dành thời gian tĩnh tâm đặt bút viết những dòng đầu tiên của bản Di chúc lịch sử."
+  },
+  {
+    "id": 86,
+    "question": "Trong bản Di chúc, điều đầu tiên Bác Hồ căn dặn toàn Đảng phải giữ gìn như giữ con ngươi của mắt mình là gì?",
+    "options": [
+      "Sự đoàn kết nhất trí trong Đảng",
+      "Vũ khí đạn dược",
+      "Tài chính ngân khố",
+      "Địa vị lãnh đạo"
+    ],
+    "correctIndex": 0,
+    "explanation": "'Các đồng chí từ Trung ương đến các chi bộ cần phải giữ gìn sự đoàn kết nhất trí của Đảng như giữ gìn con ngươi của mắt mình'."
+  },
+  {
+    "id": 87,
+    "question": "Về thế hệ thanh niên tương lai, Bác Hồ căn dặn Đảng trong Di chúc điều gì?",
+    "options": [
+      "'Bồi dưỡng thế hệ cách mạng cho đời sau là một việc rất quan trọng và rất cần thiết'",
+      "'Để thanh niên tự lập không cần quan tâm'",
+      "'Chỉ tập trung vào phát triển kinh tế'",
+      "'Cử tất cả thanh niên ra nước ngoài'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác coi thanh niên là rường cột của nước nhà, cần chăm lo giáo dục đạo đức cách mạng và tri thức cho tuổi trẻ."
+  },
+  {
+    "id": 88,
+    "question": "Chủ tịch Hồ Chí Minh từ trần vào thời khắc thiêng liêng nào?",
+    "options": [
+      "9 giờ 47 phút ngày 2 tháng 9 năm 1969",
+      "12 giờ trưa ngày 30 tháng 4 năm 1975",
+      "19 giờ tối ngày 19 tháng 5 năm 1969",
+      "6 giờ sáng ngày 1 tháng 1 năm 1970"
+    ],
+    "correctIndex": 0,
+    "explanation": "Người trút hơi thở cuối cùng vào lúc 9 giờ 47 phút sáng ngày 2/9/1969 tại Hà Nội, hưởng thọ 79 tuổi, để lại muôn vàn tiếc thương cho dân tộc và thế giới."
+  },
+  {
+    "id": 89,
+    "question": "Công trình thiêng liêng nơi lưu giữ thi hài Bác Hồ và đón hàng triệu lượt người vào viếng mỗi năm là công trình nào?",
+    "options": [
+      "Lăng Chủ tịch Hồ Chí Minh tại Quảng trường Ba Đình",
+      "Bảo tàng Hồ Chí Minh",
+      "Khu di tích Kim Liên",
+      "Bến Nhà Rồng"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lăng Bác khánh thành ngày 29/8/1975 giữa Quảng trường Ba Đình rợp bóng tre ngà và muôn hoa tươi thắm khắp mọi miền Tổ quốc."
+  },
+  {
+    "id": 90,
+    "question": "Tổ chức UNESCO của Liên Hợp Quốc đã ra Nghị quyết vinh danh Chủ tịch Hồ Chí Minh là gì vào năm 1987?",
+    "options": [
+      "Anh hùng giải phóng dân tộc, Nhà văn hóa kiệt xuất của Việt Nam",
+      "Danh nhân quân sự kiệt xuất",
+      "Nhà triết học vĩ đại",
+      "Nhà ngoại giao xuất sắc nhất"
+    ],
+    "correctIndex": 0,
+    "explanation": "Khóa họp Đại hội đồng UNESCO lần thứ 24 (năm 1987) đã ra Nghị quyết kỷ niệm 100 năm ngày sinh của Người với tư cách Anh hùng giải phóng dân tộc và Danh nhân văn hóa kiệt xuất."
+  },
+  {
+    "id": 91,
+    "question": "Năm điều Bác Hồ dạy thiếu niên, nhi đồng mở đầu bằng điều gì?",
+    "options": [
+      "Yêu Tổ quốc, yêu đồng bào",
+      "Học tập tốt, lao động tốt",
+      "Đoàn kết tốt, kỷ luật tốt",
+      "Giữ gìn vệ sinh thật tốt"
+    ],
+    "correctIndex": 0,
+    "explanation": "5 điều Bác dạy: 1. Yêu Tổ quốc, yêu đồng bào; 2. Học tập tốt, lao động tốt; 3. Đoàn kết tốt, kỷ luật tốt; 4. Giữ gìn vệ sinh thật tốt; 5. Khiêm tốn, thật thà, dũng cảm."
+  },
+  {
+    "id": 92,
+    "question": "Bốn đức tính cốt lõi của người cách mạng theo tư tưởng Bác Hồ là gì?",
+    "options": [
+      "Cần, Kiệm, Liêm, Chính",
+      "Nhân, Nghĩa, Lễ, Trí",
+      "Công, Dung, Ngôn, Hạnh",
+      "Tín, Nghĩa, Dũng, Mưu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác ví: 'Trời có bốn mùa: Xuân, Hạ, Thu, Đông / Đất có bốn phương: Đông, Tây, Nam, Bắc / Người có bốn đức: Cần, Kiệm, Liêm, Chính / Thiếu một mùa, thì không thành trời / Thiếu một phương, thì không thành đất / Thiếu một đức, thì không thành người'."
+  },
+  {
+    "id": 93,
+    "question": "Kỷ vật mộc mạc gắn liền với đôi chân vạn dặm của Bác Hồ từ kháng chiến chống Pháp đến khi Người đi xa là gì?",
+    "options": [
+      "Đôi dép cao su (dép lốp quân nhu)",
+      "Đôi giày da bóng",
+      "Đôi guốc mộc",
+      "Đôi hài thêu"
+    ],
+    "correctIndex": 0,
+    "explanation": "Đôi dép lốp làm từ săm lốp xe hơi phế thải đã theo Bác đi khắp nẻo đường kháng chiến, sang thăm cả các nước bạn, biểu tượng cho sự thanh bạch tột cùng."
+  },
+  {
+    "id": 94,
+    "question": "Trong câu chuyện cảm động mùa đông 1946, khi các chiến sĩ tặng Bác chiếc áo trấn thủ ấm áp, Bác đã làm gì?",
+    "options": [
+      "Bác nhờ gửi tặng lại cho chiến sĩ ngoài mặt trận đang chịu rét nhất",
+      "Bác giữ lại mặc suốt mùa đông",
+      "Bác cất vào tủ kỷ niệm",
+      "Bác tặng cho viên tướng Pháp"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác luôn đau xót khi nghĩ đến các chiến sĩ ngoài tiền tuyến chịu gió rét, nhường lại chiếc áo ấm duy nhất cho người cần nhất."
+  },
+  {
+    "id": 95,
+    "question": "Câu nói nổi tiếng của Bác về tầm quan trọng của việc trồng người và phát triển giáo dục là gì?",
+    "options": [
+      "'Vì lợi ích mười năm thì phải trồng cây, vì lợi ích trăm năm thì phải trồng người'",
+      "'Học, học nữa, học mãi'",
+      "'Hiền tài là nguyên khí quốc gia'",
+      "'Không thầy đố mày làm nên'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Phát biểu tại Hội nghị cán bộ giáo dục năm 1958, Bác nhắc nhở chiến lược phát triển con người là nền tảng cốt lõi của quốc gia."
+  },
+  {
+    "id": 96,
+    "question": "Bác Hồ luôn nhấn mạnh phương châm đối ngoại khôn khéo của dân tộc Việt Nam là gì?",
+    "options": [
+      "'Dĩ bất biến, ứng vạn biến'",
+      "'Đơn thương độc mã'",
+      "'Đóng cửa tự vệ'",
+      "'Dĩ hòa vi quý tuyệt đối'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Trước khi sang Pháp năm 1946, Bác dặn cụ Huỳnh Thúc Kháng: 'Dĩ bất biến, ứng vạn biến' - giữ vững mục tiêu độc lập chủ quyền, linh hoạt sách lược ứng phó."
+  },
+  {
+    "id": 97,
+    "question": "Lời khẳng định đanh thép của Bác về sự thống nhất giang sơn gấm vóc Việt Nam là gì?",
+    "options": [
+      "'Nước Việt Nam là một, dân tộc Việt Nam là một. Sông có thể cạn, núi có thể mòn, song chân lý ấy không bao giờ thay đổi!'",
+      "'Bắc Nam chia đôi mãi mãi'",
+      "'Mỗi miền có thể độc lập riêng'",
+      "'Tùy thuộc vào sự viện trợ quốc tế'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Lời khẳng định bất diệt của Bác tháng 2/1958 thể hiện ý chí sắt đá không thế lực nào có thể chia cắt được non sông Việt Nam."
+  },
+  {
+    "id": 98,
+    "question": "Trong tác phẩm 'Sửa đổi lối làm việc' (1947), Bác Hồ phê phán căn bệnh nguy hiểm nào trong nội bộ cán bộ?",
+    "options": [
+      "Bệnh quan liêu, mệnh lệnh, xa rời quần chúng nhân dân",
+      "Bệnh cần cù quá mức",
+      "Bệnh nói nhiều làm nhiều",
+      "Bệnh trung thực thẳng thắn"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bác yêu cầu người cán bộ cách mạng phải gần dân, hiểu dân, học hỏi dân và là 'công bộc của dân chứ không phải quan cách mạng'."
+  },
+  {
+    "id": 99,
+    "question": "Bộ trang phục giản dị quen thuộc Bác Hồ thường mặc trong các buổi tiếp khách quốc tế và duyệt đội ngũ là gì?",
+    "options": [
+      "Bộ quần áo kaki màu vàng sẫm sờn gấu",
+      "Bộ âu phục cà vạt lụa xa hoa",
+      "Áo gấm hoàng gia",
+      "Áo len quý tộc"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bộ kaki giản dị của Bác đã làm rung động triệu trái tim bạn bè quốc tế, tượng trưng cho phong cách thanh cao, giản dị của vị Chủ tịch nước."
+  },
+  {
+    "id": 100,
+    "question": "Câu đúc kết nổi tiếng của Bác Hồ về sức mạnh vô địch của khối đại đoàn kết toàn dân là gì?",
+    "options": [
+      "'Đoàn kết, đoàn kết, đại đoàn kết. Thành công, thành công, đại thành công!'",
+      "'Một cây làm chẳng nên non'",
+      "'Muôn người như một'",
+      "'Đồng tâm hiệp lực ắt thành công'"
+    ],
+    "correctIndex": 0,
+    "explanation": "Tại Đại hội Mặt trận Tổ quốc Việt Nam năm 1961, Người khẳng định chân lý bất hủ: Đoàn kết là sức mạnh vô địch đưa cách mạng Việt Nam đi từ thắng lợi này đến thắng lợi khác."
+  }
+]
