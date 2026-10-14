@@ -1083,7 +1083,7 @@ export default function OngVangGame() {
             </div>
             <div className="flex-grow">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Bàn Cờ Hải Trình Vạn Dặm</h4>
+                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Hành Trình Theo Chân Bác</h4>
                 {activeGameTab === 'journey' && (
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
                     Đang chơi
@@ -1091,7 +1091,7 @@ export default function OngVangGame() {
                 )}
               </div>
               <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
-                Bàn cờ tỷ phú lịch sử (Business Tour). Đổ xúc xắc đưa con tàu qua 16 ô địa danh lịch sử, vượt thử thách và cắm cờ Tổ quốc!
+                Đổ xúc xắc đồng hành cùng Bác qua 16 ô địa danh lịch sử, vượt thử thách và cắm đủ 11 lá cờ Tổ quốc trên hành trình tìm đường cứu nước!
               </p>
               <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
                 <span>{activeGameTab === 'journey' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
@@ -1941,7 +1941,7 @@ export default function OngVangGame() {
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                2. Hải Trình Vạn Dặm
+                2. Hành Trình Theo Chân Bác
               </button>
               <button
                 onClick={() => setRulesTab('quiz')}
@@ -2058,7 +2058,7 @@ export default function OngVangGame() {
             {rulesTab === 'journey' && (
               <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
                 
-                {/* Visual Illustration Diagram for Game 2 (Monopoly Business Tour) */}
+                {/* Visual Illustration Diagram for Game 2 */}
                 <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-amber-600/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
                   {/* Left: Monopoly Board Preview */}
                   <div className="sm:col-span-5 relative aspect-square rounded-xl overflow-hidden border border-amber-500/60 bg-gradient-to-br from-[#1b0f08] to-black shadow-md p-2 flex flex-col justify-between">
@@ -2074,7 +2074,7 @@ export default function OngVangGame() {
                         5
                       </div>
                       <div className="text-[10px] text-amber-300 font-bold">🎲 Đổ xúc xắc 1 - 6 bước</div>
-                      <div className="text-[9px] text-stone-400">Tàu di chuyển quanh 16 ô viền</div>
+                      <div className="text-[9px] text-stone-400">Đồng hành cùng Bác qua 16 ô địa danh</div>
                     </div>
 
                     <div className="grid grid-cols-4 gap-1 text-[8px] font-mono text-center">
@@ -2086,33 +2086,33 @@ export default function OngVangGame() {
 
                     <div className="absolute top-2 right-2 bg-black/85 px-2 py-0.5 rounded text-[10px] text-yellow-300 font-bold border border-yellow-400/50 flex items-center space-x-1">
                       <Dices className="w-3 h-3 text-yellow-300" />
-                      <span>Bàn Cờ Tỷ Phú</span>
+                      <span>Hành Trình Lịch Sử</span>
                     </div>
                   </div>
 
-                  {/* Right: How to Play in Business Tour Style */}
+                  {/* Right: How to Play */}
                   <div className="sm:col-span-7 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#241408] to-[#140b04] border border-amber-700/60 shadow-sm">
                     <div className="flex items-center space-x-1.5 text-xs font-bold text-amber-300">
                       <Dices className="w-3.5 h-3.5 text-yellow-400" />
-                      <span>Luật chơi Bàn Cờ Hải Trình Vạn Dặm:</span>
+                      <span>Luật chơi Hành Trình Theo Chân Bác:</span>
                     </div>
 
                     <div className="p-2.5 rounded-lg bg-black/60 border border-amber-800/40 text-[11px] text-stone-200 space-y-1.5 font-serif">
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">1.</span>
-                        <span>Bấm nút <strong>LẮC XÚC XẮC (ROLL DICE)</strong>: Con tàu sẽ nhảy từng bước theo số điểm ngẫu nhiên (1 đến 6).</span>
+                        <span>Bấm nút <strong>LẮC XÚC XẮC</strong>: Nhân vật Bác di chuyển mượt mà qua các ô theo số điểm xúc xắc (1 đến 6).</span>
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">2.</span>
-                        <span>Dừng chân ở ô Địa Danh: Trả lời câu hỏi lịch sử. Đúng sẽ <strong>cắm cờ Tổ quốc 🇻🇳</strong> lên ô đó và tích lũy hải lý!</span>
+                        <span>Dừng chân ở ô Địa Danh: Trả lời câu hỏi lịch sử. Đúng sẽ <strong>cắm cờ Tổ quốc 🇻🇳</strong> lên địa danh đó và tích lũy dặm đường!</span>
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">3.</span>
-                        <span>Ô Cơ Hội & Vận Mệnh: Nhận thưởng hải lý, tiến thêm bước và vượt bão đại dương.</span>
+                        <span>Ô Cơ Hội & Vận Mệnh: Nhận thêm dặm thưởng, tăng tốc tiến bước và vượt khó khăn trên biển lớn.</span>
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">4.</span>
-                        <span>Cắm cờ toàn bộ địa danh và về đích tại <strong>Cột mốc 108 Pác Bó</strong> để giành chiến thắng vinh quang!</span>
+                        <span><strong>Mục tiêu tối thượng:</strong> Tiếp tục hành trình và cắm đủ <strong>tất cả 11 lá cờ Việt Nam</strong> trên 11 địa danh lịch sử để giành Đại Thắng Toàn Diện!</span>
                       </div>
                     </div>
                   </div>
@@ -2126,7 +2126,7 @@ export default function OngVangGame() {
                       <span>Đổ xúc xắc di chuyển</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Con tàu di chuyển linh hoạt theo chiều kim đồng hồ quanh 16 ô địa danh lịch sử theo xúc xắc.
+                      Nhân vật Bác di chuyển chân thực, sống động quanh 16 ô viền bản đồ theo số điểm xúc xắc 3D.
                     </p>
                   </div>
 
@@ -2136,17 +2136,17 @@ export default function OngVangGame() {
                       <span>Cắm cờ Việt Nam 🇻🇳</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Giải mã thử thách để cắm cờ Tổ quốc, lưu dấu ấn di sản Bác Hồ tại mỗi quốc gia Người từng đi qua.
+                      Trả lời chính xác thử thách lịch sử để cắm cờ Tổ quốc đánh dấu mốc son rực rỡ tại mỗi quốc gia.
                     </p>
                   </div>
 
                   <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
                     <div className="flex items-center space-x-1.5 text-emerald-300 font-bold text-xs">
                       <span className="w-5 h-5 rounded-full bg-emerald-600 text-stone-950 flex items-center justify-center text-[10px]">3</span>
-                      <span>Về đích Pác Bó</span>
+                      <span>Cắm đủ 11 lá cờ</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Cập bến mốc 108 Pác Bó khép lại 30 năm bôn ba và nhận Cúp Vàng Đại Thắng lịch sử.
+                      Chơi liên tục đến khi cắm trọn vẹn 11 lá cờ Tổ quốc trên khắp năm châu để vinh quy bái tổ!
                     </p>
                   </div>
                 </div>

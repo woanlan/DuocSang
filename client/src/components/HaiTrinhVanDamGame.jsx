@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Anchor, Compass, MapPin, Navigation, Ship, Wind, Award,
-  Sparkles, CheckCircle2, ChevronRight, ChevronLeft, Volume2,
-  VolumeX, Trophy, RotateCcw, BookOpen, Flag, Shield, Eye,
-  Maximize2, ArrowRight, Play, Check, X, Dices, Gift, Star,
+  Anchor, Compass, MapPin, Ship, Award,
+  Sparkles, CheckCircle2, Volume2, Trophy, RotateCcw,
+  Flag, Shield, Check, X, Dices, Gift, Star,
   HelpCircle, AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundFX, speakVietnameseVoice, stopVietnameseVoice } from '../utils/gameAudio';
 
-// ================= 16 TILES ON THE MONOPOLY PERIMETER (CLOCKWISE 5x5 BOARD) =================
-// Grid 5x5 perimeter: 
-// Top: (0,0) -> (0,1) -> (0,2) -> (0,3) -> (0,4)
-// Right: (1,4) -> (2,4) -> (3,4) -> (4,4)
-// Bottom: (4,3) -> (4,2) -> (4,1) -> (4,0)
-// Left: (3,0) -> (2,0) -> (1,0)
-
+// ================= 16 HISTORIC BOARD TILES (CLOCKWISE 5x5 BOARD) =================
+// 11 Historical Landmarks + 5 Special Event / Supply Stations
 export const BOARD_TILES = [
   // Top Row (0 -> 4)
   {
@@ -25,7 +19,7 @@ export const BOARD_TILES = [
     type: 'landmark',
     stopId: 1,
     title: "Bến Nhà Rồng",
-    subtitle: "Xuất phát (05/06/1911)",
+    subtitle: "Khởi hành tìm đường cứu nước (05/06/1911)",
     country: "Sài Gòn - Việt Nam",
     nauticalMiles: 0,
     imageUrl: "/images/gallery/ben-nha-rong.jpg",
@@ -50,7 +44,7 @@ export const BOARD_TILES = [
     type: 'landmark',
     stopId: 2,
     title: "Marseille & Le Havre",
-    subtitle: "Cập cảng Pháp (06/07/1911)",
+    subtitle: "Cập cảng nước Pháp (06/07/1911)",
     country: "Cộng hòa Pháp",
     nauticalMiles: 6500,
     imageUrl: "/images/timeline/tau-latouche-treville.jpg",
@@ -78,7 +72,7 @@ export const BOARD_TILES = [
     icon: 'gift',
     color: 'from-amber-600 to-yellow-500',
     chanceEvents: [
-      { text: "Được kiều bào và thủy thủ quốc tế tận tình giúp đỡ! Bạn được tặng thêm +300 hải lý.", bonusMiles: 300, forwardSteps: 0 },
+      { text: "Được kiều bào và thủy thủ quốc tế tận tình giúp đỡ! Bạn được tặng thêm +300 hải lý tiếp sức.", bonusMiles: 300, forwardSteps: 0 },
       { text: "Gió thuận buồm xuôi, con tàu lướt sóng nhanh vượt bậc! Bạn tiến thẳng thêm 2 ô.", bonusMiles: 150, forwardSteps: 2 },
       { text: "Học thêm tiếng Anh và tiếng Pháp thông qua sách báo thư viện! Bạn nhận +250 hải lý tri thức.", bonusMiles: 250, forwardSteps: 0 }
     ]
@@ -131,7 +125,7 @@ export const BOARD_TILES = [
     subtitle: "Thủ đô sương mù (1913 - 1917)",
     country: "Vương quốc Anh",
     nauticalMiles: 14500,
-    imageUrl: "/images/timeline/khach-san-carlton.jpg",
+    imageUrl: "/images/timeline/carlton-hotel.jpg",
     roleTitle: "Đoàn viên Lao động Hải ngoại",
     vessel: "Vượt bão tuyết xứ sương mù",
     narrative: "Đầu năm 1914, Người sang Anh, làm nghề cào tuyết, đốt lò rồi phụ bếp tại khách sạn Carlton dưới sự hướng dẫn của vua đầu bếp Escoffier. Tại đây, Người gia nhập Công đoàn Lao động Hải ngoại và nghiên cứu phong trào công nhân thế giới.",
@@ -152,7 +146,7 @@ export const BOARD_TILES = [
     col: 4,
     type: 'fate',
     title: "Thử Thách Vận Mệnh",
-    subtitle: "Sóng gió đại dương",
+    subtitle: "Sóng gió đại dương & Bản lĩnh thép",
     icon: 'compass',
     color: 'from-purple-600 to-indigo-700',
     fateEvents: [
@@ -167,7 +161,7 @@ export const BOARD_TILES = [
     type: 'landmark',
     stopId: 5,
     title: "Paris - Ngõ Compoint",
-    subtitle: "Bản Yêu sách & Báo Người Cùng Khổ (1917 - 1923)",
+    subtitle: "Bản Yêu sách & Báo Le Paria (1917 - 1923)",
     country: "Cộng hòa Pháp",
     nauticalMiles: 16800,
     imageUrl: "/images/timeline/ngo-compoint.jpg",
@@ -195,7 +189,7 @@ export const BOARD_TILES = [
     subtitle: "Quê hương Cách mạng Tháng Mười (1923 - 1924)",
     country: "Liên Xô",
     nauticalMiles: 20100,
-    imageUrl: "/images/timeline/quoc-te-cong-san.jpg",
+    imageUrl: "/images/timeline/moskva-1924.jpg",
     roleTitle: "Đại biểu Quốc tế Nông dân & Đệ Tam Quốc tế",
     vessel: "Hành trình bí mật qua Berlin đến Liên Xô",
     narrative: "Mùa hè năm 1923, Nguyễn Ái Quốc bí mật rời Paris sang Liên bang Xô Viết. Người tham dự Đại hội I Quốc tế Nông dân, học tại Trường Đại học Phương Đông và phát biểu đanh thép tại Đại hội V Quốc tế Cộng sản về phong trào giải phóng thuộc địa.",
@@ -237,7 +231,7 @@ export const BOARD_TILES = [
     subtitle: "Ươm mầm hạt giống đỏ (1924 - 1927)",
     country: "Trung Quốc",
     nauticalMiles: 23400,
-    imageUrl: "/images/timeline/thanh-nien-quang-chau.jpg",
+    imageUrl: "/images/timeline/tru-so-hoi-thanh-nien.jpg",
     roleTitle: "Đồng chí Lý Thụy & Cố vấn Borodin",
     vessel: "Cầu nối phong trào cách mạng về Tổ quốc",
     narrative: "Cuối năm 1924, Người đến Quảng Châu (Trung Quốc) lấy bí danh Lý Thụy. Người sáng lập Hội Việt Nam Cách mạng Thanh niên (6/1925), xuất bản báo Thanh Niên và mở các lớp huấn luyện chính trị đào tạo các chiến sĩ nòng cốt cho cách mạng nước nhà.",
@@ -328,7 +322,7 @@ export const BOARD_TILES = [
     subtitle: "Chuẩn bị về nước (1940)",
     country: "Vùng biên giới Việt - Trung",
     nauticalMiles: 28900,
-    imageUrl: "/images/gallery/pac-bo.jpg",
+    imageUrl: "/images/timeline/lan-khuoi-nam.jpg",
     roleTitle: "Bác Hồ - Già Thu",
     vessel: "Bắt liên lạc trở về biên ải",
     narrative: "Năm 1940, trước tình hình thế giới chuyển biến mau lẹ, Người tìm về Côn Minh và Quế Lâm, gặp gỡ các đồng chí Võ Nguyên Giáp, Phạm Văn Đồng... trực tiếp chỉ đạo chuẩn bị mọi điều kiện để đưa phong trào cách mạng về lại Tổ quốc.",
@@ -347,13 +341,13 @@ export const BOARD_TILES = [
     id: 15,
     row: 1,
     col: 0,
-    type: 'finish',
+    type: 'landmark',
     stopId: 11,
     title: "Cột mốc 108 - Pác Bó",
-    subtitle: "Về Đích Lịch Sử (28/01/1941)",
+    subtitle: "Mốc son trở về đất mẹ (28/01/1941)",
     country: "Cao Bằng - Việt Nam",
     nauticalMiles: 30000,
-    imageUrl: "/images/gallery/pac-bo.jpg",
+    imageUrl: "/images/timeline/cot-moc-108.jpg",
     roleTitle: "Chủ tịch Hồ Chí Minh - Người Cha Già Dân Tộc",
     vessel: "Hành trình 30 năm khép lại - Bình minh độc lập",
     narrative: "Ngày 28/01/1941 (mùng 2 Tết Tân Tỵ), sau 30 năm bôn ba khắp bốn biển năm châu, Bác Hồ kính yêu đã bước qua cột mốc 108 trên biên giới Việt - Trung, nghẹn ngào cúi hôn mảnh đất quê hương Pác Bó (Hà Quảng, Cao Bằng).",
@@ -369,6 +363,9 @@ export const BOARD_TILES = [
     explanation: "Đúng ngày 28/01/1941, Bác Hồ cùng các đồng chí bí mật đặt chân về Tổ quốc tại Cao Bằng, đánh dấu mốc son rực rỡ chuẩn bị cho ngày Tổng khởi nghĩa Cách mạng Tháng Tám."
   }
 ];
+
+// List of all 11 landmark tile IDs where Vietnamese flag must be planted
+export const LANDMARK_TILE_IDS = [0, 1, 3, 5, 7, 8, 10, 11, 12, 14, 15];
 
 // Helper to shuffle options so correct answer is randomly distributed among A, B, C, D
 function shuffleTileOptions(tile) {
@@ -392,12 +389,14 @@ function shuffleTileOptions(tile) {
 export default function HaiTrinhVanDamGame() {
   // Current tile index on board (0 to 15)
   const [currentTileIdx, setCurrentTileIdx] = useState(0);
-  const [claimedTiles, setClaimedTiles] = useState([0]); // Tiles where Vietnamese flag is claimed/unlocked
+  // Claimed tiles where Vietnamese flag is successfully planted
+  const [claimedTiles, setClaimedTiles] = useState([]);
   const [totalNauticalMiles, setTotalNauticalMiles] = useState(0);
   const [diceCount, setDiceCount] = useState(0); // Number of rolls
   const [diceValue, setDiceValue] = useState(1); // 1 to 6
   const [isRolling, setIsRolling] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
+  const [diceTransform, setDiceTransform] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
 
   // Modals
   const [activeChallengeTile, setActiveChallengeTile] = useState(null); // Landmark challenge
@@ -408,7 +407,7 @@ export default function HaiTrinhVanDamGame() {
   // Chance / Fate notification modal
   const [chanceModalInfo, setChanceModalInfo] = useState(null);
 
-  // Grand victory modal
+  // Grand victory modal (when all 11 flags are planted)
   const [isGrandFinale, setIsGrandFinale] = useState(false);
 
   // Clean voice on unmount
@@ -418,14 +417,12 @@ export default function HaiTrinhVanDamGame() {
     };
   }, []);
 
-  // Number of landmark milestones available on the board (landmarks + finish)
-  const totalLandmarks = BOARD_TILES.filter(t => t.type === 'landmark' || t.type === 'finish').length;
-  const totalClaimedLandmarks = claimedTiles.filter(idx => {
-    const t = BOARD_TILES[idx];
-    return t && (t.type === 'landmark' || t.type === 'finish');
-  }).length;
+  // Number of landmark flags claimed so far
+  const totalLandmarks = LANDMARK_TILE_IDS.length; // 11
+  const claimedCount = claimedTiles.filter(id => LANDMARK_TILE_IDS.includes(id)).length;
+  const progressPercent = Math.round((claimedCount / totalLandmarks) * 100);
 
-  // ================= ROLL DICE ACTION =================
+  // ================= ULTRA SMOOTH 3D DECELERATING DICE ROLL =================
   const handleRollDice = () => {
     if (isRolling || isMoving || activeChallengeTile || chanceModalInfo || isGrandFinale) return;
 
@@ -433,22 +430,37 @@ export default function HaiTrinhVanDamGame() {
     setIsRolling(true);
     soundFX.playDiceRoll();
 
-    // Roll animation 700ms
-    let rollCounter = 0;
-    const interval = setInterval(() => {
-      setDiceValue(Math.floor(Math.random() * 6) + 1);
-      rollCounter++;
-      if (rollCounter > 7) {
-        clearInterval(interval);
-        const finalDice = Math.floor(Math.random() * 6) + 1;
+    const finalDice = Math.floor(Math.random() * 6) + 1;
+
+    // Smooth physics deceleration intervals (ms)
+    const intervals = [40, 50, 60, 75, 95, 120, 155, 200, 260];
+    let step = 0;
+
+    const runDeceleratingRoll = () => {
+      if (step < intervals.length) {
+        setDiceValue(Math.floor(Math.random() * 6) + 1);
+        setDiceTransform({
+          rotateX: Math.floor(Math.random() * 360),
+          rotateY: Math.floor(Math.random() * 360),
+          scale: 1.08 + Math.random() * 0.08
+        });
+        step++;
+        setTimeout(runDeceleratingRoll, intervals[step - 1]);
+      } else {
+        // Final landing with bounce and snap to final number
         setDiceValue(finalDice);
+        setDiceTransform({ rotateX: 0, rotateY: 0, scale: 1 });
         setIsRolling(false);
         setDiceCount(prev => prev + 1);
 
-        // Start step-by-step token movement
-        moveTokenStepByStep(finalDice);
+        // Move character step-by-step
+        setTimeout(() => {
+          moveTokenStepByStep(finalDice);
+        }, 250);
       }
-    }, 80);
+    };
+
+    runDeceleratingRoll();
   };
 
   // Step-by-step movement along the 16 board tiles
@@ -478,20 +490,19 @@ export default function HaiTrinhVanDamGame() {
     if (!tile) return;
 
     // Check tile type
-    if (tile.type === 'landmark' || tile.type === 'finish') {
-      // Landmark challenge tile
+    if (tile.type === 'landmark') {
       if (claimedTiles.includes(tile.id)) {
-        // Already claimed earlier: Bonus visit
+        // Flag already planted earlier: Praise and give travel bonus
         soundFX.playSparkle();
         setTotalNauticalMiles(prev => prev + 100);
-        speakVietnameseVoice(`Bạn đã dừng chân tại ${tile.title}. Địa danh này đã được cắm cờ Tổ quốc, bạn nhận thêm 100 hải lý!`);
+        speakVietnameseVoice(`Bạn đã dừng chân tại ${tile.title}. Địa danh này đã được cắm cờ Tổ quốc Việt Nam, bạn nhận thêm 100 hải lý tiếp sức!`);
       } else {
-        // Open question challenge with shuffled options
+        // Not claimed yet: Open question challenge with shuffled options
         const shuffled = shuffleTileOptions(tile);
         setActiveChallengeTile(shuffled);
         setSelectedOption(null);
         setIsAnswerChecked(false);
-        // Read question aloud
+        // Automatically read question aloud
         speakVietnameseVoice(shuffled.question);
       }
     } else if (tile.type === 'chance') {
@@ -534,7 +545,7 @@ export default function HaiTrinhVanDamGame() {
       setTotalNauticalMiles(prev => prev + 200);
       setChanceModalInfo({
         title: "TRẠM TIẾP TẾ SUEZ",
-        subtitle: "Bổ sung lương thực & nước ngọt",
+        subtitle: "Bổ sung nhiên liệu & nước ngọt",
         text: tile.rewardText,
         bonusMiles: 200,
         forwardSteps: 0,
@@ -550,7 +561,6 @@ export default function HaiTrinhVanDamGame() {
     const info = chanceModalInfo;
     setChanceModalInfo(null);
     if (info && info.forwardSteps > 0) {
-      // Advance additional steps as granted by the card
       setTimeout(() => {
         moveTokenStepByStep(info.forwardSteps, currentTileIdx);
       }, 300);
@@ -569,32 +579,35 @@ export default function HaiTrinhVanDamGame() {
     if (isCorrect) {
       soundFX.playShipHorn();
       soundFX.playCorrect();
-      speakVietnameseVoice(`Chính xác! Bạn đã mở khóa và cắm cờ Tổ quốc thành công lên địa danh ${activeChallengeTile.title}.`);
       
-      const newClaimed = [...claimedTiles, activeChallengeTile.id];
+      const newClaimed = [...new Set([...claimedTiles, activeChallengeTile.id])];
       setClaimedTiles(newClaimed);
       setTotalNauticalMiles(prev => prev + 350);
 
-      // Check if finished final destination (Pac Bo) or claimed all
-      if (activeChallengeTile.id === 15 || newClaimed.length >= totalLandmarks) {
+      const updatedCount = newClaimed.filter(id => LANDMARK_TILE_IDS.includes(id)).length;
+
+      // Check if ALL 11 landmark flags have been planted!
+      if (updatedCount >= totalLandmarks) {
+        speakVietnameseVoice(`Chính xác! Bạn đã cắm lá cờ Tổ quốc thứ ${updatedCount} và hoàn thành xuất sắc toàn bộ 11 mốc son lịch sử của Bác Hồ!`);
         setTimeout(() => {
           setIsGrandFinale(true);
           soundFX.playVictory();
-          speakVietnameseVoice("Chúc mừng bạn đã hoàn thành xuất sắc Bàn Cờ Hải Trình Vạn Dặm của Chủ tịch Hồ Chí Minh!");
           try {
             confetti({
-              particleCount: 160,
+              particleCount: 180,
               spread: 100,
               origin: { y: 0.55 }
             });
           } catch (e) {}
         }, 1200);
+      } else {
+        speakVietnameseVoice(`Chính xác! Bạn đã cắm cờ Việt Nam thành công tại ${activeChallengeTile.title}. Bạn đã cắm được ${updatedCount} trên 11 lá cờ!`);
       }
     } else {
       soundFX.playWrong();
       const correctLetter = String.fromCharCode(65 + activeChallengeTile.correctIndex);
       const correctText = activeChallengeTile.options[activeChallengeTile.correctIndex];
-      speakVietnameseVoice(`Chưa chính xác! Đáp án đúng là đáp án ${correctLetter}: ${correctText}.`);
+      speakVietnameseVoice(`Chưa chính xác! Đáp án đúng là đáp án ${correctLetter}: ${correctText}. Bạn chưa cắm được cờ tại đây, hãy thử lại ở vòng sau nhé!`);
     }
   };
 
@@ -609,7 +622,7 @@ export default function HaiTrinhVanDamGame() {
     stopVietnameseVoice();
     soundFX.playShipHorn();
     setCurrentTileIdx(0);
-    setClaimedTiles([0]);
+    setClaimedTiles([]);
     setTotalNauticalMiles(0);
     setDiceCount(0);
     setDiceValue(1);
@@ -621,54 +634,126 @@ export default function HaiTrinhVanDamGame() {
   // Get current tile data
   const currentTile = BOARD_TILES[currentTileIdx];
 
-  // Convert (row, col) into grid column & row classes for CSS Grid (5 cols x 5 rows)
-  // row: 0..4 (grid-row 1..5), col: 0..4 (grid-col 1..5)
+  // Grid style for 5x5 board
   const getGridStyle = (tile) => ({
     gridRowStart: tile.row + 1,
     gridColumnStart: tile.col + 1
   });
 
+  // Render 3D Dice Pips
+  const renderDicePips = (val) => {
+    switch(val) {
+      case 1:
+        return (
+          <div className="flex items-center justify-center w-full h-full">
+            <span className="text-3xl sm:text-4xl text-yellow-300 drop-shadow-[0_0_12px_rgba(255,235,59,0.9)] animate-pulse">★</span>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="w-full h-full p-2 flex flex-col justify-between">
+            <div className="flex justify-start"><span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" /></div>
+            <div className="flex justify-end"><span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" /></div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="w-full h-full p-2 flex flex-col justify-between">
+            <div className="flex justify-start"><span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" /></div>
+            <div className="flex justify-center"><span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" /></div>
+            <div className="flex justify-end"><span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" /></div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="w-full h-full p-2 flex flex-col justify-between">
+            <div className="flex justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+            <div className="flex justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+          </div>
+        );
+      case 5:
+        return (
+          <div className="w-full h-full p-2 flex flex-col justify-between relative">
+            <div className="flex justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+            <div className="flex justify-center my-auto">
+              <span className="text-yellow-300 text-sm">★</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+          </div>
+        );
+      case 6:
+      default:
+        return (
+          <div className="w-full h-full p-2 flex justify-between">
+            <div className="flex flex-col justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+            <div className="flex flex-col justify-between">
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+              <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(255,235,59,0.85)]" />
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto space-y-6">
       
-      {/* ================= HEADER BAR: STATS & DICE STATUS ================= */}
+      {/* ================= DIGNIFIED HEADER BAR: PROGRESS & STATS ================= */}
       <div className="bg-[#17100a]/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-amber-600/40 shadow-xl flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center space-x-3.5">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center shadow-lg text-stone-950 font-black">
-            <Dices className="w-7 h-7 text-stone-950 animate-bounce" />
+            <Compass className="w-7 h-7 text-stone-950 animate-spin-slow" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-xs uppercase tracking-widest font-black text-amber-400 bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-500/40">
-                PHONG CÁCH BUSINESS TOUR
+                HÀNH TRÌNH 30 NĂM BÔN BA (1911 - 1941)
               </span>
-              <span className="text-xs text-stone-400 font-serif">16 Ô Bàn Cờ Hải Trình 30 Năm</span>
+              <span className="text-xs text-stone-400 font-serif hidden sm:inline">16 Mốc Son Lịch Sử</span>
             </div>
-            <h3 className="text-base sm:text-lg font-serif font-bold text-amber-100 flex items-center gap-1.5 mt-0.5">
-              <span>Bàn Cờ Tỷ Phú Hải Trình Vạn Dặm</span>
+            <h3 className="text-base sm:text-xl font-serif font-bold text-amber-100 flex items-center gap-1.5 mt-0.5">
+              <span>Hành Trình Theo Chân Bác</span>
             </h3>
           </div>
         </div>
 
-        {/* Stats Pills */}
+        {/* Stats Pills & Flag Progress */}
         <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
-            <div className="text-[10px] text-stone-400 uppercase font-semibold">Cờ Tổ Quốc Đã Cắm</div>
-            <div className="text-sm sm:text-base font-black font-mono text-yellow-400 flex items-center justify-center space-x-1">
-              <span>🇻🇳</span>
-              <span>{totalClaimedLandmarks} / {totalLandmarks}</span>
+          {/* Main Goal Counter: Vietnamese Flags Planted */}
+          <div className="bg-gradient-to-r from-red-950/90 to-amber-950/90 border border-red-500/60 px-4 py-1.5 rounded-2xl text-center shadow-md">
+            <div className="text-[10px] text-amber-300 uppercase font-bold tracking-wider">Cờ Tổ Quốc Đã Cắm</div>
+            <div className="text-sm sm:text-base font-black font-mono text-yellow-300 flex items-center justify-center space-x-1.5">
+              <span className="text-base animate-bounce">🇻🇳</span>
+              <span>{claimedCount} / {totalLandmarks} lá cờ</span>
             </div>
           </div>
 
-          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
+          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner hidden sm:block">
             <div className="text-[10px] text-stone-400 uppercase font-semibold">Hải Lý Tích Lũy</div>
             <div className="text-sm sm:text-base font-black font-mono text-cyan-300">
               {totalNauticalMiles.toLocaleString()} <span className="text-[10px] text-stone-400 font-normal">hl</span>
             </div>
           </div>
 
-          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
-            <div className="text-[10px] text-stone-400 uppercase font-semibold">Lượt Đổ</div>
+          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner hidden sm:block">
+            <div className="text-[10px] text-stone-400 uppercase font-semibold">Lượt Lắc</div>
             <div className="text-sm sm:text-base font-black font-mono text-amber-200">
               #{diceCount}
             </div>
@@ -677,15 +762,32 @@ export default function HaiTrinhVanDamGame() {
           <button
             onClick={handleRestartGame}
             className="p-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
-            title="Làm mới lại bàn cờ"
+            title="Làm mới lại hành trình"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* ================= 16-TILE MONOPOLY BOARD (5x5 GRID) ================= */}
-      <div className="relative w-full aspect-square max-w-[820px] mx-auto p-2 sm:p-4 rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none">
+      {/* Progress Bar: Claiming 11 Vietnamese Flags */}
+      <div className="bg-stone-950/80 p-2.5 rounded-2xl border border-amber-900/50 space-y-1">
+        <div className="flex items-center justify-between text-xs font-serif px-1">
+          <span className="text-amber-300 font-bold flex items-center space-x-1">
+            <span>🎯 Nhiệm vụ vinh quang:</span>
+            <span className="text-stone-300 font-normal">Cắm đủ 11 lá cờ Việt Nam trên khắp các mốc son để đại thắng</span>
+          </span>
+          <span className="text-yellow-400 font-mono font-bold">{progressPercent}%</span>
+        </div>
+        <div className="w-full h-2.5 rounded-full bg-stone-900 overflow-hidden border border-amber-900/60 p-0.5">
+          <div 
+            className="h-full rounded-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 transition-all duration-500 shadow-md"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+      </div>
+
+      {/* ================= 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
+      <div className="relative w-full aspect-square max-w-[840px] mx-auto p-2 sm:p-4 rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none">
         
         {/* Subtle Map Watermark Texture in background */}
         <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
@@ -697,6 +799,7 @@ export default function HaiTrinhVanDamGame() {
           {BOARD_TILES.map((tile) => {
             const isCurrentPos = currentTileIdx === tile.id;
             const isClaimed = claimedTiles.includes(tile.id);
+            const isLandmark = tile.type === 'landmark';
             const isCorner = (tile.row === 0 && tile.col === 0) || 
                              (tile.row === 0 && tile.col === 4) || 
                              (tile.row === 4 && tile.col === 4) || 
@@ -707,16 +810,15 @@ export default function HaiTrinhVanDamGame() {
                 key={tile.id}
                 style={getGridStyle(tile)}
                 onClick={() => {
-                  if (tile.type === 'landmark' || tile.type === 'finish') {
-                    // Let user inspect tile info
+                  if (tile.type === 'landmark') {
                     handleLandedOnTile(tile.id);
                   }
                 }}
                 className={`relative rounded-xl sm:rounded-2xl border transition-all duration-300 flex flex-col justify-between p-1 sm:p-2.5 cursor-pointer overflow-hidden ${
                   isCurrentPos 
-                    ? 'ring-4 ring-yellow-400 border-yellow-300 bg-gradient-to-b from-amber-800/90 to-amber-950 z-20 scale-[1.03] shadow-[0_0_20px_rgba(251,191,36,0.6)]' 
+                    ? 'ring-4 ring-yellow-400 border-yellow-300 bg-gradient-to-b from-amber-800/90 to-amber-950 z-20 scale-[1.03] shadow-[0_0_25px_rgba(251,191,36,0.7)]' 
                     : isClaimed
-                      ? 'border-emerald-500/80 bg-gradient-to-b from-[#1c2c1a] to-[#0f170e] hover:border-emerald-400'
+                      ? 'border-red-500/80 ring-2 ring-yellow-400/50 bg-gradient-to-b from-[#2a130c] to-[#170a05] hover:border-yellow-300'
                       : tile.type === 'chance'
                         ? 'border-amber-500/60 bg-gradient-to-b from-[#2e1908] to-[#1a0f05] hover:border-yellow-400'
                         : tile.type === 'fate'
@@ -727,40 +829,50 @@ export default function HaiTrinhVanDamGame() {
                 }`}
               >
                 {/* Tile Header Bar */}
-                <div className="flex items-center justify-between gap-1">
+                <div className="flex items-center justify-between gap-1 z-10">
                   <span className={`text-[8px] sm:text-[10px] font-mono font-bold px-1.5 py-0.2 rounded ${
                     isCorner ? 'bg-amber-600 text-stone-950' : 'bg-black/50 text-amber-300'
                   }`}>
                     #{tile.id + 1}
                   </span>
 
-                  {/* Claimed Vietnamese Flag Badge */}
-                  {isClaimed && (tile.type === 'landmark' || tile.type === 'finish') && (
-                    <span className="text-[10px] sm:text-xs animate-bounce" title="Đã cắm cờ Việt Nam">
-                      🇻🇳
-                    </span>
-                  )}
+                  {/* PROMINENT PLANTED VIETNAMESE FLAG BADGE */}
+                  {isClaimed && isLandmark ? (
+                    <div className="flex items-center space-x-1 px-1.5 py-0.5 rounded-full bg-red-600 border border-yellow-300 text-yellow-300 shadow-md animate-pulse">
+                      <span className="text-[10px]">🇻🇳</span>
+                      <span className="text-[7px] sm:text-[9px] font-black font-sans uppercase">ĐÃ CẮM CỜ</span>
+                    </div>
+                  ) : isLandmark ? (
+                    <span className="text-[8px] sm:text-[9px] font-bold text-stone-400 font-serif">Chưa cắm cờ</span>
+                  ) : null}
 
                   {tile.type === 'chance' && (
-                    <span className="text-[10px] text-yellow-300">🎁</span>
+                    <span className="text-[10px] text-yellow-300">🎁 Cơ hội</span>
                   )}
                   {tile.type === 'fate' && (
-                    <span className="text-[10px] text-purple-300">⚡</span>
+                    <span className="text-[10px] text-purple-300">⚡ Vận mệnh</span>
                   )}
                   {tile.type === 'supply' && (
-                    <span className="text-[10px] text-cyan-300">⚓</span>
+                    <span className="text-[10px] text-cyan-300">⚓ Tiếp tế</span>
                   )}
                 </div>
 
-                {/* Tile Main Content */}
+                {/* Tile Main Content: Historical Vintage Photo */}
                 <div className="my-auto text-center px-0.5 space-y-0.5 sm:space-y-1">
-                  {/* Landmark or Event Icon/Image thumbnail */}
                   {tile.imageUrl ? (
-                    <div className="w-full aspect-[16/10] max-h-10 sm:max-h-14 rounded-md sm:rounded-lg overflow-hidden border border-amber-900/50 mx-auto hidden sm:block relative">
-                      <img src={tile.imageUrl} alt={tile.title} className="w-full h-full object-cover" />
+                    <div className="w-full aspect-[16/10] max-h-11 sm:max-h-16 rounded-md sm:rounded-lg overflow-hidden border border-amber-900/60 mx-auto hidden sm:block relative bg-black">
+                      <img 
+                        src={tile.imageUrl} 
+                        alt={tile.title} 
+                        className="w-full h-full object-cover filter contrast-105"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/images/gallery/ben-nha-rong.jpg";
+                        }}
+                      />
                       {isClaimed && (
-                        <div className="absolute inset-0 bg-emerald-950/40 backdrop-blur-[0.5px] flex items-center justify-center">
-                          <Check className="w-4 h-4 text-emerald-300" />
+                        <div className="absolute inset-0 bg-red-950/40 backdrop-blur-[0.5px] flex items-center justify-center">
+                          <span className="text-xl sm:text-2xl drop-shadow">🇻🇳</span>
                         </div>
                       )}
                     </div>
@@ -780,15 +892,13 @@ export default function HaiTrinhVanDamGame() {
                   </p>
                 </div>
 
-                {/* ================= BUSINESS TOUR 3D CHARACTER TOKEN: BÁC HỒ ================= */}
+                {/* ================= 3D CHARACTER TOKEN: BÁC HỒ ================= */}
                 {isCurrentPos && (
                   <div className="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none">
-                    {/* Character Token Container with Jump/Hop Animation */}
                     <div className={`relative flex flex-col items-center transition-all duration-300 ${
                       isMoving ? 'scale-125 -translate-y-3.5 sm:-translate-y-5 drop-shadow-[0_15px_15px_rgba(0,0,0,0.8)]' : 'scale-105 translate-y-0'
                     }`}>
-                      
-                      {/* Name Tag Badge Pill */}
+                      {/* Name Tag Badge */}
                       <div className="px-2 py-0.5 rounded-full bg-gradient-to-r from-red-700 via-amber-600 to-red-700 text-yellow-200 border-2 border-yellow-300 text-[8px] sm:text-[10px] font-black uppercase tracking-wider shadow-[0_4px_10px_rgba(0,0,0,0.6)] mb-0.5 flex items-center space-x-1 animate-pulse shrink-0">
                         <span className="text-yellow-300 text-[8px]">★</span>
                         <span>BÁC HỒ</span>
@@ -805,13 +915,13 @@ export default function HaiTrinhVanDamGame() {
                           />
                         </div>
 
-                        {/* Gold Star Pin on avatar */}
+                        {/* Gold Star Pin */}
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-red-600 border border-yellow-300 flex items-center justify-center text-[8px] sm:text-[10px] text-yellow-300 font-bold shadow-md">
                           ★
                         </div>
                       </div>
 
-                      {/* 3D Standee Pedestal / Glowing Spotlight at base */}
+                      {/* Base spotlight glow */}
                       <div className="w-8 sm:w-14 h-2 sm:h-3 rounded-full bg-yellow-400/80 blur-[2px] mt-0.5 animate-pulse" />
                     </div>
                   </div>
@@ -820,7 +930,7 @@ export default function HaiTrinhVanDamGame() {
             );
           })}
 
-          {/* ================= CENTER ARENA (THE BUSINESS TOUR STAGE: 3x3 CELLS) ================= */}
+          {/* ================= CENTER ARENA: DICE & CHARACTER SHOWCASE ================= */}
           <div className="col-start-2 col-end-5 row-start-2 row-end-5 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#180e07]/95 via-[#120a05]/95 to-[#0a0503]/95 border-2 border-amber-600/40 shadow-inner p-3 sm:p-6 flex flex-col justify-between items-center text-center relative overflow-hidden">
             
             {/* Center Background Compass Rose graphic */}
@@ -828,7 +938,7 @@ export default function HaiTrinhVanDamGame() {
               <Compass className="w-80 h-80 text-amber-400" />
             </div>
 
-            {/* Top of Center: Business Tour Character Showcase (Bác Hồ) */}
+            {/* Top of Center: Character Showcase (Bác Hồ) */}
             <div className="w-full max-w-md flex items-center justify-between gap-2.5 px-3 py-2 rounded-2xl bg-gradient-to-r from-stone-950/90 via-amber-950/80 to-stone-950/90 border border-amber-500/60 shadow-lg">
               <div className="flex items-center space-x-2.5">
                 <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 shadow-md shrink-0">
@@ -850,7 +960,7 @@ export default function HaiTrinhVanDamGame() {
                 </div>
               </div>
 
-              {/* Current tile pill */}
+              {/* Current tile status */}
               <div className="text-right">
                 <div className="text-[9px] text-stone-400 font-serif">Đang dừng tại:</div>
                 <div className="text-[11px] sm:text-xs font-bold text-yellow-400 font-serif line-clamp-1">
@@ -859,24 +969,27 @@ export default function HaiTrinhVanDamGame() {
               </div>
             </div>
 
-            {/* Middle of Center: 3D Animated Dice Area */}
-            <div className="my-auto py-2 flex flex-col items-center justify-center space-y-3">
-              {/* The Dice Visual */}
-              <div className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-rose-900 border-2 border-yellow-300 shadow-[0_10px_25px_rgba(220,38,38,0.5)] flex items-center justify-center select-none ${
-                isRolling ? 'animate-spin' : 'hover:scale-105 transition-transform'
-              }`}>
-                {/* Dice Dots or Number */}
-                <div className="text-3xl sm:text-5xl font-black font-mono text-yellow-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                  {diceValue}
-                </div>
+            {/* Middle of Center: Smooth 3D Animated Dice */}
+            <div className="my-auto py-2 flex flex-col items-center justify-center space-y-2">
+              <div 
+                className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-rose-900 border-2 border-yellow-300 shadow-[0_10px_30px_rgba(220,38,38,0.6)] flex items-center justify-center select-none transition-transform duration-100 ${
+                  isRolling ? 'scale-110 shadow-[0_0_35px_rgba(251,191,36,0.9)]' : 'hover:scale-105'
+                }`}
+                style={{
+                  transform: `rotateX(${diceTransform.rotateX}deg) rotateY(${diceTransform.rotateY}deg) scale(${diceTransform.scale})`,
+                  transformStyle: 'preserve-3d'
+                }}
+              >
+                {/* 3D Dice Pips */}
+                {renderDicePips(diceValue)}
 
-                {/* Corner Stars of the dice */}
-                <span className="absolute top-1.5 left-1.5 text-[10px] text-yellow-300/80">★</span>
-                <span className="absolute bottom-1.5 right-1.5 text-[10px] text-yellow-300/80">★</span>
+                {/* Corner Stars */}
+                <span className="absolute top-1 left-1.5 text-[8px] text-yellow-300/80">★</span>
+                <span className="absolute bottom-1 right-1.5 text-[8px] text-yellow-300/80">★</span>
               </div>
 
-              <div className="text-[11px] sm:text-xs text-amber-200/80 font-serif">
-                {isRolling ? "Xúc xắc đang lăn..." : isMoving ? "Bác Hồ đang di chuyển từng bước..." : `Đã đổ được ${diceValue} bước`}
+              <div className="text-[11px] sm:text-xs text-amber-200/90 font-serif">
+                {isRolling ? "Xúc xắc đang lắc mượt mà..." : isMoving ? "Bác Hồ đang di chuyển từng bước..." : `Đã đổ được ${diceValue} bước`}
               </div>
             </div>
 
@@ -892,11 +1005,11 @@ export default function HaiTrinhVanDamGame() {
                 }`}
               >
                 <Dices className={`w-5 h-5 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
-                <span>{isRolling ? "ĐANG LẮC XÚC XẮC..." : isMoving ? "ĐANG TIẾN VỀ PHÍA TRƯỚC..." : "LẮC XÚC XẮC (ROLL DICE)"}</span>
+                <span>{isRolling ? "ĐANG LẮC XÚC XẮC..." : isMoving ? "ĐANG TIẾN VỀ PHÍA TRƯỚC..." : "LẮC XÚC XẮC"}</span>
               </button>
 
               <div className="text-[10px] sm:text-[11px] text-stone-400 font-serif">
-                Nhấp để tung xúc xắc và đồng hành cùng Bác Hồ qua 16 ô địa danh lịch sử
+                Lắc xúc xắc để đồng hành cùng Bác Hồ qua 16 ô và cắm đủ 11 lá cờ Tổ quốc
               </div>
             </div>
 
@@ -919,7 +1032,7 @@ export default function HaiTrinhVanDamGame() {
                 </div>
                 <div>
                   <span className="text-[10px] text-amber-400 uppercase font-black tracking-wider block">
-                    THỬ THÁCH CẮM CỜ DI SẢN (Ô #{activeChallengeTile.id + 1})
+                    THỬ THÁCH CẮM CỜ TỔ QUỐC (MỐC #{activeChallengeTile.stopId}/11)
                   </span>
                   <h4 className="text-sm sm:text-base font-serif font-bold text-amber-100">
                     {activeChallengeTile.title} ({activeChallengeTile.country})
@@ -950,11 +1063,15 @@ export default function HaiTrinhVanDamGame() {
             {/* Milestone Narrative & Photo */}
             <div className="p-3.5 rounded-2xl bg-stone-900/80 border border-amber-900/50 flex flex-col sm:flex-row items-center gap-3.5">
               {activeChallengeTile.imageUrl && (
-                <div className="w-full sm:w-36 aspect-[4/3] rounded-xl overflow-hidden border border-amber-500/40 shrink-0 bg-black">
+                <div className="w-full sm:w-40 aspect-[4/3] rounded-xl overflow-hidden border border-amber-500/40 shrink-0 bg-black">
                   <img 
                     src={activeChallengeTile.imageUrl} 
                     alt={activeChallengeTile.title} 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/images/gallery/ben-nha-rong.jpg";
+                    }}
                   />
                 </div>
               )}
@@ -975,7 +1092,7 @@ export default function HaiTrinhVanDamGame() {
             <div className="space-y-2">
               <div className="flex items-center space-x-1.5 text-xs font-bold uppercase tracking-wider text-amber-400">
                 <HelpCircle className="w-4 h-4 text-yellow-400" />
-                <span>Câu Hỏi Trắc Nghiệm Mở Khóa Địa Danh:</span>
+                <span>Câu Hỏi Trắc Nghiệm Mở Khóa Cắm Cờ:</span>
               </div>
               <p className="text-sm sm:text-base text-amber-50 font-serif font-semibold leading-relaxed">
                 {activeChallengeTile.question}
@@ -1033,12 +1150,12 @@ export default function HaiTrinhVanDamGame() {
                     {isAnswerCorrect ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                        <span>CHÍNH XÁC! ĐÃ CẮM CỜ VIỆT NAM (+350 HẢI LÝ)</span>
+                        <span>CHÍNH XÁC! ĐÃ CẮM CỜ VIỆT NAM THÀNH CÔNG (+350 HẢI LÝ)</span>
                       </>
                     ) : (
                       <>
                         <AlertCircle className="w-4 h-4 text-rose-400" />
-                        <span>CHƯA ĐÚNG RỒI! HÃY THỬ LẠI Ở VÒNG SAU</span>
+                        <span>CHƯA CHÍNH XÁC RỒI! HÃY THỬ LẠI Ở VÒNG SAU</span>
                       </>
                     )}
                   </div>
@@ -1105,29 +1222,29 @@ export default function HaiTrinhVanDamGame() {
         </div>
       )}
 
-      {/* ================= MODAL: GRAND FINALE (REACHED PÁC BÓ & COMPLETED) ================= */}
+      {/* ================= MODAL: GRAND FINALE (ALL 11 FLAGS PLANTED) ================= */}
       {isGrandFinale && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
           <div className="duocsang-card max-w-xl w-full rounded-3xl p-6 sm:p-8 border-2 border-yellow-400 shadow-2xl text-center space-y-5">
-            <div className="w-16 h-16 mx-auto rounded-full bg-yellow-400/20 border-2 border-yellow-400 flex items-center justify-center text-yellow-300 animate-bounce">
-              <Trophy className="w-8 h-8" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400/30 to-amber-600/30 border-2 border-yellow-400 flex items-center justify-center text-yellow-300 animate-bounce">
+              <Trophy className="w-10 h-10" />
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <span className="text-xs uppercase tracking-widest text-yellow-400 font-bold">
-                HOÀN THÀNH XUẤT SẮC BÀN CỜ HẢI TRÌNH
+                ĐẠI THẮNG TOÀN DIỆN HẢI TRÌNH 30 NĂM
               </span>
               <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100">
-                30 Năm Bôn Ba Tìm Đường Cứu Nước
+                Đã Cắm Đủ 11 Lá Cờ Tổ Quốc Việt Nam!
               </h3>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-700/50 text-xs sm:text-sm text-stone-200 font-serif leading-relaxed space-y-2">
+            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-700/50 text-xs sm:text-sm text-stone-200 font-serif leading-relaxed space-y-2.5">
               <p>
-                Từ người thanh niên Văn Ba mang trong mình bầu nhiệt huyết tại Bến Nhà Rồng năm 1911, trải qua muôn vàn gian nan khắp năm châu bốn biển, Bác Hồ đã trở về Pác Bó (1941) mang lại ánh sáng độc lập tự do cho Tổ quốc!
+                Chúc mừng bạn đã hoàn thành xuất sắc toàn bộ hành trình lịch sử! Từ bến cảng Nhà Rồng năm 1911 đến mốc 108 Pác Bó năm 1941, mỗi lá cờ Tổ quốc được cắm xuống là một dấu ấn di sản thiêng liêng trên con đường giải phóng dân tộc của Chủ tịch Hồ Chí Minh.
               </p>
               <div className="flex justify-center space-x-4 pt-2 font-mono text-xs">
-                <span className="text-yellow-300 font-bold">🚩 Cắm cờ: {totalClaimedLandmarks} địa danh</span>
+                <span className="text-yellow-300 font-bold">🇻🇳 Hoàn thành: 11 / 11 Cờ Tổ Quốc</span>
                 <span className="text-cyan-300 font-bold">⚓ Tổng: {totalNauticalMiles.toLocaleString()} hải lý</span>
               </div>
             </div>
