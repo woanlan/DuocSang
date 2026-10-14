@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Anchor, Compass, MapPin, Ship, Award,
   Sparkles, CheckCircle2, Volume2, Trophy, RotateCcw,
@@ -436,6 +436,38 @@ export default function HaiTrinhVanDamGame() {
   const claimedCount = claimedTiles.filter(id => LANDMARK_TILE_IDS.includes(id)).length;
   const progressPercent = Math.round((claimedCount / totalLandmarks) * 100);
 
+  // ================= TRUE RANDOM WITH BALANCED BAG SHUFFLE (ANTI-DUPLICATE & FAIR DISTRIBUTION) =================
+  const lastRollRef = useRef(null);
+  const diceBagRef = useRef([]);
+
+  const getNextRandomDice = () => {
+    // If bag has fewer than 1 item, refill with a fresh shuffled set of [1, 2, 3, 4, 5, 6]
+    if (!diceBagRef.current || diceBagRef.current.length === 0) {
+      const bag = [1, 2, 3, 4, 5, 6];
+      // Fisher-Yates shuffle using crypto.getRandomValues if available
+      for (let i = bag.length - 1; i > 0; i--) {
+        let j = 0;
+        if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
+          const uintArr = new Uint32Array(1);
+          window.crypto.getRandomValues(uintArr);
+          j = uintArr[0] % (i + 1);
+        } else {
+          j = Math.floor(Math.random() * (i + 1));
+        }
+        [bag[i], bag[j]] = [bag[j], bag[i]];
+      }
+      // Guarantee the first number does not repeat the previous roll
+      if (bag[0] === lastRollRef.current && bag.length > 1) {
+        [bag[0], bag[1]] = [bag[1], bag[0]];
+      }
+      diceBagRef.current = bag;
+    }
+
+    const nextRoll = diceBagRef.current.shift();
+    lastRollRef.current = nextRoll;
+    return nextRoll;
+  };
+
   // ================= ULTRA SMOOTH 3D DECELERATING DICE ROLL =================
   const handleRollDice = () => {
     if (isRolling || isMoving || isWaitingChallenge || activeChallengeTile || chanceModalInfo || isGrandFinale) return;
@@ -444,7 +476,7 @@ export default function HaiTrinhVanDamGame() {
     setIsRolling(true);
     soundFX.playDiceRoll();
 
-    const finalDice = Math.floor(Math.random() * 6) + 1;
+    const finalDice = getNextRandomDice();
 
     // Smooth physics deceleration intervals (ms)
     const intervals = [40, 50, 60, 75, 95, 120, 155, 200, 260];
@@ -452,7 +484,9 @@ export default function HaiTrinhVanDamGame() {
 
     const runDeceleratingRoll = () => {
       if (step < intervals.length) {
-        setDiceValue(Math.floor(Math.random() * 6) + 1);
+        // Tumbling random face during roll
+        const tumbleVal = Math.floor(Math.random() * 6) + 1;
+        setDiceValue(tumbleVal);
         setDiceTransform({
           rotateX: Math.floor(Math.random() * 360),
           rotateY: Math.floor(Math.random() * 360),
@@ -461,7 +495,7 @@ export default function HaiTrinhVanDamGame() {
         step++;
         setTimeout(runDeceleratingRoll, intervals[step - 1]);
       } else {
-        // Final landing with bounce and snap to final number
+        // Final landing with bounce and snap to the fair random number
         setDiceValue(finalDice);
         setDiceTransform({ rotateX: 0, rotateY: 0, scale: 1 });
         setIsRolling(false);
@@ -639,6 +673,8 @@ export default function HaiTrinhVanDamGame() {
   const handleRestartGame = () => {
     stopVietnameseVoice();
     soundFX.playShipHorn();
+    lastRollRef.current = null;
+    diceBagRef.current = [];
     setCurrentTileIdx(0);
     setClaimedTiles([]);
     setTotalNauticalMiles(0);
@@ -991,22 +1027,22 @@ export default function HaiTrinhVanDamGame() {
                   transformStyle: 'preserve-3d'
                 }}
               >
-                {/* 3D Dice Pips */}
+                {/* 3D Dice Pips (Exact 1 to 6 golden stars matching the roll) */}
                 {renderDicePips(diceValue)}
-
-                {/* Corner Stars */}
-                <span className="absolute top-0.5 left-1 text-[7px] text-yellow-300/80">★</span>
-                <span className="absolute bottom-0.5 right-1 text-[7px] text-yellow-300/80">★</span>
               </div>
 
-              <div className="text-[9px] sm:text-[11px] text-amber-200/90 font-serif leading-none">
-                {isRolling 
-                  ? "Đang lắc xúc xắc..." 
-                  : isMoving 
-                    ? "Bác Hồ đang di chuyển..." 
-                    : isWaitingChallenge 
-                      ? "Đã đến địa danh! Chuẩn bị mở câu hỏi..." 
-                      : `Đã đổ được ${diceValue} bước`}
+              <div className="text-[9px] sm:text-[11px] text-amber-200/90 font-serif leading-none flex items-center justify-center">
+                {isRolling ? (
+                  <span>Đang lắc xúc xắc...</span>
+                ) : isMoving ? (
+                  <span>Bác Hồ đang di chuyển...</span>
+                ) : isWaitingChallenge ? (
+                  <span className="text-yellow-300 font-bold">Đã đến nơi! Chuẩn bị mở câu hỏi...</span>
+                ) : (
+                  <span>
+                    Kết quả: <strong className="text-yellow-300 font-mono text-xs sm:text-sm font-bold">{diceValue} nút</strong> ({diceValue} bước)
+                  </span>
+                )}
               </div>
             </div>
 
