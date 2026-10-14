@@ -1036,7 +1036,7 @@ export default function OngVangGame() {
             </div>
             <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">1. Lật Mảnh Ghép</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif break-words leading-tight">1. Lật Mảnh Ghép</h4>
                 {activeGameTab === 'puzzle' && (
                   <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-red-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi
@@ -1086,7 +1086,7 @@ export default function OngVangGame() {
             </div>
             <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">2. Hành Trình Theo Chân Bác</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif break-words leading-tight">2. Hành Trình Theo Chân Bác</h4>
                 {activeGameTab === 'journey' && (
                   <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi
@@ -1136,7 +1136,7 @@ export default function OngVangGame() {
             </div>
             <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">3. Đố Vui Tốc Độ 35s</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif break-words leading-tight">3. Đố Vui Tốc Độ 35s</h4>
                 {activeGameTab === 'quiz' && (
                   <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi

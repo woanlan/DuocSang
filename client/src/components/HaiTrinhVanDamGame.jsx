@@ -749,10 +749,10 @@ export default function HaiTrinhVanDamGame() {
             <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950 animate-spin-slow" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-xs sm:text-sm md:text-base font-serif font-bold text-amber-100 truncate leading-tight">
+            <h3 className="text-xs sm:text-sm md:text-base font-serif font-bold text-amber-100 leading-tight break-words">
               Hành Trình Theo Chân Bác
             </h3>
-            <span className="text-[9px] sm:text-[10px] text-amber-400 font-serif block truncate">
+            <span className="text-[9px] sm:text-[10px] text-amber-400 font-serif block break-words">
               16 Mốc Son Lịch Sử (1911 - 1941)
             </span>
           </div>
@@ -761,9 +761,9 @@ export default function HaiTrinhVanDamGame() {
         {/* Center: Vietnam Flag Goal & Progress */}
         <div className="flex-1 max-w-xs sm:max-w-sm mx-1 sm:mx-3">
           <div className="flex items-center justify-between text-[10px] sm:text-xs font-serif mb-1 px-0.5">
-            <span className="text-yellow-300 font-bold flex items-center space-x-1.5 truncate">
-              <VietnamFlagIcon className="w-4 h-3 rounded-[2px]" />
-              <span className="truncate">Cờ đã cắm: <span className="font-mono text-amber-200">{claimedCount}/{totalLandmarks}</span></span>
+            <span className="text-yellow-300 font-bold flex items-center space-x-1.5 whitespace-nowrap">
+              <VietnamFlagIcon className="w-4 h-3 rounded-[2px] shrink-0" />
+              <span>Cờ đã cắm: <span className="font-mono text-amber-200">{claimedCount}/{totalLandmarks}</span></span>
             </span>
             <span className="text-amber-300 font-mono font-bold ml-1">{progressPercent}%</span>
           </div>
@@ -860,24 +860,24 @@ export default function HaiTrinhVanDamGame() {
                       <span className="text-[6px] sm:text-[8px] font-black font-sans uppercase tracking-tighter">ĐÃ CẮM CỜ</span>
                     </div>
                   ) : isLandmark ? (
-                    <span className="text-[6px] sm:text-[8px] font-bold text-stone-400 font-serif truncate">Chưa cắm</span>
+                    <span className="text-[6px] sm:text-[8px] font-bold text-stone-400 font-serif whitespace-nowrap">Chưa cắm</span>
                   ) : null}
 
                   {tile.type === 'chance' && (
-                    <span className="text-[8px] sm:text-[9px] text-yellow-300 truncate">🎁 Cơ hội</span>
+                    <span className="text-[8px] sm:text-[9px] text-yellow-300 whitespace-nowrap">🎁 Cơ hội</span>
                   )}
                   {tile.type === 'fate' && (
-                    <span className="text-[8px] sm:text-[9px] text-purple-300 truncate">⚡ Vận mệnh</span>
+                    <span className="text-[8px] sm:text-[9px] text-purple-300 whitespace-nowrap">⚡ Vận mệnh</span>
                   )}
                   {tile.type === 'supply' && (
-                    <span className="text-[8px] sm:text-[9px] text-cyan-300 truncate">⚓ Tiếp tế</span>
+                    <span className="text-[8px] sm:text-[9px] text-cyan-300 whitespace-nowrap">⚓ Tiếp tế</span>
                   )}
                 </div>
 
                 {/* Tile Main Content: Historical Vintage Photo */}
                 <div className="my-auto text-center px-0.5 space-y-0.5">
                   {tile.imageUrl ? (
-                    <div className="w-full aspect-[16/10] h-6 xs:h-7 sm:h-9 md:h-11 rounded sm:rounded-md overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner">
+                    <div className="w-full aspect-[16/10] max-h-7 xs:max-h-8 sm:max-h-11 md:max-h-13 rounded sm:rounded-md overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner">
                       <img 
                         src={tile.imageUrl} 
                         alt={tile.title} 
@@ -902,10 +902,10 @@ export default function HaiTrinhVanDamGame() {
                     </div>
                   )}
 
-                  <h5 className="font-bold text-[7px] sm:text-[9px] md:text-[10px] text-amber-100 font-serif leading-tight line-clamp-1">
+                  <h5 className="font-bold text-[7px] sm:text-[8.5px] md:text-[10px] text-amber-100 font-serif leading-tight line-clamp-2 break-words">
                     {tile.title}
                   </h5>
-                  <p className="text-[6px] sm:text-[8px] text-stone-400 font-serif line-clamp-1 hidden xs:block">
+                  <p className="text-[6px] sm:text-[7.5px] text-stone-400 font-serif leading-none line-clamp-1 block">
                     {tile.subtitle || tile.country}
                   </p>
                 </div>
@@ -967,14 +967,14 @@ export default function HaiTrinhVanDamGame() {
                     <span className="text-[7px] sm:text-[8px] uppercase font-bold text-amber-400 tracking-wider">Hải Trình</span>
                     <span className="text-[7px] px-1 py-0.2 rounded-full bg-red-900 text-yellow-300 font-bold border border-yellow-400/50">Hoa Tiêu</span>
                   </div>
-                  <h4 className="text-[10px] sm:text-xs font-bold text-yellow-100 font-serif leading-tight truncate">Chủ tịch Hồ Chí Minh</h4>
+                  <h4 className="text-[10px] sm:text-xs font-bold text-yellow-100 font-serif leading-tight whitespace-nowrap">Chủ tịch Hồ Chí Minh</h4>
                 </div>
               </div>
 
               {/* Current tile status */}
               <div className="text-right shrink-0">
                 <div className="text-[7px] sm:text-[8px] text-stone-400 font-serif">Đang dừng:</div>
-                <div className="text-[9px] sm:text-[10px] font-bold text-yellow-400 font-serif truncate max-w-[90px] sm:max-w-[120px]">
+                <div className="text-[9px] sm:text-[10px] font-bold text-yellow-400 font-serif leading-tight">
                   {currentTile.title}
                 </div>
               </div>
@@ -1025,7 +1025,7 @@ export default function HaiTrinhVanDamGame() {
                 <span>{isRolling ? "ĐANG LẮC..." : isMoving ? "TIẾN BƯỚC..." : isWaitingChallenge ? "CHUẨN BỊ..." : "LẮC XÚC XẮC"}</span>
               </button>
 
-              <div className="text-[8px] sm:text-[9px] text-stone-400 font-serif leading-none truncate">
+              <div className="text-[8px] sm:text-[9px] text-stone-400 font-serif leading-tight text-center">
                 Lắc xúc xắc để cắm đủ 11 lá cờ Tổ quốc
               </div>
             </div>
@@ -1080,11 +1080,11 @@ export default function HaiTrinhVanDamGame() {
             {/* Milestone Narrative & Photo */}
             <div className="p-3.5 rounded-2xl bg-stone-900/80 border border-amber-900/50 flex flex-col sm:flex-row items-center gap-3.5">
               {activeChallengeTile.imageUrl && (
-                <div className="w-full sm:w-40 aspect-[4/3] rounded-xl overflow-hidden border border-amber-500/40 shrink-0 bg-black">
+                <div className="w-full sm:w-44 aspect-[4/3] rounded-xl overflow-hidden border border-amber-500/40 shrink-0 bg-black flex items-center justify-center shadow-md">
                   <img 
                     src={activeChallengeTile.imageUrl} 
                     alt={activeChallengeTile.title} 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = "/images/gallery/ben-nha-rong.jpg";

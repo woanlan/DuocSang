@@ -318,7 +318,7 @@ export default function GallerySection({ multimediaData }) {
               <div className="p-4 sm:p-5 bg-gradient-to-r from-[#7a2810] to-[#3a1106] flex items-center justify-between border-b border-amber-500/30">
                 <div className="flex items-center space-x-2">
                   <Film className="w-5 h-5 text-amber-400" />
-                  <h3 className="font-serif font-bold text-lg sm:text-xl text-white truncate max-w-xl">
+                  <h3 className="font-serif font-bold text-base sm:text-xl text-white break-words">
                     {selectedVideo.title}
                   </h3>
                 </div>

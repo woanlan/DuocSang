@@ -464,9 +464,9 @@ export default function TimelineSection({ timelineData = [] }) {
                   </div>
 
                   <div className="mt-3 pt-2.5 border-t border-amber-900/30 flex items-center justify-between text-[11px] text-stone-400">
-                    <span className="flex items-center gap-1 text-amber-400/90 truncate max-w-[220px]">
+                    <span className="flex items-center gap-1 text-amber-400/90 break-words">
                       <MapPin className="w-3 h-3 text-amber-500 shrink-0" />
-                      <span className="truncate">{evt.location || currentEra.location}</span>
+                      <span>{evt.location || currentEra.location}</span>
                     </span>
                     <span className="text-amber-300 font-medium group-hover:underline flex items-center gap-1.5">
                       <BookOpen className="w-3.5 h-3.5 text-amber-400" />
@@ -705,7 +705,7 @@ export default function TimelineSection({ timelineData = [] }) {
                       <Ship className="w-3.5 h-3.5" />
                       <span>Phương tiện / Con tàu:</span>
                     </div>
-                    <div className="text-sm font-semibold text-stone-200 truncate" title={selectedStation.transport}>
+                    <div className="text-sm font-semibold text-stone-200 break-words" title={selectedStation.transport}>
                       {selectedStation.transport}
                     </div>
                   </div>
