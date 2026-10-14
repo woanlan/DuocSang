@@ -6,7 +6,7 @@ import {
   Maximize2, ArrowRight, Play, Check, X
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { soundFX } from '../utils/gameAudio';
+import { soundFX, speakVietnameseVoice, stopVietnameseVoice } from '../utils/gameAudio';
 
 // ================= 10 HISTORIC MILESTONES OF THE 30-YEAR VOYAGE =================
 export const JOURNEY_STOPS = [
@@ -275,8 +275,16 @@ export default function HaiTrinhVanDamGame() {
 
   const activePort = JOURNEY_STOPS[currentStopIndex];
 
+  // Clean voice on unmount
+  useEffect(() => {
+    return () => {
+      stopVietnameseVoice();
+    };
+  }, []);
+
   // Open modal for a port
   const handleOpenPort = (stop, index) => {
+    stopVietnameseVoice();
     soundFX.playFlip();
     setSelectedPortModal({ stop, index });
     setChallengeOption(null);
@@ -295,6 +303,7 @@ export default function HaiTrinhVanDamGame() {
     if (isCorrect) {
       soundFX.playShipHorn();
       soundFX.playCorrect();
+      speakVietnameseVoice("Chính xác! Bạn đã chọn đúng. Con tàu đã cập cảng thành công.");
       setGameScore(prev => prev + 300);
       setTotalNauticalMiles(selectedPortModal.stop.nauticalMiles);
 
@@ -310,6 +319,7 @@ export default function HaiTrinhVanDamGame() {
           // Reached Pác Bó - Victory!
           setIsGrandFinale(true);
           soundFX.playVictory();
+          speakVietnameseVoice("Chúc mừng bạn đã hoàn thành xuất sắc hải trình ba mươi năm tìm đường cứu nước!");
           try {
             confetti({
               particleCount: 150,
@@ -321,16 +331,21 @@ export default function HaiTrinhVanDamGame() {
       }
     } else {
       soundFX.playWrong();
+      const correctLetter = String.fromCharCode(65 + selectedPortModal.stop.correctIndex);
+      const correctText = selectedPortModal.stop.options[selectedPortModal.stop.correctIndex];
+      speakVietnameseVoice(`Chưa chính xác! Đáp án đúng là đáp án ${correctLetter}: ${correctText}.`);
     }
   };
 
   const handleCloseModal = () => {
+    stopVietnameseVoice();
     setSelectedPortModal(null);
     setChallengeOption(null);
     setIsAnswerChecked(false);
   };
 
   const handleRestartJourney = () => {
+    stopVietnameseVoice();
     soundFX.playShipHorn();
     setCurrentStopIndex(0);
     setVisitedStops([0]);
@@ -360,7 +375,6 @@ export default function HaiTrinhVanDamGame() {
             </div>
             <h3 className="text-base sm:text-lg font-serif font-bold text-amber-100 flex items-center gap-1.5 mt-0.5">
               <span>Bản Đồ Hải Trình Vạn Dặm Tương Tác</span>
-              <span className="text-xs text-amber-400/80 font-normal hidden sm:inline">(Theo Dấu Chân Người)</span>
             </h3>
           </div>
         </div>

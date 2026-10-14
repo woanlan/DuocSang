@@ -153,3 +153,70 @@ class GameSoundFX {
 }
 
 export const soundFX = new GameSoundFX();
+
+// ================= VIETNAMESE TTS VOICE ENGINE =================
+let audioPlayerInstance = null;
+
+export const stopVietnameseVoice = () => {
+  if (audioPlayerInstance) {
+    try {
+      audioPlayerInstance.pause();
+      audioPlayerInstance.currentTime = 0;
+    } catch (e) {}
+  }
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    try {
+      window.speechSynthesis.cancel();
+    } catch (e) {}
+  }
+};
+
+const speakWebSpeechFallback = (text) => {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'vi-VN';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    const voices = window.speechSynthesis.getVoices();
+    const viVoice = voices.find(v => v.lang && (v.lang.includes('vi') || v.lang.includes('VI')));
+    if (viVoice) {
+      utterance.voice = viVoice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {}
+};
+
+export const speakVietnameseVoice = (text) => {
+  if (!text || !text.trim() || typeof window === 'undefined') return;
+  stopVietnameseVoice();
+
+  try {
+    if (!audioPlayerInstance) {
+      audioPlayerInstance = new Audio();
+    }
+    const audio = audioPlayerInstance;
+    audio.pause();
+    audio.currentTime = 0;
+
+    const ttsUrl = `/api/tts?text=${encodeURIComponent(text.trim())}`;
+    audio.src = ttsUrl;
+    audio.playbackRate = 1.0;
+
+    audio.onerror = () => {
+      speakWebSpeechFallback(text);
+    };
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((e) => {
+        speakWebSpeechFallback(text);
+      });
+    }
+  } catch (e) {
+    speakWebSpeechFallback(text);
+  }
+};

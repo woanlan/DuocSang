@@ -6,7 +6,7 @@ import {
   Maximize2, ArrowRight, Compass, ShieldCheck
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { soundFX } from '../utils/gameAudio';
+import { soundFX, speakVietnameseVoice, stopVietnameseVoice } from '../utils/gameAudio';
 
 // ================= QUESTION & DATA BANK FOR 6 HISTORICAL PUZZLES =================
 export const PUZZLE_LEVELS = [
@@ -668,8 +668,16 @@ export default function ManhGhepBiAnGame() {
     }
   }, [allTilesRevealed]);
 
+  // Clean voice on unmount
+  useEffect(() => {
+    return () => {
+      stopVietnameseVoice();
+    };
+  }, []);
+
   // Handle clicking on a Vietnamese flag
   const handleTileClick = (tile) => {
+    stopVietnameseVoice();
     soundFX.playFlip();
     if (revealedTiles.includes(tile.id)) {
       // Already revealed: Show the information behind this flag
@@ -699,6 +707,7 @@ export default function ManhGhepBiAnGame() {
 
     if (isCorrect) {
       soundFX.playCorrect();
+      speakVietnameseVoice("Chính xác! Bạn đã chọn đúng.");
       setScore(prev => prev + 250);
       setStreak(prev => prev + 1);
       const newRevealed = [...revealedTiles, activeTile.id];
@@ -713,11 +722,15 @@ export default function ManhGhepBiAnGame() {
     } else {
       soundFX.playWrong();
       setStreak(0);
+      const correctLetter = String.fromCharCode(65 + activeTile.correctIndex);
+      const correctText = activeTile.options[activeTile.correctIndex];
+      speakVietnameseVoice(`Chưa chính xác! Đáp án đúng là đáp án ${correctLetter}: ${correctText}.`);
     }
   };
 
   // Close question modal
   const handleCloseQuestionModal = () => {
+    stopVietnameseVoice();
     setActiveTile(null);
     setSelectedOption(null);
     setShowQuestionResult(false);
@@ -739,6 +752,7 @@ export default function ManhGhepBiAnGame() {
     if (isMatched) {
       // VICTORY BY INSTANT GUESS!
       soundFX.playVictory();
+      speakVietnameseVoice(`Chính xác! Bạn đã giải mã thành công: ${currentLevel.title}.`);
       try {
         confetti({
           particleCount: 120,
@@ -763,6 +777,7 @@ export default function ManhGhepBiAnGame() {
       setGuessInput('');
     } else {
       soundFX.playWrong();
+      speakVietnameseVoice("Chưa chính xác rồi! Hãy mở thêm lá cờ hoặc dùng nút Gợi ý để quan sát thêm chi tiết nhé.");
       setGuessFeedback({
         type: 'error',
         text: 'Chưa chính xác rồi! Hãy mở thêm lá cờ hoặc dùng nút "Gợi ý" để quan sát thêm chi tiết nhé!'
@@ -832,7 +847,6 @@ export default function ManhGhepBiAnGame() {
             </div>
             <h3 className="text-base sm:text-lg font-serif font-bold text-amber-100 flex items-center gap-1.5 mt-0.5">
               <span>Lật Mảnh Ghép Tư Liệu Bí Ẩn</span>
-              <span className="text-xs text-amber-400/80 font-normal hidden sm:inline">(6 Lá Cờ Việt Nam)</span>
             </h3>
           </div>
         </div>
@@ -908,40 +922,21 @@ export default function ManhGhepBiAnGame() {
                         {/* Vietnamese Flag Red Silk Texture & Gold Star */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 pointer-events-none" />
                         
-                        {/* Golden 5-pointed Star */}
-                        <div className="relative flex flex-col items-center justify-center p-2 text-center">
+                        {/* Golden 5-pointed Star centered on Red Background */}
+                        <div className="relative flex items-center justify-center p-2">
                           <svg 
                             viewBox="0 0 100 100" 
-                            className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-300 drop-shadow-[0_2px_8px_rgba(255,235,59,0.7)] group-hover:scale-110 transition-transform duration-300"
+                            className="w-14 h-14 sm:w-20 sm:h-20 text-yellow-300 drop-shadow-[0_2px_12px_rgba(255,235,59,0.85)] group-hover:scale-110 transition-transform duration-300 pointer-events-none"
                             fill="currentColor"
                           >
                             {/* Standard 5-pointed Star SVG */}
                             <polygon points="50,5 64,36 98,36 70,57 81,91 50,70 19,91 30,57 2,36 36,36" />
                           </svg>
-
-                          {/* Flag Tile Badge */}
-                          <div className="mt-1 flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-black/60 border border-yellow-400/60 shadow-md">
-                            <span className="text-[11px] sm:text-xs font-black text-yellow-300 tracking-wider">
-                              LÁ CỜ #{tile.id}
-                            </span>
-                          </div>
-
-                          <span className="text-[10px] text-yellow-100/90 font-serif mt-1 hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity">
-                            Nhấn để giải mã ➜
-                          </span>
                         </div>
 
                         {/* Subtle pulsing ring on hover */}
                         <div className="absolute inset-0 rounded-xl border border-yellow-300/0 group-hover:border-yellow-300/40 transition-colors pointer-events-none" />
                       </div>
-
-                      {/* Small badge showing unlocked status when revealed */}
-                      {isRevealed && (
-                        <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-black/70 border border-emerald-500/60 text-[10px] text-emerald-300 font-bold backdrop-blur-sm flex items-center space-x-1">
-                          <Check className="w-3 h-3 text-emerald-400" />
-                          <span>Mảnh #{tile.id}</span>
-                        </div>
-                      )}
                     </div>
                   );
                 })}
@@ -1089,24 +1084,21 @@ export default function ManhGhepBiAnGame() {
             </div>
           </div>
 
-          {/* Historical Chronicle & Story Behind the Photo */}
-          <div className="p-5 rounded-3xl bg-stone-950/80 border border-amber-900/50 shadow-md space-y-2.5">
-            <h5 className="text-xs uppercase font-bold tracking-wider text-amber-400 flex items-center space-x-1.5">
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
-              <span>Ý Nghĩa Lịch Sử & Tư Liệu</span>
-            </h5>
-            <p className="text-xs text-stone-300 font-serif leading-relaxed">
-              {isLevelSolved 
-                ? currentLevel.historicalSignificance 
-                : "Hãy mở các lá cờ Việt Nam hoặc đoán đúng sự kiện để khám phá trọn vẹn câu chuyện và ý nghĩa lịch sử sâu sắc của bức ảnh này."
-              }
-            </p>
-            {isLevelSolved && (
+          {/* Historical Chronicle & Story Behind the Photo (shown only when solved) */}
+          {isLevelSolved && (
+            <div className="p-5 rounded-3xl bg-stone-950/80 border border-amber-900/50 shadow-md space-y-2.5 animate-fadeIn">
+              <h5 className="text-xs uppercase font-bold tracking-wider text-amber-400 flex items-center space-x-1.5">
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+                <span>Ý Nghĩa Lịch Sử & Tư Liệu</span>
+              </h5>
+              <p className="text-xs text-stone-200 font-serif leading-relaxed">
+                {currentLevel.historicalSignificance}
+              </p>
               <blockquote className="p-3 rounded-xl bg-amber-950/40 border-l-2 border-amber-500 text-xs italic text-amber-200 font-serif">
                 {currentLevel.famousQuote}
               </blockquote>
-            )}
-          </div>
+            </div>
+          )}
 
         </div>
 
