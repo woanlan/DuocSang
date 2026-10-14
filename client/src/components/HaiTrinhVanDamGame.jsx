@@ -1116,7 +1116,7 @@ export default function HaiTrinhVanDamGame() {
             </div>
 
             {currentTile.narrative && (
-              <p className="text-xs text-stone-300 font-serif leading-relaxed line-clamp-3 bg-black/40 p-2.5 rounded-xl border border-amber-900/40">
+              <p className="text-xs text-stone-300 font-serif leading-relaxed bg-black/40 p-2.5 rounded-xl border border-amber-900/40">
                 {currentTile.narrative}
               </p>
             )}
@@ -1161,25 +1161,6 @@ export default function HaiTrinhVanDamGame() {
                 );
               })}
             </div>
-          </div>
-
-          {/* Card 3: Big Roll Action Box */}
-          <div className="p-4 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-stone-950 via-amber-950/60 to-stone-950 border border-amber-600/50 shadow-xl space-y-2 text-center">
-            <button
-              disabled={isRolling || isMoving || isWaitingChallenge || Boolean(activeChallengeTile)}
-              onClick={handleRollDice}
-              className={`w-full py-3.5 px-4 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl ${
-                isRolling || isMoving || isWaitingChallenge
-                  ? 'bg-stone-800 text-stone-500 border border-stone-700 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-stone-950 border-2 border-yellow-200 shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:scale-[1.02] active:scale-95'
-              }`}
-            >
-              <Dices className={`w-5 h-5 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
-              <span>{isRolling ? "ĐANG LẮC XÚC XẮC..." : isMoving ? "BÁC ĐANG DI CHUYỂN..." : "LẮC XÚC XẮC TIẾN BƯỚC"}</span>
-            </button>
-            <p className="text-[10px] text-stone-400 font-serif">
-              Lắc xúc xắc ngẫu nhiên công bằng • Vượt qua 16 ô mốc son
-            </p>
           </div>
 
         </div>
