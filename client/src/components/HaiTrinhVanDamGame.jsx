@@ -774,7 +774,7 @@ export default function HaiTrinhVanDamGame() {
   };
 
   return (
-    <div id="journey-game-container" className="w-full max-w-5xl mx-auto space-y-2 sm:space-y-3">
+    <div id="journey-game-container" className="w-full max-w-7xl mx-auto space-y-2 sm:space-y-3">
       
       {/* ================= COMPACT HISTORICAL HUD BAR (PROGRESS & STATS) ================= */}
       <div className="bg-[#17100a]/95 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-amber-600/40 shadow-lg flex items-center justify-between gap-2.5">
@@ -835,11 +835,11 @@ export default function HaiTrinhVanDamGame() {
 
       {/* ================= 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
       <div 
-        className="relative aspect-square mx-auto p-1.5 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
+        className="relative aspect-square mx-auto p-1 xs:p-1.5 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
         style={{
-          width: 'min(96vw, calc(100vh - 145px), 580px)',
-          height: 'min(96vw, calc(100vh - 145px), 580px)',
-          maxHeight: 'min(96vw, calc(100vh - 145px), 580px)'
+          width: 'min(98vw, calc(100vh - 180px), 820px)',
+          height: 'min(98vw, calc(100vh - 180px), 820px)',
+          maxHeight: 'calc(100vh - 180px)'
         }}
       >
         {/* Subtle Map Watermark Texture in background */}
@@ -913,7 +913,7 @@ export default function HaiTrinhVanDamGame() {
                 {/* Tile Main Content: Historical Vintage Photo */}
                 <div className="my-auto text-center px-0.5 space-y-0.5">
                   {tile.imageUrl ? (
-                    <div className="w-full aspect-[16/10] max-h-7 xs:max-h-8 sm:max-h-11 md:max-h-13 rounded sm:rounded-md overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner">
+                    <div className="w-full aspect-[16/10] max-h-7 xs:max-h-9 sm:max-h-12 md:max-h-16 lg:max-h-20 rounded sm:rounded-md overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner">
                       <img 
                         src={tile.imageUrl} 
                         alt={tile.title} 
@@ -931,17 +931,17 @@ export default function HaiTrinhVanDamGame() {
                       )}
                     </div>
                   ) : (
-                    <div className="w-5 h-5 sm:w-7 sm:h-7 mx-auto rounded-full bg-black/40 border border-amber-500/40 flex items-center justify-center text-amber-300">
-                      {tile.type === 'chance' && <Gift className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-yellow-300" />}
-                      {tile.type === 'fate' && <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-300" />}
-                      {tile.type === 'supply' && <Anchor className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-300" />}
+                    <div className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 mx-auto rounded-full bg-black/40 border border-amber-500/40 flex items-center justify-center text-amber-300">
+                      {tile.type === 'chance' && <Gift className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-300" />}
+                      {tile.type === 'fate' && <Compass className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-purple-300" />}
+                      {tile.type === 'supply' && <Anchor className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-cyan-300" />}
                     </div>
                   )}
 
-                  <h5 className="font-bold text-[7px] sm:text-[8.5px] md:text-[10px] text-amber-100 font-serif leading-tight line-clamp-2 break-words">
+                  <h5 className="font-bold text-[7px] sm:text-[9px] md:text-xs text-amber-100 font-serif leading-tight line-clamp-2 break-words">
                     {tile.title}
                   </h5>
-                  <p className="text-[6px] sm:text-[7.5px] text-stone-400 font-serif leading-none line-clamp-1 block">
+                  <p className="text-[6px] sm:text-[8px] md:text-[9px] text-stone-400 font-serif leading-none line-clamp-1 block">
                     {tile.subtitle || tile.country}
                   </p>
                 </div>

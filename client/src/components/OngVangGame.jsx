@@ -958,8 +958,8 @@ export default function OngVangGame() {
   const totalQuestions = activeQuestions.length;
 
   return (
-    <section id="quiz" className="pt-6 pb-12 sm:pt-10 sm:pb-16 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+    <section id="quiz" className="pt-3 pb-8 sm:pt-6 sm:pb-12 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
+      <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         
         {/* Section Header with Dignified and Respectful Title */}
         <div className="text-center mb-3 sm:mb-5">
