@@ -5,7 +5,7 @@ import {
   Trophy, Flame, User, LogIn, UserPlus, LogOut, Play, Medal, ShieldAlert,
   Crown, Target, Compass, Anchor, Flag, Mountain, ScrollText, Landmark,
   Shield, MapPin, RotateCcw, BookOpen, Check, X, Eye, Maximize2,
-  Volume1, Radio, Zap, ArrowRight, Share2
+  Volume1, Radio, Zap, ArrowRight, Share2, Dices, Gift
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { 
@@ -1079,11 +1079,11 @@ export default function OngVangGame() {
                 ? 'bg-amber-600 border border-yellow-300 text-stone-950'
                 : 'bg-amber-950/80 border border-amber-500/50 text-amber-300'
             }`}>
-              <Compass className="w-5 h-5 animate-spin-slow" />
+              <Dices className="w-5 h-5 animate-bounce" />
             </div>
             <div className="flex-grow">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Hải Trình Vạn Dặm</h4>
+                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Bàn Cờ Hải Trình Vạn Dặm</h4>
                 {activeGameTab === 'journey' && (
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
                     Đang chơi
@@ -1091,7 +1091,7 @@ export default function OngVangGame() {
                 )}
               </div>
               <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
-                Bản đồ tương tác 10 mốc son 30 năm (1911 - 1941). Cập cảng, tích lũy hải lý và mở khóa nhật ký.
+                Bàn cờ tỷ phú lịch sử (Business Tour). Đổ xúc xắc đưa con tàu qua 16 ô địa danh lịch sử, vượt thử thách và cắm cờ Tổ quốc!
               </p>
               <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
                 <span>{activeGameTab === 'journey' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
@@ -2058,54 +2058,62 @@ export default function OngVangGame() {
             {rulesTab === 'journey' && (
               <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
                 
-                {/* Visual Illustration Diagram for Game 2 */}
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-cyan-700/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
-                  {/* Left: Historic Vessel Photo Preview */}
-                  <div className="sm:col-span-5 relative aspect-[4/3] rounded-xl overflow-hidden border border-cyan-500/60 bg-black shadow-md">
-                    <img 
-                      src="/images/timeline/tau-latouche-treville.jpg" 
-                      alt="Tàu Amiral Latouche-Tréville" 
-                      className="w-full h-full object-cover" 
-                    />
-                    <div className="absolute top-2 left-2 bg-black/85 px-2 py-0.5 rounded text-[10px] text-cyan-300 font-bold border border-cyan-400/50 flex items-center space-x-1">
-                      <Ship className="w-3 h-3 text-cyan-300" />
-                      <span>Tàu Latouche-Tréville</span>
+                {/* Visual Illustration Diagram for Game 2 (Monopoly Business Tour) */}
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-amber-600/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
+                  {/* Left: Monopoly Board Preview */}
+                  <div className="sm:col-span-5 relative aspect-square rounded-xl overflow-hidden border border-amber-500/60 bg-gradient-to-br from-[#1b0f08] to-black shadow-md p-2 flex flex-col justify-between">
+                    <div className="grid grid-cols-4 gap-1 text-[8px] font-mono text-center">
+                      <span className="p-1 rounded bg-amber-600 text-stone-950 font-bold">1. Bến Rồng</span>
+                      <span className="p-1 rounded bg-stone-900 border border-stone-700 text-stone-300">2. Pháp</span>
+                      <span className="p-1 rounded bg-amber-950 text-yellow-300">🎁 Cơ Hội</span>
+                      <span className="p-1 rounded bg-stone-900 border border-stone-700 text-stone-300">3. Mỹ</span>
                     </div>
-                    <div className="absolute bottom-1 left-1 right-1 bg-black/85 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-200 text-center font-serif font-bold border border-amber-500/40">
-                      Bến Nhà Rồng, Sài Gòn (05/06/1911)
+
+                    <div className="my-auto text-center space-y-1">
+                      <div className="w-10 h-10 mx-auto rounded-xl bg-red-600 border border-yellow-300 flex items-center justify-center text-yellow-300 text-lg font-black shadow animate-bounce">
+                        5
+                      </div>
+                      <div className="text-[10px] text-amber-300 font-bold">🎲 Đổ xúc xắc 1 - 6 bước</div>
+                      <div className="text-[9px] text-stone-400">Tàu di chuyển quanh 16 ô viền</div>
+                    </div>
+
+                    <div className="grid grid-cols-4 gap-1 text-[8px] font-mono text-center">
+                      <span className="p-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-500">16. Pác Bó 🏁</span>
+                      <span className="p-1 rounded bg-stone-900 border border-stone-700 text-stone-300">Hồng Kông</span>
+                      <span className="p-1 rounded bg-stone-900 border border-stone-700 text-stone-300">Thái Lan</span>
+                      <span className="p-1 rounded bg-stone-900 border border-stone-700 text-stone-300">Quảng Châu</span>
+                    </div>
+
+                    <div className="absolute top-2 right-2 bg-black/85 px-2 py-0.5 rounded text-[10px] text-yellow-300 font-bold border border-yellow-400/50 flex items-center space-x-1">
+                      <Dices className="w-3 h-3 text-yellow-300" />
+                      <span>Bàn Cờ Tỷ Phú</span>
                     </div>
                   </div>
 
-                  {/* Right: Interactive Route Diagram */}
-                  <div className="sm:col-span-7 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#101b24] to-[#0a1118] border border-cyan-800/60 shadow-sm">
-                    <div className="flex items-center space-x-1.5 text-xs font-bold text-cyan-300">
-                      <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
-                      <span>Hải trình 10 mốc son vạn dặm:</span>
+                  {/* Right: How to Play in Business Tour Style */}
+                  <div className="sm:col-span-7 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#241408] to-[#140b04] border border-amber-700/60 shadow-sm">
+                    <div className="flex items-center space-x-1.5 text-xs font-bold text-amber-300">
+                      <Dices className="w-3.5 h-3.5 text-yellow-400" />
+                      <span>Luật chơi Bàn Cờ Hải Trình Vạn Dặm:</span>
                     </div>
 
-                    {/* Step pills */}
-                    <div className="flex items-center space-x-1 overflow-x-auto py-1 text-[10px]">
-                      <span className="px-2 py-1 rounded bg-amber-950 border border-amber-500 text-amber-200 font-bold shrink-0">
-                        1. Sài Gòn ⚓
-                      </span>
-                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
-                      <span className="px-2 py-1 rounded bg-stone-900 border border-stone-700 text-stone-300 shrink-0">
-                        2. Pháp
-                      </span>
-                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
-                      <span className="px-2 py-1 rounded bg-stone-900 border border-stone-700 text-stone-300 shrink-0">
-                        3. Mỹ & Anh
-                      </span>
-                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
-                      <span className="px-2 py-1 rounded bg-emerald-950 border border-emerald-500 text-emerald-200 font-bold shrink-0">
-                        10. Pác Bó 🚩
-                      </span>
-                    </div>
-
-                    <div className="p-2 rounded-lg bg-black/60 border border-cyan-800/40 text-[11px] text-stone-300 space-y-1 font-serif">
-                      <div className="text-amber-300 font-bold">🎯 Cách thức vượt ải:</div>
-                      <div>• Bấm vào trạm có biểu tượng rada phát sáng để mở nhật ký hành trình.</div>
-                      <div>• Trả lời câu hỏi thử thách cập cảng để tích lũy hải lý và nhổ neo sang trạm kế tiếp!</div>
+                    <div className="p-2.5 rounded-lg bg-black/60 border border-amber-800/40 text-[11px] text-stone-200 space-y-1.5 font-serif">
+                      <div className="flex items-start space-x-2">
+                        <span className="text-yellow-400 font-bold shrink-0">1.</span>
+                        <span>Bấm nút <strong>LẮC XÚC XẮC (ROLL DICE)</strong>: Con tàu sẽ nhảy từng bước theo số điểm ngẫu nhiên (1 đến 6).</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <span className="text-yellow-400 font-bold shrink-0">2.</span>
+                        <span>Dừng chân ở ô Địa Danh: Trả lời câu hỏi lịch sử. Đúng sẽ <strong>cắm cờ Tổ quốc 🇻🇳</strong> lên ô đó và tích lũy hải lý!</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <span className="text-yellow-400 font-bold shrink-0">3.</span>
+                        <span>Ô Cơ Hội & Vận Mệnh: Nhận thưởng hải lý, tiến thêm bước và vượt bão đại dương.</span>
+                      </div>
+                      <div className="flex items-start space-x-2">
+                        <span className="text-yellow-400 font-bold shrink-0">4.</span>
+                        <span>Cắm cờ toàn bộ địa danh và về đích tại <strong>Cột mốc 108 Pác Bó</strong> để giành chiến thắng vinh quang!</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2113,32 +2121,32 @@ export default function OngVangGame() {
                 {/* 3 Step Boxes */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
                   <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
-                    <div className="flex items-center space-x-1.5 text-cyan-300 font-bold text-xs">
-                      <span className="w-5 h-5 rounded-full bg-cyan-600 text-stone-950 flex items-center justify-center text-[10px]">1</span>
-                      <span>Cập cảng phát sáng</span>
+                    <div className="flex items-center space-x-1.5 text-yellow-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-amber-600 text-stone-950 flex items-center justify-center text-[10px]">1</span>
+                      <span>Đổ xúc xắc di chuyển</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Con tàu di chuyển theo từng chặng, nhấp vào trạm đang phát sáng để xem tư liệu.
+                      Con tàu di chuyển linh hoạt theo chiều kim đồng hồ quanh 16 ô địa danh lịch sử theo xúc xắc.
                     </p>
                   </div>
 
                   <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
                     <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
-                      <span className="w-5 h-5 rounded-full bg-amber-600 text-stone-950 flex items-center justify-center text-[10px]">2</span>
-                      <span>Vượt thử thách cập cảng</span>
+                      <span className="w-5 h-5 rounded-full bg-red-600 text-yellow-300 flex items-center justify-center text-[10px]">2</span>
+                      <span>Cắm cờ Việt Nam 🇻🇳</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Trả lời câu hỏi lịch sử của cảng đó. Trả lời đúng sẽ kéo còi tàu và cộng hải lý (+300đ).
+                      Giải mã thử thách để cắm cờ Tổ quốc, lưu dấu ấn di sản Bác Hồ tại mỗi quốc gia Người từng đi qua.
                     </p>
                   </div>
 
                   <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
                     <div className="flex items-center space-x-1.5 text-emerald-300 font-bold text-xs">
                       <span className="w-5 h-5 rounded-full bg-emerald-600 text-stone-950 flex items-center justify-center text-[10px]">3</span>
-                      <span>Đại hoa tiêu lịch sử</span>
+                      <span>Về đích Pác Bó</span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
-                      Cập bến mốc 108 Pác Bó để hoàn thành 30 năm bôn ba và vinh danh hoa tiêu xuất sắc.
+                      Cập bến mốc 108 Pác Bó khép lại 30 năm bôn ba và nhận Cúp Vàng Đại Thắng lịch sử.
                     </p>
                   </div>
                 </div>

@@ -1,33 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Anchor, Compass, MapPin, Navigation, Ship, Wind, Award,
   Sparkles, CheckCircle2, ChevronRight, ChevronLeft, Volume2,
   VolumeX, Trophy, RotateCcw, BookOpen, Flag, Shield, Eye,
-  Maximize2, ArrowRight, Play, Check, X
+  Maximize2, ArrowRight, Play, Check, X, Dices, Gift, Star,
+  HelpCircle, AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundFX, speakVietnameseVoice, stopVietnameseVoice } from '../utils/gameAudio';
 
-// ================= 10 HISTORIC MILESTONES OF THE 30-YEAR VOYAGE =================
-export const JOURNEY_STOPS = [
+// ================= 16 TILES ON THE MONOPOLY PERIMETER (CLOCKWISE 5x5 BOARD) =================
+// Grid 5x5 perimeter: 
+// Top: (0,0) -> (0,1) -> (0,2) -> (0,3) -> (0,4)
+// Right: (1,4) -> (2,4) -> (3,4) -> (4,4)
+// Bottom: (4,3) -> (4,2) -> (4,1) -> (4,0)
+// Left: (3,0) -> (2,0) -> (1,0)
+
+export const BOARD_TILES = [
+  // Top Row (0 -> 4)
   {
-    id: 1,
-    city: "Sài Gòn - Bến Nhà Rồng",
-    country: "Việt Nam",
-    year: "05/06/1911",
-    lat: 10.768,
-    lng: 106.706,
-    mapX: 77.5, // Percent position on map canvas
-    mapY: 62.0,
-    roleTitle: "Người thanh niên Văn Ba",
-    vessel: "Tàu Amiral Latouche-Tréville",
+    id: 0,
+    row: 0,
+    col: 0,
+    type: 'landmark',
+    stopId: 1,
+    title: "Bến Nhà Rồng",
+    subtitle: "Xuất phát (05/06/1911)",
+    country: "Sài Gòn - Việt Nam",
     nauticalMiles: 0,
     imageUrl: "/images/gallery/ben-nha-rong.jpg",
+    roleTitle: "Người thanh niên Văn Ba",
+    vessel: "Tàu Amiral Latouche-Tréville",
     narrative: "Ngày 5/6/1911, từ Bến cảng Nhà Rồng (Sài Gòn), người thanh niên yêu nước Nguyễn Tất Thành bước chân lên tàu buôn Pháp Amiral Latouche-Tréville với tên gọi Văn Ba, bắt đầu chuyến hải trình 30 năm tìm con đường cứu nước, cứu dân.",
     quote: "“Tôi muốn đi ra ngoài, xem nước Pháp và các nước khác. Sau khi xem xét họ làm như thế nào, tôi sẽ trở về giúp đồng bào chúng ta.”",
-    question: "Người thanh niên Nguyễn Tất Thành đã nhận làm công việc gì trên tàu buôn Amiral Latouche-Tréville?",
+    question: "Người thanh niên Nguyễn Tất Thành đã nhận làm công việc gì trên tàu buôn Amiral Latouche-Tréville khi rời Bến Nhà Rồng?",
     options: [
-      "Phụ bếp với công việc quét dọn, bốc vác than và rửa bát đĩa",
+      "Phụ bếp với công việc quét dọn, bốc than và rửa bát đĩa",
       "Thủy thủ lái tàu chính",
       "Phiên dịch viên tiếng Pháp cho thuyền trưởng",
       "Thợ cơ khí máy móc hơi nước"
@@ -36,18 +44,18 @@ export const JOURNEY_STOPS = [
     explanation: "Người đã nhận làm phụ bếp, sẵn sàng lao động tay chân vất vả từ sáng sớm đến đêm khuya trong khoang tàu nóng rực để có cơ hội sang phương Tây tìm đường cứu nước."
   },
   {
-    id: 2,
-    city: "Marseille & Le Havre",
+    id: 1,
+    row: 0,
+    col: 1,
+    type: 'landmark',
+    stopId: 2,
+    title: "Marseille & Le Havre",
+    subtitle: "Cập cảng Pháp (06/07/1911)",
     country: "Cộng hòa Pháp",
-    year: "06/07/1911",
-    lat: 43.296,
-    lng: 5.369,
-    mapX: 47.5,
-    mapY: 34.0,
-    roleTitle: "Thủy thủ viễn dương",
-    vessel: "Tàu buôn vượt Ấn Độ Dương & Địa Trung Hải",
     nauticalMiles: 6500,
     imageUrl: "/images/timeline/tau-latouche-treville.jpg",
+    roleTitle: "Thủy thủ viễn dương",
+    vessel: "Tàu buôn vượt Ấn Độ Dương & Địa Trung Hải",
     narrative: "Sau hơn 1 tháng lênh đênh qua Singapore, Colombo, Djibouti và vượt kênh đào Suez, con tàu cập cảng Marseille. Lần đầu tiên đặt chân lên đất Pháp, Người nhận thấy ở chính 'mẫu quốc' cũng có những người nghèo khổ như đồng bào mình.",
     quote: "“Tại sao người Pháp không khai hóa đồng bào của họ trước khi đi khai hóa chúng ta?”",
     question: "Khi cập cảng Marseille, điều gì khiến người thanh niên Văn Ba ngạc nhiên nhất về xã hội nước Pháp?",
@@ -58,146 +66,205 @@ export const JOURNEY_STOPS = [
       "Các thủy thủ da màu được đối xử trọng vọng"
     ],
     correctIndex: 0,
-    explanation: "Người nhận ra ở đâu cũng có hai loại người: kẻ bóc lột và người bị bóc lột. Người lao động Pháp cũng chịu cảnh bần hàn và bất công, chỉ có bọn thực dân cai trị là tàn bạo."
+    explanation: "Tại Marseille, Bác thấy những người lao động Pháp nghèo khổ, qua đó nhận thức sâu sắc: người lao động ở đâu cũng bị bóc lột và cần đoàn kết lại."
+  },
+  {
+    id: 2,
+    row: 0,
+    col: 2,
+    type: 'chance',
+    title: "Cơ Hội Lịch Sử",
+    subtitle: "Thẻ may mắn hải trình",
+    icon: 'gift',
+    color: 'from-amber-600 to-yellow-500',
+    chanceEvents: [
+      { text: "Được kiều bào và thủy thủ quốc tế tận tình giúp đỡ! Bạn được tặng thêm +300 hải lý.", bonusMiles: 300, forwardSteps: 0 },
+      { text: "Gió thuận buồm xuôi, con tàu lướt sóng nhanh vượt bậc! Bạn tiến thẳng thêm 2 ô.", bonusMiles: 150, forwardSteps: 2 },
+      { text: "Học thêm tiếng Anh và tiếng Pháp thông qua sách báo thư viện! Bạn nhận +250 hải lý tri thức.", bonusMiles: 250, forwardSteps: 0 }
+    ]
   },
   {
     id: 3,
-    city: "Boston & New York",
-    country: "Hợp chúng quốc Hoa Kỳ",
-    year: "1912 - 1913",
-    lat: 42.360,
-    lng: -71.058,
-    mapX: 27.0,
-    mapY: 34.5,
-    roleTitle: "Thợ làm bánh & Lao động tự do",
-    vessel: "Tàu hàng vượt Đại Tây Dương",
+    row: 0,
+    col: 3,
+    type: 'landmark',
+    stopId: 3,
+    title: "New York & Boston",
+    subtitle: "Tiếp cận thế giới mới (1912 - 1913)",
+    country: "Hoa Kỳ",
     nauticalMiles: 11200,
-    imageUrl: "/images/gallery/tuyen-ngon-doc-lap.jpg",
-    narrative: "Cuối năm 1912, Người sang Hoa Kỳ, làm thợ bánh tại khách sạn Omni Parker House (Boston) và sống ở khu Harlem (New York). Người nghiên cứu sâu Tuyên ngôn Độc lập Mỹ năm 1776 và chứng kiến nạn phân biệt chủng tộc với người da màu.",
+    imageUrl: "/images/timeline/bac-o-my.jpg",
+    roleTitle: "Lao động tự do & quan sát văn minh",
+    vessel: "Tàu hàng vượt Đại Tây Dương",
+    narrative: "Cuối năm 1912, Người theo tàu sang Mỹ, sống và làm thuê tại New York và Boston. Người thường xuyên đến khu Harlem tìm hiểu đời sống người da màu và nghiên cứu bản Tuyên ngôn Độc lập Mỹ năm 1776.",
     quote: "“Tất cả mọi người đều sinh ra có quyền bình đẳng. Tạo hóa cho họ những quyền không ai có thể xâm phạm được.”",
-    question: "Tại Boston (Mỹ), người thanh niên yêu nước Nguyễn Tất Thành đã làm việc tại địa điểm nổi tiếng nào?",
+    question: "Trong thời gian ở Boston (Mỹ), Bác Hồ đã làm công việc gì tại khách sạn danh tiếng Omni Parker House?",
     options: [
-      "Khách sạn Omni Parker House",
-      "Đại học Harvard",
-      "Cảng biển Boston Harbor",
-      "Tòa thị chính Boston"
+      "Làm thợ làm bánh tại bộ phận bếp bánh của khách sạn",
+      "Lễ tân trưởng đón khách quốc tế",
+      "Quản lý sổ sách và tài chính khách sạn",
+      "Bảo vệ sảnh chính khách sạn"
     ],
     correctIndex: 0,
-    explanation: "Tại khách sạn Omni Parker House lịch sử ở Boston, Người làm thợ phụ làm bánh và tranh thủ thời gian tự học tiếng Anh cũng như tìm hiểu văn hóa chính trị Mỹ."
+    explanation: "Tại khách sạn Parker House ở Boston, Người làm thợ phụ làm bánh. Đến nay, chiếc bàn đá nơi Bác từng làm bánh vẫn được khách sạn lưu giữ trang trọng như một kỷ vật lịch sử."
   },
   {
     id: 4,
-    city: "London",
-    country: "Vương quốc Anh",
-    year: "1913 - 1917",
-    lat: 51.507,
-    lng: -0.127,
-    mapX: 46.0,
-    mapY: 30.5,
-    roleTitle: "Lao động & Hội viên Lao động Hải ngoại",
-    vessel: "Hành trình sương mù London",
-    nauticalMiles: 14500,
-    imageUrl: "/images/timeline/carlton-hotel.jpg",
-    narrative: "Đến thủ đô sương mù London, Người làm đủ nghề: cào tuyết cho một trường học, đốt lò, rồi làm phụ bếp tại khách sạn Carlton dưới sự hướng dẫn của bếp trưởng huyền thoại Auguste Escoffier. Người gia nhập Công đoàn Lao động Hải ngoại.",
-    quote: "“Học để làm việc, làm người, làm cán bộ. Học để phụng sự Tổ quốc, phụng sự nhân dân.”",
-    question: "Khách sạn sang trọng nơi Bác Hồ từng làm việc trong thời gian sống tại thủ đô London nước Anh là gì?",
-    options: [
-      "Khách sạn Carlton",
-      "Khách sạn The Ritz",
-      "Khách sạn Savoy",
-      "Khách sạn Claridge's"
-    ],
-    correctIndex: 0,
-    explanation: "Khách sạn Carlton là nơi Người phụ bếp và kết thân với phong trào công nhân tiến bộ Anh, tích lũy kiến thức sâu rộng về xã hội tư bản phương Tây."
+    row: 0,
+    col: 4,
+    type: 'supply',
+    title: "Trạm Kênh Đào Suez",
+    subtitle: "Nghỉ ngơi & Tiếp tế hải trình",
+    icon: 'anchor',
+    color: 'from-cyan-600 to-blue-700',
+    rewardText: "Con tàu neo đậu tiếp tế nhiên liệu và nước ngọt qua eo biển Suez. Bạn được phục hồi năng lượng và nhận +200 hải lý tiếp tế!"
   },
+
+  // Right Column (5 -> 8)
   {
     id: 5,
-    city: "Paris - Ngõ Compoint & Đại hội Tours",
-    country: "Cộng hòa Pháp",
-    year: "1917 - 1923",
-    lat: 48.856,
-    lng: 2.352,
-    mapX: 47.0,
-    mapY: 32.5,
-    roleTitle: "Chiến sĩ Nguyễn Ái Quốc",
-    vessel: "Trung tâm phong trào giải phóng thuộc địa",
-    nauticalMiles: 15200,
-    imageUrl: "/images/gallery/dai-hoi-tours.jpg",
-    narrative: "Năm 1917, Người trở lại Pháp, lấy tên Nguyễn Ái Quốc. Năm 1919 gửi 'Bản Yêu sách của nhân dân An Nam' tới Hội nghị Versailles. Tháng 12/1920, bỏ phiếu sáng lập Đảng Cộng sản Pháp tại Đại hội Tours và sáng lập báo Le Paria (1922).",
-    quote: "“Luận cương của Lênin làm cho tôi rất cảm động, phấn khởi, sáng tỏ, tin tưởng biết bao! Hỡi đồng bào bị đày đọa đau khổ! Đây là cái cần thiết cho chúng ta!”",
-    question: "Bản văn kiện lịch sử nào của V.I. Lênin đã giúp Nguyễn Ái Quốc tìm thấy con đường giải phóng cho dân tộc?",
+    row: 1,
+    col: 4,
+    type: 'landmark',
+    stopId: 4,
+    title: "London",
+    subtitle: "Thủ đô sương mù (1913 - 1917)",
+    country: "Vương quốc Anh",
+    nauticalMiles: 14500,
+    imageUrl: "/images/timeline/khach-san-carlton.jpg",
+    roleTitle: "Đoàn viên Lao động Hải ngoại",
+    vessel: "Vượt bão tuyết xứ sương mù",
+    narrative: "Đầu năm 1914, Người sang Anh, làm nghề cào tuyết, đốt lò rồi phụ bếp tại khách sạn Carlton dưới sự hướng dẫn của vua đầu bếp Escoffier. Tại đây, Người gia nhập Công đoàn Lao động Hải ngoại và nghiên cứu phong trào công nhân thế giới.",
+    quote: "“Dù phải cào tuyết giữa mùa đông lạnh giá buốt xương, ngọn lửa yêu nước trong tim chưa bao giờ nguội tắt.”",
+    question: "Tại London, Bác Hồ đã gia nhập tổ chức bí mật tiến bộ nào của những người lao động thuộc địa?",
     options: [
-      "Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa",
-      "Tuyên ngôn của Đảng Cộng sản",
-      "Cách mạng và Nhà nước",
-      "Kinh tế chính trị học Mác - Lênin"
+      "Hội những người Lao động Hải ngoại (Overseas Workers Association)",
+      "Công đoàn Thủy thủ Viễn đông",
+      "Hội Thanh niên Ái quốc Luân Đôn",
+      "Hội Trí thức Tiến bộ Anh quốc"
     ],
     correctIndex: 0,
-    explanation: "Đọc Luận cương của Lênin trên báo L'Humanité tháng 7/1920, Nguyễn Ái Quốc đã thốt lên trong niềm xúc động tột cùng và tìm ra con đường cứu nước đúng đắn."
+    explanation: "Bác tham gia Hội những người Lao động Hải ngoại gồm các công nhân từ các nước thuộc địa, học hỏi phương pháp đấu tranh nghiệp đoàn của giai cấp vô sản."
   },
   {
     id: 6,
-    city: "Moskva (Mát-xcơ-va)",
-    country: "Liên Xô",
-    year: "1923 - 1924",
-    lat: 55.755,
-    lng: 37.617,
-    mapX: 58.5,
-    mapY: 27.5,
-    roleTitle: "Cán bộ Quốc tế Cộng sản",
-    vessel: "Đoàn tàu xuyên Siberia",
-    nauticalMiles: 17800,
-    imageUrl: "/images/timeline/moskva-1924.jpg",
-    narrative: "Tháng 6/1923, Nguyễn Ái Quốc bí mật sang Moskva, quê hương Cách mạng Tháng Mười. Người dự Đại hội Quốc tế Nông dân, Đại hội V Quốc tế Cộng sản và học tập, nghiên cứu tại Trường Đại học Phương Đông.",
-    quote: "“Chỉ có chủ nghĩa xã hội, chủ nghĩa cộng sản mới giải phóng được các dân tộc bị áp bức và những người lao động trên thế giới khỏi ách nô lệ.”",
-    question: "Nguyễn Ái Quốc đã học tập và nghiên cứu lý luận cách mạng tại ngôi trường danh tiếng nào ở Moskva?",
-    options: [
-      "Trường Đại học Lao động Cộng sản Phương Đông",
-      "Trường Đại học Tổng hợp Lomonosov",
-      "Học viện Quân sự Frunze",
-      "Trường Đảng cao cấp Moskva"
-    ],
-    correctIndex: 0,
-    explanation: "Tại Trường Đại học Phương Đông, Người vừa theo học lý luận Mác - Lênin, vừa truyền bá tư tưởng cách mạng cho sinh viên các nước phương Đông."
+    row: 2,
+    col: 4,
+    type: 'fate',
+    title: "Thử Thách Vận Mệnh",
+    subtitle: "Sóng gió đại dương",
+    icon: 'compass',
+    color: 'from-purple-600 to-indigo-700',
+    fateEvents: [
+      { text: "Vượt qua sự theo dõi gắt gao của mật thám! Nhờ mưu trí, bạn nhận được huy chương kiên định (+250 hải lý).", bonusMiles: 250, forwardSteps: 0 },
+      { text: "Bão biển Địa Trung Hải dữ dội! Con tàu phải hạ buồm giữ thăng bằng an toàn, nhận +150 hải lý rèn luyện.", bonusMiles: 150, forwardSteps: 0 }
+    ]
   },
   {
     id: 7,
-    city: "Quảng Châu",
-    country: "Trung Quốc",
-    year: "1924 - 1927",
-    lat: 23.129,
-    lng: 113.264,
-    mapX: 79.5,
-    mapY: 53.0,
-    roleTitle: "Đồng chí Lý Thụy",
-    vessel: "Hội Việt Nam Cách mạng Thanh niên",
-    nauticalMiles: 23500,
-    imageUrl: "/images/timeline/tru-so-hoi-thanh-nien.jpg",
-    narrative: "Cuối năm 1924, Người đến Quảng Châu với bí danh Lý Thụy. Người thành lập Hội Việt Nam Cách mạng Thanh niên (6/1925), mở các lớp huấn luyện chính trị đào tạo cán bộ cốt cán và xuất bản cuốn sách bất hủ 'Đường Kách Mệnh' (1927).",
-    quote: "“Cách mệnh trước hết phải có cái gì? Trước hết phải có Đảng cách mệnh, để trong thì vận động và tổ chức dân chúng, ngoài thì liên lạc với dân tộc bị áp bức.”",
-    question: "Tác phẩm lý luận cách mạng đầu tiên tập hợp các bài giảng của Nguyễn Ái Quốc tại Quảng Châu xuất bản năm 1927 có tên là gì?",
+    row: 3,
+    col: 4,
+    type: 'landmark',
+    stopId: 5,
+    title: "Paris - Ngõ Compoint",
+    subtitle: "Bản Yêu sách & Báo Người Cùng Khổ (1917 - 1923)",
+    country: "Cộng hòa Pháp",
+    nauticalMiles: 16800,
+    imageUrl: "/images/timeline/ngo-compoint.jpg",
+    roleTitle: "Nguyễn Ái Quốc - Chiến sĩ Ái quốc",
+    vessel: "Trung tâm phong trào giải phóng dân tộc",
+    narrative: "Tại căn gác trọ số 9 ngõ Compoint (Quận 17, Paris), Nguyễn Ái Quốc làm nghề thợ ảnh để kiếm sống. Người gửi Bản Yêu sách của nhân dân An Nam đến Hội nghị Versailles (1919) và bỏ phiếu gia nhập Quốc tế III, sáng lập Đảng Cộng sản Pháp (1920).",
+    quote: "“Hỡi đồng bào bị đọa đày đau khổ! Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng chúng ta!”",
+    question: "Nguyễn Ái Quốc đã đọc bản văn kiện lịch sử mang tính bước ngoặt nào của Lênin vào tháng 7/1920?",
     options: [
-      "Đường Kách Mệnh",
-      "Bản án chế độ thực dân Pháp",
-      "Lời kêu gọi toàn quốc kháng chiến",
-      "Nhật ký trong tù"
+      "Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa",
+      "Tuyên ngôn của Đảng Cộng sản",
+      "Nhà nước và Cách mạng",
+      "Chính sách kinh tế mới (NEP)"
     ],
     correctIndex: 0,
-    explanation: "Cuốn 'Đường Kách Mệnh' đã trang bị vũ khí tư tưởng cho các cán bộ cách mạng Việt Nam, chuẩn bị trực tiếp về mặt chính trị và tư tưởng cho việc thành lập Đảng."
+    explanation: "Đọc Luận cương của Lênin trên báo L'Humanité, Bác đã òa khóc vì xúc động khi tìm thấy con đường cứu nước chân chính cho dân tộc Việt Nam: con đường cách mạng vô sản."
   },
   {
     id: 8,
-    city: "Bản Đông - Phichit",
+    row: 4,
+    col: 4,
+    type: 'landmark',
+    stopId: 6,
+    title: "Mát-xcơ-va",
+    subtitle: "Quê hương Cách mạng Tháng Mười (1923 - 1924)",
+    country: "Liên Xô",
+    nauticalMiles: 20100,
+    imageUrl: "/images/timeline/quoc-te-cong-san.jpg",
+    roleTitle: "Đại biểu Quốc tế Nông dân & Đệ Tam Quốc tế",
+    vessel: "Hành trình bí mật qua Berlin đến Liên Xô",
+    narrative: "Mùa hè năm 1923, Nguyễn Ái Quốc bí mật rời Paris sang Liên bang Xô Viết. Người tham dự Đại hội I Quốc tế Nông dân, học tại Trường Đại học Phương Đông và phát biểu đanh thép tại Đại hội V Quốc tế Cộng sản về phong trào giải phóng thuộc địa.",
+    quote: "“Chủ nghĩa tư bản là con đỉa hai vòi: một vòi bám vào chính quốc, vòi kia bám vào thuộc địa. Muốn giết nó phải chặt cả hai vòi.”",
+    question: "Tại Liên Xô, Bác Hồ đã theo học và tốt nghiệp ngôi trường đào tạo cán bộ cách mạng nổi tiếng nào?",
+    options: [
+      "Trường Đại học Lao động Cộng sản Phương Đông",
+      "Trường Quân sự Hoàng Phố",
+      "Trường Đảng cao cấp Matxcơva",
+      "Trường Đại học Tổng hợp Lomonosov"
+    ],
+    correctIndex: 0,
+    explanation: "Tại Trường Đại học Phương Đông, Người đã nghiên cứu sâu sắc chủ nghĩa Mác - Lênin và chuẩn bị nền tảng lý luận đào tạo cán bộ cho cách mạng Việt Nam."
+  },
+
+  // Bottom Row (9 -> 12, right to left)
+  {
+    id: 9,
+    row: 4,
+    col: 3,
+    type: 'chance',
+    title: "Cơ Hội Lịch Sử",
+    subtitle: "Ngọn đuốc Lênin soi đường",
+    icon: 'gift',
+    color: 'from-amber-600 to-yellow-500',
+    chanceEvents: [
+      { text: "Tiếp thu Luận cương Lênin soi sáng đường lối cách mạng! Bạn được thưởng lớn +400 hải lý.", bonusMiles: 400, forwardSteps: 0 },
+      { text: "Liên lạc mật mã với các đồng chí kiên trung! Con tàu được tăng tốc vượt 2 ô về phía phương Đông.", bonusMiles: 200, forwardSteps: 2 },
+      { text: "Được nhân dân lao động quốc tế che chở bí mật vượt biên giới! Nhận +300 hải lý.", bonusMiles: 300, forwardSteps: 0 }
+    ]
+  },
+  {
+    id: 10,
+    row: 4,
+    col: 2,
+    type: 'landmark',
+    stopId: 7,
+    title: "Quảng Châu",
+    subtitle: "Ươm mầm hạt giống đỏ (1924 - 1927)",
+    country: "Trung Quốc",
+    nauticalMiles: 23400,
+    imageUrl: "/images/timeline/thanh-nien-quang-chau.jpg",
+    roleTitle: "Đồng chí Lý Thụy & Cố vấn Borodin",
+    vessel: "Cầu nối phong trào cách mạng về Tổ quốc",
+    narrative: "Cuối năm 1924, Người đến Quảng Châu (Trung Quốc) lấy bí danh Lý Thụy. Người sáng lập Hội Việt Nam Cách mạng Thanh niên (6/1925), xuất bản báo Thanh Niên và mở các lớp huấn luyện chính trị đào tạo các chiến sĩ nòng cốt cho cách mạng nước nhà.",
+    quote: "“Cách mạng là việc chung cả dân chúng chứ không phải việc một hai người.”",
+    question: "Tập hợp các bài giảng lý luận chính trị của Nguyễn Ái Quốc tại các lớp huấn luyện ở Quảng Châu đã được in thành cuốn sách gối đầu giường nào?",
+    options: [
+      "Đường Kách mệnh (1927)",
+      "Bản án chế độ thực dân Pháp",
+      "Tuyên ngôn Độc lập",
+      "Cương lĩnh chính trị đầu tiên"
+    ],
+    correctIndex: 0,
+    explanation: "Cuốn sách 'Đường Kách mệnh' xuất bản năm 1927 là cẩm nang chính trị vô giá giác ngộ hàng vạn thanh niên yêu nước đứng lên đấu tranh giành độc lập."
+  },
+  {
+    id: 11,
+    row: 4,
+    col: 1,
+    type: 'landmark',
+    stopId: 8,
+    title: "Bản Đông - Phichit",
+    subtitle: "Thầy giáo Thầu Chín (1928 - 1929)",
     country: "Xiêm (Thái Lan)",
-    year: "1928 - 1929",
-    lat: 16.442,
-    lng: 100.347,
-    mapX: 76.0,
-    mapY: 58.5,
-    roleTitle: "Thầy giáo Thầu Chín",
-    vessel: "Vùng đất hữu nghị Đông Nam Á",
     nauticalMiles: 25100,
     imageUrl: "/images/timeline/thau-chin-thai-lan.jpg",
+    roleTitle: "Thầy giáo Thầu Chín",
+    vessel: "Vùng đất hữu nghị Đông Nam Á",
     narrative: "Mùa thu năm 1928, Người sang Xiêm (Thái Lan) với bí danh Thầu Chín. Người cùng kiều bào mở mang trường học dạy chữ quốc ngữ, mở hội hợp tác, dịch sách báo và gây dựng căn cứ cách mạng vững chắc sát gần biên giới Tổ quốc.",
     quote: "“Muốn cách mạng thành công, trước hết phải làm cho dân giác ngộ, phải thương yêu đùm bọc lẫn nhau.”",
     question: "Khi hoạt động cách mạng giữa cộng đồng kiều bào tại Thái Lan (1928 - 1929), Bác Hồ lấy bí danh thân thương là gì?",
@@ -211,18 +278,18 @@ export const JOURNEY_STOPS = [
     explanation: "Bà con kiều bào tại vùng Udon Thani, Phichit thân thương gọi Người là 'Thầu Chín' (tiếng Thái có nghĩa là bác/chú Chín đầy tôn kính)."
   },
   {
-    id: 9,
-    city: "Cửu Long (Kowloon) - Hồng Kông",
+    id: 12,
+    row: 4,
+    col: 0,
+    type: 'landmark',
+    stopId: 9,
+    title: "Cửu Long - Hồng Kông",
+    subtitle: "Thành lập Đảng Cộng sản Việt Nam (03/02/1930)",
     country: "Hồng Kông",
-    year: "03/02/1930",
-    lat: 22.319,
-    lng: 114.169,
-    mapX: 80.5,
-    mapY: 53.5,
-    roleTitle: "Phái viên Quốc tế Cộng sản",
-    vessel: "Hội nghị hợp nhất lịch sử",
     nauticalMiles: 26800,
     imageUrl: "/images/timeline/thanh-lap-dang-1930.jpg",
+    roleTitle: "Phái viên Quốc tế Cộng sản",
+    vessel: "Hội nghị hợp nhất lịch sử",
     narrative: "Từ ngày 6/1 đến đầu tháng 2/1930, tại bán đảo Cửu Long (Hồng Kông), Người chủ trì Hội nghị hợp nhất ba tổ chức cộng sản, thành lập nên Đảng Cộng sản Việt Nam quang vinh, chấm dứt thời kỳ khủng hoảng đường lối cứu nước.",
     quote: "“Đảng ta là đạo đức, là văn minh / Là thống nhất, độc lập, là hòa bình ấm no.”",
     question: "Hội nghị thành lập Đảng Cộng sản Việt Nam (03/02/1930) đã hợp nhất những tổ chức cộng sản nào?",
@@ -235,39 +302,80 @@ export const JOURNEY_STOPS = [
     correctIndex: 0,
     explanation: "Nguyễn Ái Quốc đã khéo léo xóa bỏ bất đồng nội bộ, hợp nhất 3 tổ chức thành một chính đảng duy nhất lấy tên là Đảng Cộng sản Việt Nam."
   },
+
+  // Left Column (13 -> 15, bottom to top)
   {
-    id: 10,
-    city: "Cột mốc 108 - Pác Bó (Cao Bằng)",
-    country: "Tổ quốc Việt Nam Thân Yêu",
-    year: "28/01/1941",
-    lat: 22.980,
-    lng: 106.050,
-    mapX: 77.0,
-    mapY: 51.0,
-    roleTitle: "Bác Hồ - Già Thu",
-    vessel: "Hành trình 30 năm khép lại - Bình minh dân tộc",
-    nauticalMiles: 30000,
+    id: 13,
+    row: 3,
+    col: 0,
+    type: 'fate',
+    title: "Tiếng Gọi Non Sông",
+    subtitle: "Biến cố & Ý chí thép",
+    icon: 'star',
+    color: 'from-rose-700 to-amber-700',
+    fateEvents: [
+      { text: "Bản lĩnh kiên cường vượt ngục Victoria (Hồng Kông) nhờ luật sư Loseby bảo vệ lẽ phải! Bạn được giải phóng và cộng +350 hải lý.", bonusMiles: 350, forwardSteps: 0 },
+      { text: "Phong trào cách mạng trong nước dâng cao! Bạn được tiếp thêm sĩ khí anh hùng, tiến thẳng thêm 1 ô.", bonusMiles: 200, forwardSteps: 1 }
+    ]
+  },
+  {
+    id: 14,
+    row: 2,
+    col: 0,
+    type: 'landmark',
+    stopId: 10,
+    title: "Côn Minh & Quế Lâm",
+    subtitle: "Chuẩn bị về nước (1940)",
+    country: "Vùng biên giới Việt - Trung",
+    nauticalMiles: 28900,
     imageUrl: "/images/gallery/pac-bo.jpg",
-    narrative: "Sáng 28/01/1941 (Mùng 2 Tết Tân Tỵ), sau 30 năm bôn ba qua 3 đại dương và 4 châu lục, Người vượt qua cột mốc 108 biên giới Việt - Trung trở về Tổ quốc. Người cúi xuống hôn lên mảnh đất quê hương, trực tiếp lãnh đạo Cách mạng Tháng Tám thắng lợi.",
-    quote: "“Kìa bóng Bác đang hôn lên hòn đất / Lắng nghe trong màu hồng hình đất nước phôi thai.” (Chế Lan Viên)",
-    question: "Ngày Bác Hồ vượt cột mốc 108 trở về đất mẹ sau 30 năm bôn ba là ngày nào?",
+    roleTitle: "Bác Hồ - Già Thu",
+    vessel: "Bắt liên lạc trở về biên ải",
+    narrative: "Năm 1940, trước tình hình thế giới chuyển biến mau lẹ, Người tìm về Côn Minh và Quế Lâm, gặp gỡ các đồng chí Võ Nguyên Giáp, Phạm Văn Đồng... trực tiếp chỉ đạo chuẩn bị mọi điều kiện để đưa phong trào cách mạng về lại Tổ quốc.",
+    quote: "“Thời cơ đã đến, dù có phải đốt cháy cả dãy Trường Sơn cũng phải kiên quyết giành cho được độc lập!”",
+    question: "Tại Côn Minh và Tĩnh Tây, Bác Hồ đã chọn địa danh nào của Tổ quốc làm căn cứ địa đầu tiên khi trở về nước?",
     options: [
-      "28/01/1941 (Mùng 2 Tết Tân Tỵ)",
-      "05/06/1941",
-      "02/09/1941",
-      "19/05/1941"
+      "Pác Bó (Cao Bằng)",
+      "Tân Trào (Tuyên Quang)",
+      "Định Hóa (Thái Nguyên)",
+      "Ba Bể (Bắc Kạn)"
     ],
     correctIndex: 0,
-    explanation: "Đúng ngày 28/01/1941, Bác Hồ cùng các đồng chí bí mật đặt chân về Tổ quốc tại Cao Bằng, đánh dấu mốc son rực rỡ chuẩn bị cho ngày độc lập."
+    explanation: "Người nhận định Cao Bằng có thế đất hiểm trở 'tiến có thể đánh, lui có thể giữ', nối liền với hậu phương quốc tế nên chọn làm bàn đạp đầu tiên cho cách mạng Việt Nam."
+  },
+  {
+    id: 15,
+    row: 1,
+    col: 0,
+    type: 'finish',
+    stopId: 11,
+    title: "Cột mốc 108 - Pác Bó",
+    subtitle: "Về Đích Lịch Sử (28/01/1941)",
+    country: "Cao Bằng - Việt Nam",
+    nauticalMiles: 30000,
+    imageUrl: "/images/gallery/pac-bo.jpg",
+    roleTitle: "Chủ tịch Hồ Chí Minh - Người Cha Già Dân Tộc",
+    vessel: "Hành trình 30 năm khép lại - Bình minh độc lập",
+    narrative: "Ngày 28/01/1941 (mùng 2 Tết Tân Tỵ), sau 30 năm bôn ba khắp bốn biển năm châu, Bác Hồ kính yêu đã bước qua cột mốc 108 trên biên giới Việt - Trung, nghẹn ngào cúi hôn mảnh đất quê hương Pác Bó (Hà Quảng, Cao Bằng).",
+    quote: "“Kìa bóng Bác đang hôn lên hòn đất / Lắng nghe trong màu hồng hình đất nước phôi thai...”",
+    question: "Hình ảnh xúc động đầu tiên của Bác Hồ khi bước chân qua cột mốc 108 trở về đất mẹ sau 30 năm xa cách là gì?",
+    options: [
+      "Bác cúi xuống xúc động hôn lên nắm đất thiêng của Tổ quốc",
+      "Bác bắt tay chào các chiến sĩ biên phòng",
+      "Bác viết ngay bài thơ Pác Bó",
+      "Bác trồng cây đa lưu niệm tại biên giới"
+    ],
+    correctIndex: 0,
+    explanation: "Đúng ngày 28/01/1941, Bác Hồ cùng các đồng chí bí mật đặt chân về Tổ quốc tại Cao Bằng, đánh dấu mốc son rực rỡ chuẩn bị cho ngày Tổng khởi nghĩa Cách mạng Tháng Tám."
   }
 ];
 
-// Helper to shuffle port challenge options so correct answer is randomly among A, B, C, D
-function shufflePortOptions(stop) {
-  if (!stop || !stop.options) return stop;
-  const indexed = stop.options.map((opt, idx) => ({
+// Helper to shuffle options so correct answer is randomly distributed among A, B, C, D
+function shuffleTileOptions(tile) {
+  if (!tile || !tile.options) return tile;
+  const indexed = tile.options.map((opt, idx) => ({
     text: opt,
-    isCorrect: idx === stop.correctIndex
+    isCorrect: idx === tile.correctIndex
   }));
   for (let i = indexed.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -275,24 +383,33 @@ function shufflePortOptions(stop) {
   }
   const newCorrectIndex = indexed.findIndex(item => item.isCorrect);
   return {
-    ...stop,
+    ...tile,
     options: indexed.map(item => item.text),
     correctIndex: newCorrectIndex
   };
 }
 
 export default function HaiTrinhVanDamGame() {
-  const [currentStopIndex, setCurrentStopIndex] = useState(0); // Current active stop
-  const [visitedStops, setVisitedStops] = useState([0]); // Set of unlocked stops (start with stop 0 unlocked)
-  const [selectedPortModal, setSelectedPortModal] = useState(null); // Port being viewed
-  const [challengeOption, setChallengeOption] = useState(null);
+  // Current tile index on board (0 to 15)
+  const [currentTileIdx, setCurrentTileIdx] = useState(0);
+  const [claimedTiles, setClaimedTiles] = useState([0]); // Tiles where Vietnamese flag is claimed/unlocked
+  const [totalNauticalMiles, setTotalNauticalMiles] = useState(0);
+  const [diceCount, setDiceCount] = useState(0); // Number of rolls
+  const [diceValue, setDiceValue] = useState(1); // 1 to 6
+  const [isRolling, setIsRolling] = useState(false);
+  const [isMoving, setIsMoving] = useState(false);
+
+  // Modals
+  const [activeChallengeTile, setActiveChallengeTile] = useState(null); // Landmark challenge
+  const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [totalNauticalMiles, setTotalNauticalMiles] = useState(0);
-  const [gameScore, setGameScore] = useState(0);
-  const [isGrandFinale, setIsGrandFinale] = useState(false);
 
-  const activePort = JOURNEY_STOPS[currentStopIndex];
+  // Chance / Fate notification modal
+  const [chanceModalInfo, setChanceModalInfo] = useState(null);
+
+  // Grand victory modal
+  const [isGrandFinale, setIsGrandFinale] = useState(false);
 
   // Clean voice on unmount
   useEffect(() => {
@@ -301,467 +418,645 @@ export default function HaiTrinhVanDamGame() {
     };
   }, []);
 
-  // Open modal for a port
-  const handleOpenPort = (stop, index) => {
+  // Number of landmark milestones available on the board (landmarks + finish)
+  const totalLandmarks = BOARD_TILES.filter(t => t.type === 'landmark' || t.type === 'finish').length;
+  const totalClaimedLandmarks = claimedTiles.filter(idx => {
+    const t = BOARD_TILES[idx];
+    return t && (t.type === 'landmark' || t.type === 'finish');
+  }).length;
+
+  // ================= ROLL DICE ACTION =================
+  const handleRollDice = () => {
+    if (isRolling || isMoving || activeChallengeTile || chanceModalInfo || isGrandFinale) return;
+
     stopVietnameseVoice();
-    soundFX.playFlip();
-    const shuffledStop = shufflePortOptions(stop);
-    setSelectedPortModal({ stop: shuffledStop, index });
-    setChallengeOption(null);
-    setIsAnswerChecked(false);
-    // Read the harbor challenge question aloud immediately
-    speakVietnameseVoice(shuffledStop.question);
+    setIsRolling(true);
+    soundFX.playDiceRoll();
+
+    // Roll animation 700ms
+    let rollCounter = 0;
+    const interval = setInterval(() => {
+      setDiceValue(Math.floor(Math.random() * 6) + 1);
+      rollCounter++;
+      if (rollCounter > 7) {
+        clearInterval(interval);
+        const finalDice = Math.floor(Math.random() * 6) + 1;
+        setDiceValue(finalDice);
+        setIsRolling(false);
+        setDiceCount(prev => prev + 1);
+
+        // Start step-by-step token movement
+        moveTokenStepByStep(finalDice);
+      }
+    }, 80);
   };
 
-  // Submit challenge answer
+  // Step-by-step movement along the 16 board tiles
+  const moveTokenStepByStep = (stepsRemaining, startIdx = currentTileIdx) => {
+    setIsMoving(true);
+    let currentStep = 0;
+    let targetIdx = startIdx;
+
+    const stepInterval = setInterval(() => {
+      currentStep++;
+      targetIdx = (targetIdx + 1) % 16;
+      setCurrentTileIdx(targetIdx);
+      soundFX.playStep();
+
+      if (currentStep >= stepsRemaining) {
+        clearInterval(stepInterval);
+        setIsMoving(false);
+        // Landed on target tile!
+        handleLandedOnTile(targetIdx);
+      }
+    }, 280);
+  };
+
+  // Handle landing on a specific tile
+  const handleLandedOnTile = (tileIndex) => {
+    const tile = BOARD_TILES[tileIndex];
+    if (!tile) return;
+
+    // Check tile type
+    if (tile.type === 'landmark' || tile.type === 'finish') {
+      // Landmark challenge tile
+      if (claimedTiles.includes(tile.id)) {
+        // Already claimed earlier: Bonus visit
+        soundFX.playSparkle();
+        setTotalNauticalMiles(prev => prev + 100);
+        speakVietnameseVoice(`Bạn đã dừng chân tại ${tile.title}. Địa danh này đã được cắm cờ Tổ quốc, bạn nhận thêm 100 hải lý!`);
+      } else {
+        // Open question challenge with shuffled options
+        const shuffled = shuffleTileOptions(tile);
+        setActiveChallengeTile(shuffled);
+        setSelectedOption(null);
+        setIsAnswerChecked(false);
+        // Read question aloud
+        speakVietnameseVoice(shuffled.question);
+      }
+    } else if (tile.type === 'chance') {
+      // Chance tile
+      const randomEvent = tile.chanceEvents[Math.floor(Math.random() * tile.chanceEvents.length)];
+      soundFX.playSparkle();
+      setChanceModalInfo({
+        title: "CƠ HỘI LỊCH SỬ",
+        subtitle: "Thẻ may mắn hải trình",
+        text: randomEvent.text,
+        bonusMiles: randomEvent.bonusMiles,
+        forwardSteps: randomEvent.forwardSteps,
+        icon: 'gift'
+      });
+      speakVietnameseVoice(randomEvent.text);
+
+      if (randomEvent.bonusMiles) {
+        setTotalNauticalMiles(prev => prev + randomEvent.bonusMiles);
+      }
+    } else if (tile.type === 'fate') {
+      // Fate tile
+      const randomEvent = tile.fateEvents[Math.floor(Math.random() * tile.fateEvents.length)];
+      soundFX.playSparkle();
+      setChanceModalInfo({
+        title: "VẬN MỆNH LỊCH SỬ",
+        subtitle: "Sóng gió đại dương & Bản lĩnh thép",
+        text: randomEvent.text,
+        bonusMiles: randomEvent.bonusMiles,
+        forwardSteps: randomEvent.forwardSteps,
+        icon: 'compass'
+      });
+      speakVietnameseVoice(randomEvent.text);
+
+      if (randomEvent.bonusMiles) {
+        setTotalNauticalMiles(prev => prev + randomEvent.bonusMiles);
+      }
+    } else if (tile.type === 'supply') {
+      // Supply station
+      soundFX.playShipHorn();
+      setTotalNauticalMiles(prev => prev + 200);
+      setChanceModalInfo({
+        title: "TRẠM TIẾP TẾ SUEZ",
+        subtitle: "Bổ sung lương thực & nước ngọt",
+        text: tile.rewardText,
+        bonusMiles: 200,
+        forwardSteps: 0,
+        icon: 'anchor'
+      });
+      speakVietnameseVoice(tile.rewardText);
+    }
+  };
+
+  // Close Chance / Fate modal
+  const handleCloseChanceModal = () => {
+    stopVietnameseVoice();
+    const info = chanceModalInfo;
+    setChanceModalInfo(null);
+    if (info && info.forwardSteps > 0) {
+      // Advance additional steps as granted by the card
+      setTimeout(() => {
+        moveTokenStepByStep(info.forwardSteps, currentTileIdx);
+      }, 300);
+    }
+  };
+
+  // Submit challenge answer in question modal
   const handleAnswerSubmit = (optionIndex) => {
-    if (challengeOption !== null || !selectedPortModal) return;
-    setChallengeOption(optionIndex);
+    if (selectedOption !== null || !activeChallengeTile) return;
+    setSelectedOption(optionIndex);
     setIsAnswerChecked(true);
 
-    const isCorrect = optionIndex === selectedPortModal.stop.correctIndex;
+    const isCorrect = optionIndex === activeChallengeTile.correctIndex;
     setIsAnswerCorrect(isCorrect);
 
     if (isCorrect) {
       soundFX.playShipHorn();
       soundFX.playCorrect();
-      speakVietnameseVoice("Chính xác! Bạn đã chọn đúng. Con tàu đã cập cảng thành công.");
-      setGameScore(prev => prev + 300);
-      setTotalNauticalMiles(selectedPortModal.stop.nauticalMiles);
+      speakVietnameseVoice(`Chính xác! Bạn đã mở khóa và cắm cờ Tổ quốc thành công lên địa danh ${activeChallengeTile.title}.`);
+      
+      const newClaimed = [...claimedTiles, activeChallengeTile.id];
+      setClaimedTiles(newClaimed);
+      setTotalNauticalMiles(prev => prev + 350);
 
-      // If this is the current active stop, advance to next stop
-      if (selectedPortModal.index === currentStopIndex) {
-        const nextIdx = currentStopIndex + 1;
-        if (nextIdx < JOURNEY_STOPS.length) {
-          if (!visitedStops.includes(nextIdx)) {
-            setVisitedStops(prev => [...prev, nextIdx]);
-          }
-          setCurrentStopIndex(nextIdx);
-        } else {
-          // Reached Pác Bó - Victory!
+      // Check if finished final destination (Pac Bo) or claimed all
+      if (activeChallengeTile.id === 15 || newClaimed.length >= totalLandmarks) {
+        setTimeout(() => {
           setIsGrandFinale(true);
           soundFX.playVictory();
-          speakVietnameseVoice("Chúc mừng bạn đã hoàn thành xuất sắc hải trình ba mươi năm tìm đường cứu nước!");
+          speakVietnameseVoice("Chúc mừng bạn đã hoàn thành xuất sắc Bàn Cờ Hải Trình Vạn Dặm của Chủ tịch Hồ Chí Minh!");
           try {
             confetti({
-              particleCount: 150,
-              spread: 90,
-              origin: { y: 0.6 }
+              particleCount: 160,
+              spread: 100,
+              origin: { y: 0.55 }
             });
           } catch (e) {}
-        }
+        }, 1200);
       }
     } else {
       soundFX.playWrong();
-      const correctLetter = String.fromCharCode(65 + selectedPortModal.stop.correctIndex);
-      const correctText = selectedPortModal.stop.options[selectedPortModal.stop.correctIndex];
+      const correctLetter = String.fromCharCode(65 + activeChallengeTile.correctIndex);
+      const correctText = activeChallengeTile.options[activeChallengeTile.correctIndex];
       speakVietnameseVoice(`Chưa chính xác! Đáp án đúng là đáp án ${correctLetter}: ${correctText}.`);
     }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseChallengeModal = () => {
     stopVietnameseVoice();
-    setSelectedPortModal(null);
-    setChallengeOption(null);
+    setActiveChallengeTile(null);
+    setSelectedOption(null);
     setIsAnswerChecked(false);
   };
 
-  const handleRestartJourney = () => {
+  const handleRestartGame = () => {
     stopVietnameseVoice();
     soundFX.playShipHorn();
-    setCurrentStopIndex(0);
-    setVisitedStops([0]);
-    setSelectedPortModal(null);
-    setChallengeOption(null);
-    setIsAnswerChecked(false);
+    setCurrentTileIdx(0);
+    setClaimedTiles([0]);
     setTotalNauticalMiles(0);
-    setGameScore(0);
+    setDiceCount(0);
+    setDiceValue(1);
     setIsGrandFinale(false);
+    setActiveChallengeTile(null);
+    setChanceModalInfo(null);
   };
 
+  // Get current tile data
+  const currentTile = BOARD_TILES[currentTileIdx];
+
+  // Convert (row, col) into grid column & row classes for CSS Grid (5 cols x 5 rows)
+  // row: 0..4 (grid-row 1..5), col: 0..4 (grid-col 1..5)
+  const getGridStyle = (tile) => ({
+    gridRowStart: tile.row + 1,
+    gridColumnStart: tile.col + 1
+  });
+
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6">
       
-      {/* Header bar: Nautical Compass & Voyage Log */}
-      <div className="bg-[#17100a]/90 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-amber-600/30 shadow-xl flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-700 to-yellow-600 border border-amber-400/60 flex items-center justify-center shadow-lg text-stone-950">
-            <Compass className="w-6 h-6 animate-spin-slow text-yellow-200" />
+      {/* ================= HEADER BAR: STATS & DICE STATUS ================= */}
+      <div className="bg-[#17100a]/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border border-amber-600/40 shadow-xl flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center space-x-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center shadow-lg text-stone-950 font-black">
+            <Dices className="w-7 h-7 text-stone-950 animate-bounce" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-xs uppercase tracking-widest font-black text-amber-400 bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-500/40">
-                TRẠM {currentStopIndex + 1} / {JOURNEY_STOPS.length}
+                PHONG CÁCH BUSINESS TOUR
               </span>
-              <span className="text-xs text-stone-400 font-serif">Hành trình 30 năm (1911 - 1941)</span>
+              <span className="text-xs text-stone-400 font-serif">16 Ô Bàn Cờ Hải Trình 30 Năm</span>
             </div>
             <h3 className="text-base sm:text-lg font-serif font-bold text-amber-100 flex items-center gap-1.5 mt-0.5">
-              <span>Bản Đồ Hải Trình Vạn Dặm Tương Tác</span>
+              <span>Bàn Cờ Tỷ Phú Hải Trình Vạn Dặm</span>
             </h3>
           </div>
         </div>
 
-        {/* Nautical Progress stats */}
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        {/* Stats Pills */}
+        <div className="flex items-center space-x-2 sm:space-x-3">
           <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
-            <div className="text-[10px] text-stone-400 uppercase font-semibold">Hải lý tích lũy</div>
-            <div className="text-base font-black font-mono text-cyan-300">
+            <div className="text-[10px] text-stone-400 uppercase font-semibold">Cờ Tổ Quốc Đã Cắm</div>
+            <div className="text-sm sm:text-base font-black font-mono text-yellow-400 flex items-center justify-center space-x-1">
+              <span>🇻🇳</span>
+              <span>{totalClaimedLandmarks} / {totalLandmarks}</span>
+            </div>
+          </div>
+
+          <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
+            <div className="text-[10px] text-stone-400 uppercase font-semibold">Hải Lý Tích Lũy</div>
+            <div className="text-sm sm:text-base font-black font-mono text-cyan-300">
               {totalNauticalMiles.toLocaleString()} <span className="text-[10px] text-stone-400 font-normal">hl</span>
             </div>
           </div>
 
           <div className="bg-stone-900/90 border border-amber-900/60 px-3.5 py-1.5 rounded-2xl text-center shadow-inner">
-            <div className="text-[10px] text-stone-400 uppercase font-semibold">Điểm hải trình</div>
-            <div className="text-base font-black font-mono text-yellow-400">{gameScore}</div>
+            <div className="text-[10px] text-stone-400 uppercase font-semibold">Lượt Đổ</div>
+            <div className="text-sm sm:text-base font-black font-mono text-amber-200">
+              #{diceCount}
+            </div>
           </div>
 
           <button
-            onClick={handleRestartJourney}
+            onClick={handleRestartGame}
             className="p-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
-            title="Bắt đầu lại hải trình"
+            title="Làm mới lại bàn cờ"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* ================= INTERACTIVE VOYAGE MAP CANVAS ================= */}
-      <div className="relative w-full rounded-3xl overflow-hidden border-2 border-amber-600/50 shadow-2xl bg-[#0f171e] duocsang-card">
+      {/* ================= 16-TILE MONOPOLY BOARD (5x5 GRID) ================= */}
+      <div className="relative w-full aspect-square max-w-[820px] mx-auto p-2 sm:p-4 rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none">
         
-        {/* Ocean Background with Stylized Latitude / Longitude Grid */}
-        <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] min-h-[380px] sm:min-h-[460px] overflow-hidden select-none bg-gradient-to-b from-[#0a1118] via-[#0d1622] to-[#121c29]">
+        {/* Subtle Map Watermark Texture in background */}
+        <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
+
+        {/* 5x5 Grid Container */}
+        <div className="relative w-full h-full grid grid-cols-5 grid-rows-5 gap-1.5 sm:gap-2.5">
           
-          {/* Subtle Nautical Compass Rose in Background */}
-          <div className="absolute top-6 right-8 w-32 h-32 sm:w-48 sm:h-48 opacity-10 pointer-events-none text-amber-300">
-            <Compass className="w-full h-full animate-spin-slow" />
-          </div>
-
-          {/* Stylized Continents Outlines SVG & Nautical Route */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              {/* Glowing Route Gradient */}
-              <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f59e0b" />
-                <stop offset="50%" stopColor="#ef4444" />
-                <stop offset="100%" stopColor="#eab308" />
-              </linearGradient>
-
-              {/* Ocean Grid Pattern */}
-              <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(217, 119, 6, 0.07)" strokeWidth="0.2" />
-              </pattern>
-            </defs>
-
-            {/* Grid overlay */}
-            <rect width="100" height="100" fill="url(#grid)" />
-
-            {/* Approximate Silhouette of World Continents for Historical Maritime Atmosphere */}
-            {/* Eurasia / Africa / Americas soft decorative shapes */}
-            <path 
-              d="M 40,20 Q 55,15 75,22 Q 88,30 85,55 Q 75,70 65,55 Q 55,45 42,40 Z" 
-              fill="rgba(40, 55, 71, 0.35)" 
-              stroke="rgba(217, 119, 6, 0.25)" 
-              strokeWidth="0.3"
-            />
-            <path 
-              d="M 18,22 Q 32,20 35,38 Q 28,55 18,45 Z" 
-              fill="rgba(40, 55, 71, 0.3)" 
-              stroke="rgba(217, 119, 6, 0.2)" 
-              strokeWidth="0.3"
-            />
-            <path 
-              d="M 45,45 Q 55,45 52,65 Q 48,78 42,60 Z" 
-              fill="rgba(40, 55, 71, 0.25)" 
-              stroke="rgba(217, 119, 6, 0.2)" 
-              strokeWidth="0.3"
-            />
-
-            {/* Nautical Route Waypoint Line connecting stops */}
-            {JOURNEY_STOPS.map((stop, idx) => {
-              if (idx === 0) return null;
-              const prev = JOURNEY_STOPS[idx - 1];
-              const isPassed = visitedStops.includes(idx);
-              return (
-                <line
-                  key={idx}
-                  x1={`${prev.mapX}%`}
-                  y1={`${prev.mapY}%`}
-                  x2={`${stop.mapX}%`}
-                  y2={`${stop.mapY}%`}
-                  stroke={isPassed ? "url(#routeGradient)" : "rgba(120, 113, 108, 0.35)"}
-                  strokeWidth={isPassed ? "0.6" : "0.3"}
-                  strokeDasharray={isPassed ? "1, 0.6" : "0.8, 0.8"}
-                  className={isPassed ? "animate-pulse" : ""}
-                />
-              );
-            })}
-          </svg>
-
-          {/* Interactive Port Waypoint Pins */}
-          {JOURNEY_STOPS.map((stop, index) => {
-            const isCurrent = index === currentStopIndex;
-            const isUnlocked = visitedStops.includes(index);
-            const isPassed = isUnlocked && !isCurrent;
+          {/* RENDER THE 16 PERIMETER TILES */}
+          {BOARD_TILES.map((tile) => {
+            const isCurrentPos = currentTileIdx === tile.id;
+            const isClaimed = claimedTiles.includes(tile.id);
+            const isCorner = (tile.row === 0 && tile.col === 0) || 
+                             (tile.row === 0 && tile.col === 4) || 
+                             (tile.row === 4 && tile.col === 4) || 
+                             (tile.row === 4 && tile.col === 0);
 
             return (
               <div
-                key={stop.id}
-                style={{ left: `${stop.mapX}%`, top: `${stop.mapY}%` }}
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 z-20 group cursor-pointer"
-                onClick={() => handleOpenPort(stop, index)}
+                key={tile.id}
+                style={getGridStyle(tile)}
+                onClick={() => {
+                  if (tile.type === 'landmark' || tile.type === 'finish') {
+                    // Let user inspect tile info
+                    handleLandedOnTile(tile.id);
+                  }
+                }}
+                className={`relative rounded-xl sm:rounded-2xl border transition-all duration-300 flex flex-col justify-between p-1 sm:p-2.5 cursor-pointer overflow-hidden ${
+                  isCurrentPos 
+                    ? 'ring-4 ring-yellow-400 border-yellow-300 bg-gradient-to-b from-amber-800/90 to-amber-950 z-20 scale-[1.03] shadow-[0_0_20px_rgba(251,191,36,0.6)]' 
+                    : isClaimed
+                      ? 'border-emerald-500/80 bg-gradient-to-b from-[#1c2c1a] to-[#0f170e] hover:border-emerald-400'
+                      : tile.type === 'chance'
+                        ? 'border-amber-500/60 bg-gradient-to-b from-[#2e1908] to-[#1a0f05] hover:border-yellow-400'
+                        : tile.type === 'fate'
+                          ? 'border-purple-600/60 bg-gradient-to-b from-[#211129] to-[#120917] hover:border-purple-400'
+                          : tile.type === 'supply'
+                            ? 'border-cyan-600/60 bg-gradient-to-b from-[#0e222d] to-[#08131a] hover:border-cyan-400'
+                            : 'border-amber-900/50 bg-[#160d07]/90 hover:bg-[#24150b] hover:border-amber-600/70'
+                }`}
               >
-                {/* Pulsing Radar Ring for Active Port */}
-                {isCurrent && (
-                  <div className="absolute inset-0 -m-3 rounded-full bg-amber-400/30 animate-ping pointer-events-none" />
-                )}
+                {/* Tile Header Bar */}
+                <div className="flex items-center justify-between gap-1">
+                  <span className={`text-[8px] sm:text-[10px] font-mono font-bold px-1.5 py-0.2 rounded ${
+                    isCorner ? 'bg-amber-600 text-stone-950' : 'bg-black/50 text-amber-300'
+                  }`}>
+                    #{tile.id + 1}
+                  </span>
 
-                {/* Waypoint Marker Pin */}
-                <div className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl ${
-                  isCurrent
-                    ? 'bg-gradient-to-tr from-amber-600 to-yellow-400 border-2 border-yellow-200 text-stone-950 scale-110 shadow-amber-500/50'
-                    : isPassed
-                    ? 'bg-[#1b2b3a] border border-amber-400/80 text-yellow-400 hover:scale-105'
-                    : 'bg-stone-900/90 border border-stone-700 text-stone-500 opacity-70 hover:opacity-100'
-                }`}>
-                  {isCurrent ? (
-                    <Ship className="w-5 h-5 text-stone-950 animate-bounce" />
-                  ) : isPassed ? (
-                    <Check className="w-4 h-4 text-emerald-400" />
-                  ) : (
-                    <Anchor className="w-4 h-4 text-stone-400" />
+                  {/* Claimed Vietnamese Flag Badge */}
+                  {isClaimed && (tile.type === 'landmark' || tile.type === 'finish') && (
+                    <span className="text-[10px] sm:text-xs animate-bounce" title="Đã cắm cờ Việt Nam">
+                      🇻🇳
+                    </span>
                   )}
 
-                  {/* Stop Number Tag */}
-                  <span className={`absolute -bottom-2 -right-1 text-[9px] font-black font-mono px-1 rounded ${
-                    isCurrent ? 'bg-black text-yellow-300' : 'bg-stone-800 text-stone-300'
-                  }`}>
-                    #{index + 1}
-                  </span>
+                  {tile.type === 'chance' && (
+                    <span className="text-[10px] text-yellow-300">🎁</span>
+                  )}
+                  {tile.type === 'fate' && (
+                    <span className="text-[10px] text-purple-300">⚡</span>
+                  )}
+                  {tile.type === 'supply' && (
+                    <span className="text-[10px] text-cyan-300">⚓</span>
+                  )}
                 </div>
 
-                {/* Port Hover Tooltip */}
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:flex flex-col items-center pointer-events-none whitespace-nowrap z-30">
-                  <div className="px-3 py-1.5 rounded-xl bg-black/90 border border-amber-400/80 text-center shadow-2xl backdrop-blur-md">
-                    <div className="text-[11px] font-bold text-amber-200">{stop.city}</div>
-                    <div className="text-[9px] text-stone-400 font-serif">{stop.year} - {stop.country}</div>
-                  </div>
-                  <div className="w-2 h-2 bg-black border-r border-b border-amber-400 rotate-45 -mt-1" />
+                {/* Tile Main Content */}
+                <div className="my-auto text-center px-0.5 space-y-0.5 sm:space-y-1">
+                  {/* Landmark or Event Icon/Image thumbnail */}
+                  {tile.imageUrl ? (
+                    <div className="w-full aspect-[16/10] max-h-10 sm:max-h-14 rounded-md sm:rounded-lg overflow-hidden border border-amber-900/50 mx-auto hidden sm:block relative">
+                      <img src={tile.imageUrl} alt={tile.title} className="w-full h-full object-cover" />
+                      {isClaimed && (
+                        <div className="absolute inset-0 bg-emerald-950/40 backdrop-blur-[0.5px] flex items-center justify-center">
+                          <Check className="w-4 h-4 text-emerald-300" />
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 mx-auto rounded-full bg-black/40 border border-amber-500/40 flex items-center justify-center text-amber-300">
+                      {tile.type === 'chance' && <Gift className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-300" />}
+                      {tile.type === 'fate' && <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-300" />}
+                      {tile.type === 'supply' && <Anchor className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-300" />}
+                    </div>
+                  )}
+
+                  <h5 className="font-bold text-[9px] sm:text-xs text-amber-100 font-serif leading-tight line-clamp-1">
+                    {tile.title}
+                  </h5>
+                  <p className="text-[7px] sm:text-[9px] text-stone-400 font-serif line-clamp-1 hidden sm:block">
+                    {tile.subtitle || tile.country}
+                  </p>
                 </div>
+
+                {/* Tile Footer: Token Presence Indicator */}
+                {isCurrentPos && (
+                  <div className="w-full py-0.5 bg-yellow-400 text-stone-950 rounded text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-center flex items-center justify-center space-x-1 shadow animate-pulse">
+                    <Ship className="w-3 h-3 text-stone-950 fill-stone-950" />
+                    <span>TÀU Ở ĐÂY</span>
+                  </div>
+                )}
               </div>
             );
           })}
 
-          {/* Active Ship Status HUD at Map Bottom */}
-          <div className="absolute bottom-3 left-3 right-3 z-30 bg-[#121a22]/90 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-amber-500/40 shadow-xl flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-950/80 border border-amber-500/60 flex items-center justify-center text-yellow-300">
-                <Ship className="w-5 h-5" />
+          {/* ================= CENTER ARENA (THE BUSINESS TOUR STAGE: 3x3 CELLS) ================= */}
+          <div className="col-start-2 col-end-5 row-start-2 row-end-5 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#180e07]/95 via-[#120a05]/95 to-[#0a0503]/95 border-2 border-amber-600/40 shadow-inner p-3 sm:p-6 flex flex-col justify-between items-center text-center relative overflow-hidden">
+            
+            {/* Center Background Compass Rose graphic */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
+              <Compass className="w-80 h-80 text-amber-400" />
+            </div>
+
+            {/* Top Info of Center: Currently Stepped Location */}
+            <div className="w-full space-y-1">
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-[10px] sm:text-xs text-amber-300 font-serif">
+                <MapPin className="w-3 h-3 text-red-500 fill-red-500" />
+                <span>Vị trí hiện tại: <strong>{currentTile.title}</strong> (#{currentTileIdx + 1}/16)</span>
               </div>
-              <div>
-                <div className="text-[10px] text-amber-400 uppercase font-black tracking-wider">
-                  CẢNG ĐẾN HIỆN TẠI: #{currentStopIndex + 1}
+              <p className="text-[11px] sm:text-xs text-stone-300 font-serif italic max-w-md mx-auto line-clamp-1">
+                {currentTile.subtitle || currentTile.country || "Hải trình theo chân Bác"}
+              </p>
+            </div>
+
+            {/* Middle of Center: 3D Animated Dice Area */}
+            <div className="my-auto py-2 flex flex-col items-center justify-center space-y-3">
+              {/* The Dice Visual */}
+              <div className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-rose-900 border-2 border-yellow-300 shadow-[0_10px_25px_rgba(220,38,38,0.5)] flex items-center justify-center select-none ${
+                isRolling ? 'animate-spin' : 'hover:scale-105 transition-transform'
+              }`}>
+                {/* Dice Dots or Number */}
+                <div className="text-3xl sm:text-5xl font-black font-mono text-yellow-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                  {diceValue}
                 </div>
-                <div className="text-sm sm:text-base font-serif font-bold text-amber-100 flex items-center space-x-2">
-                  <span>{activePort.city}</span>
-                  <span className="text-xs text-stone-400 font-normal">({activePort.year})</span>
-                </div>
+
+                {/* Corner Stars of the dice */}
+                <span className="absolute top-1.5 left-1.5 text-[10px] text-yellow-300/80">★</span>
+                <span className="absolute bottom-1.5 right-1.5 text-[10px] text-yellow-300/80">★</span>
+              </div>
+
+              <div className="text-[11px] sm:text-xs text-amber-200/80 font-serif">
+                {isRolling ? "Xúc xắc đang lăn..." : isMoving ? "Tàu đang di chuyển từng bước..." : `Đã đổ được ${diceValue} bước`}
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            {/* Bottom of Center: BIG ROLL DICE BUTTON */}
+            <div className="w-full max-w-sm space-y-2">
               <button
-                onClick={() => handleOpenPort(activePort, currentStopIndex)}
-                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 font-black text-xs tracking-wider uppercase flex items-center space-x-2 shadow-lg hover:scale-105 active:scale-95 transition-all"
+                disabled={isRolling || isMoving || Boolean(activeChallengeTile)}
+                onClick={handleRollDice}
+                className={`w-full py-3 sm:py-3.5 px-6 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2.5 shadow-xl ${
+                  isRolling || isMoving
+                    ? 'bg-stone-800 text-stone-500 border border-stone-700 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-stone-950 border-2 border-yellow-200 shadow-amber-900/50 hover:scale-105 active:scale-95'
+                }`}
               >
-                <span>CẬP CẢNG & THỬ THÁCH</span>
-                <ArrowRight className="w-4 h-4" />
+                <Dices className={`w-5 h-5 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
+                <span>{isRolling ? "ĐANG LẮC XÚC XẮC..." : isMoving ? "ĐANG TIẾN VỀ PHÍA TRƯỚC..." : "LẮC XÚC XẮC (ROLL DICE)"}</span>
               </button>
+
+              <div className="text-[10px] sm:text-[11px] text-stone-400 font-serif">
+                Nhấp để tung xúc xắc và di chuyển con tàu quanh 16 ô địa danh lịch sử
+              </div>
             </div>
+
           </div>
 
         </div>
 
       </div>
 
-      {/* ================= VOYAGE TIMELINE STRIP ================= */}
-      <div className="p-4 rounded-3xl bg-[#1b120a]/80 border border-amber-900/60 space-y-3">
-        <div className="flex items-center justify-between text-xs text-amber-300 font-serif">
-          <span className="font-bold uppercase tracking-wider flex items-center space-x-1.5">
-            <Navigation className="w-4 h-4 text-amber-400" />
-            <span>Mốc Son Hải Trình (1911 - 1941)</span>
-          </span>
-          <span>Đã vượt qua: {visitedStops.length} / {JOURNEY_STOPS.length} trạm</span>
-        </div>
-
-        {/* Scrollable Waypoints Ribbon */}
-        <div className="flex items-center space-x-2.5 overflow-x-auto pb-2 pt-1 scrollbar-thin">
-          {JOURNEY_STOPS.map((stop, idx) => {
-            const isUnlocked = visitedStops.includes(idx);
-            const isCurrent = idx === currentStopIndex;
-            return (
-              <button
-                key={stop.id}
-                onClick={() => handleOpenPort(stop, idx)}
-                className={`flex-shrink-0 px-3.5 py-2 rounded-2xl border text-left transition-all ${
-                  isCurrent 
-                    ? 'bg-amber-950 border-amber-400 text-amber-200 ring-2 ring-amber-500/40 shadow-lg' 
-                    : isUnlocked 
-                    ? 'bg-stone-900/80 border-amber-800/60 text-stone-300 hover:border-amber-600' 
-                    : 'bg-stone-950 border-stone-800 text-stone-600 opacity-60'
-                }`}
-              >
-                <div className="text-[10px] font-mono text-amber-400 font-bold">Trạm #{idx + 1} - {stop.year}</div>
-                <div className="text-xs font-serif font-bold truncate max-w-[130px]">{stop.city}</div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ================= MODAL: PORT LOG & MARITIME CHALLENGE ================= */}
-      {selectedPortModal && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-          <div className="duocsang-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 border-2 border-amber-500/70 shadow-2xl relative space-y-5 max-h-[92vh] overflow-y-auto">
+      {/* ================= MODAL: LANDMARK CHALLENGE QUESTION ================= */}
+      {activeChallengeTile && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+          <div className="duocsang-card max-w-xl w-full rounded-3xl p-5 sm:p-8 border-2 border-amber-500/80 shadow-2xl relative space-y-5 max-h-[92vh] overflow-y-auto">
             
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-2xl bg-amber-950 border border-amber-400 flex items-center justify-center text-yellow-300">
-                  <MapPin className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-amber-600 border border-yellow-400 flex items-center justify-center text-yellow-300 shadow">
+                  <Flag className="w-5 h-5 fill-current" />
                 </div>
                 <div>
                   <span className="text-[10px] text-amber-400 uppercase font-black tracking-wider block">
-                    NHẬT KÝ HẢI TRÌNH - TRẠM #{selectedPortModal.index + 1}
+                    THỬ THÁCH CẮM CỜ DI SẢN (Ô #{activeChallengeTile.id + 1})
                   </span>
-                  <h4 className="text-base sm:text-lg font-serif font-bold text-amber-100">
-                    {selectedPortModal.stop.city} ({selectedPortModal.stop.year})
+                  <h4 className="text-sm sm:text-base font-serif font-bold text-amber-100">
+                    {activeChallengeTile.title} ({activeChallengeTile.country})
                   </h4>
                 </div>
               </div>
 
-              <button
-                onClick={handleCloseModal}
-                className="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Historical Photo & Narrative */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-              <div className="sm:col-span-5 h-44 rounded-2xl overflow-hidden border border-amber-600/40 bg-black shadow-md">
-                <img 
-                  src={selectedPortModal.stop.imageUrl} 
-                  alt={selectedPortModal.stop.city}
-                  className="w-full h-full object-cover" 
-                />
-              </div>
-
-              <div className="sm:col-span-7 space-y-2 text-xs font-serif leading-relaxed text-stone-200">
-                <div className="flex items-center space-x-2 text-[11px] text-amber-300 font-bold">
-                  <span>Vai trò: {selectedPortModal.stop.roleTitle}</span>
-                </div>
-                <p>{selectedPortModal.stop.narrative}</p>
-                <blockquote className="p-2.5 rounded-xl bg-amber-950/40 border-l-2 border-amber-500 text-[11px] italic text-amber-200 font-serif">
-                  {selectedPortModal.stop.quote}
-                </blockquote>
-              </div>
-            </div>
-
-            {/* Port Challenge: "Thử Thách Vượt Sóng Cập Cảng" */}
-            <div className="pt-2 border-t border-amber-900/60 space-y-3">
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-                  <Shield className="w-4 h-4 text-yellow-400" />
-                  <span>Thử Thách Cập Cảng Để Nhổ Neo Tiếp Tục Hải Trình</span>
-                </div>
+              {/* Re-read question & Close */}
+              <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => speakVietnameseVoice(selectedPortModal.stop.question)}
-                  className="px-2.5 py-1 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-yellow-300 hover:text-white transition-all flex items-center space-x-1.5 text-xs shadow-sm hover:scale-105"
+                  onClick={() => speakVietnameseVoice(activeChallengeTile.question)}
+                  className="px-2.5 py-1.5 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-yellow-300 hover:text-white transition-all flex items-center space-x-1.5 text-xs shadow-sm hover:scale-105"
                   title="Nghe lại câu hỏi"
                 >
                   <Volume2 className="w-3.5 h-3.5 text-yellow-400" />
                   <span className="font-serif">Đọc lại</span>
                 </button>
-              </div>
 
-              <p className="text-xs sm:text-sm font-serif font-semibold text-amber-100">
-                {selectedPortModal.stop.question}
+                <button
+                  onClick={handleCloseChallengeModal}
+                  className="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Milestone Narrative & Photo */}
+            <div className="p-3.5 rounded-2xl bg-stone-900/80 border border-amber-900/50 flex flex-col sm:flex-row items-center gap-3.5">
+              {activeChallengeTile.imageUrl && (
+                <div className="w-full sm:w-36 aspect-[4/3] rounded-xl overflow-hidden border border-amber-500/40 shrink-0 bg-black">
+                  <img 
+                    src={activeChallengeTile.imageUrl} 
+                    alt={activeChallengeTile.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="space-y-1 text-left flex-grow">
+                <div className="text-xs text-yellow-400 font-bold font-serif">{activeChallengeTile.roleTitle}</div>
+                <p className="text-xs text-stone-300 font-serif leading-relaxed line-clamp-3">
+                  {activeChallengeTile.narrative}
+                </p>
+                {activeChallengeTile.quote && (
+                  <p className="text-[11px] text-amber-200/90 font-serif italic border-l-2 border-amber-500 pl-2 mt-1">
+                    {activeChallengeTile.quote}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Question Text */}
+            <div className="space-y-2">
+              <div className="flex items-center space-x-1.5 text-xs font-bold uppercase tracking-wider text-amber-400">
+                <HelpCircle className="w-4 h-4 text-yellow-400" />
+                <span>Câu Hỏi Trắc Nghiệm Mở Khóa Địa Danh:</span>
+              </div>
+              <p className="text-sm sm:text-base text-amber-50 font-serif font-semibold leading-relaxed">
+                {activeChallengeTile.question}
               </p>
+            </div>
 
-              {/* Options */}
-              <div className="space-y-2 pt-1">
-                {selectedPortModal.stop.options.map((opt, idx) => {
-                  const isSelected = challengeOption === idx;
-                  const isCorrect = idx === selectedPortModal.stop.correctIndex;
-                  let style = "bg-stone-900/90 hover:bg-stone-800 border-stone-800 text-stone-200";
+            {/* Shuffled Options */}
+            <div className="space-y-2.5 pt-1">
+              {activeChallengeTile.options.map((option, idx) => {
+                const isSelected = selectedOption === idx;
+                const isCorrect = idx === activeChallengeTile.correctIndex;
+                let btnStyle = "bg-stone-900/90 hover:bg-stone-800 border-stone-800 text-stone-200";
 
-                  if (isAnswerChecked) {
-                    if (isCorrect) {
-                      style = "bg-emerald-950 border-emerald-500 text-emerald-200 ring-2 ring-emerald-500/50";
-                    } else if (isSelected && !isCorrect) {
-                      style = "bg-rose-950 border-rose-500 text-rose-200";
-                    } else {
-                      style = "bg-stone-900/40 border-stone-800 text-stone-500 opacity-60";
-                    }
+                if (isAnswerChecked) {
+                  if (isCorrect) {
+                    btnStyle = "bg-emerald-950 border-emerald-500 text-emerald-200 ring-2 ring-emerald-500/50";
+                  } else if (isSelected && !isCorrect) {
+                    btnStyle = "bg-rose-950 border-rose-500 text-rose-200";
+                  } else {
+                    btnStyle = "bg-stone-900/40 border-stone-800 text-stone-500 opacity-60";
                   }
+                }
 
-                  return (
-                    <button
-                      key={idx}
-                      disabled={isAnswerChecked}
-                      onClick={() => handleAnswerSubmit(idx)}
-                      className={`w-full p-3 rounded-2xl border text-left text-xs font-serif flex items-start space-x-3 transition-all ${style}`}
-                    >
-                      <span className="w-5 h-5 rounded-lg bg-black/50 border border-amber-600/40 flex items-center justify-center text-xs font-bold text-amber-300 flex-shrink-0 mt-0.5">
-                        {String.fromCharCode(65 + idx)}
-                      </span>
-                      <span className="flex-grow leading-relaxed">{opt}</span>
-                    </button>
-                  );
-                })}
-              </div>
+                return (
+                  <button
+                    key={idx}
+                    disabled={isAnswerChecked}
+                    onClick={() => handleAnswerSubmit(idx)}
+                    className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left text-xs sm:text-sm font-sans flex items-start space-x-3 transition-all ${btnStyle}`}
+                  >
+                    <span className="w-6 h-6 rounded-lg bg-black/40 border border-amber-600/40 flex items-center justify-center text-xs font-bold text-amber-300 flex-shrink-0 mt-0.5">
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="flex-grow font-serif leading-snug">{option}</span>
+                    {isAnswerChecked && isCorrect && (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    )}
+                    {isAnswerChecked && isSelected && !isCorrect && (
+                      <X className="w-5 h-5 text-rose-400 flex-shrink-0" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
-              {/* Feedback */}
-              {isAnswerChecked && (
-                <div className={`p-4 rounded-2xl border text-xs font-serif leading-relaxed animate-fadeIn ${
+            {/* Answer Result & Explanation */}
+            {isAnswerChecked && (
+              <div className="space-y-3 pt-2 animate-fadeIn">
+                <div className={`p-4 rounded-2xl border ${
                   isAnswerCorrect 
-                    ? 'bg-emerald-950/80 border-emerald-600/60 text-emerald-200' 
-                    : 'bg-rose-950/80 border-rose-600/60 text-rose-200'
+                    ? 'bg-emerald-950/70 border-emerald-600/60 text-emerald-200' 
+                    : 'bg-rose-950/70 border-rose-600/60 text-rose-200'
                 }`}>
-                  <div className="font-bold uppercase text-[11px] mb-1 flex items-center space-x-1.5">
+                  <div className="font-bold text-xs uppercase flex items-center space-x-1.5 mb-1">
                     {isAnswerCorrect ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                        <span>CHÍNH XÁC! TÀU ĐÃ CẬP CẢNG THÀNH CÔNG (+300 ĐIỂM)</span>
+                        <span>CHÍNH XÁC! ĐÃ CẮM CỜ VIỆT NAM (+350 HẢI LÝ)</span>
                       </>
                     ) : (
                       <>
-                        <X className="w-4 h-4 text-rose-400" />
-                        <span>CHƯA CHÍNH XÁC! HÃY NGHIÊN CỨU LẠI NHẬT KÝ</span>
+                        <AlertCircle className="w-4 h-4 text-rose-400" />
+                        <span>CHƯA ĐÚNG RỒI! HÃY THỬ LẠI Ở VÒNG SAU</span>
                       </>
                     )}
                   </div>
-                  <p>{selectedPortModal.stop.explanation}</p>
+                  <p className="text-xs font-serif leading-relaxed text-stone-200">
+                    {activeChallengeTile.explanation}
+                  </p>
                 </div>
-              )}
 
-              <div className="flex justify-end pt-2">
-                <button
-                  onClick={handleCloseModal}
-                  className="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 font-bold text-xs tracking-wider uppercase shadow-md hover:scale-105 transition-all"
-                >
-                  TIẾP TỤC HẢI TRÌNH
-                </button>
+                <div className="flex justify-end pt-1">
+                  <button
+                    onClick={handleCloseChallengeModal}
+                    className="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 font-bold text-xs tracking-wider uppercase shadow-md hover:scale-105 transition-all"
+                  >
+                    TIẾP TỤC ĐỔ XÚC XẮC
+                  </button>
+                </div>
               </div>
+            )}
 
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: CHANCE / FATE CARD ================= */}
+      {chanceModalInfo && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+          <div className="duocsang-card max-w-md w-full rounded-3xl p-6 sm:p-7 border-2 border-yellow-400 shadow-2xl space-y-4 text-center">
+            
+            <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-400 border border-yellow-200 flex items-center justify-center text-stone-950 shadow-lg animate-bounce">
+              {chanceModalInfo.icon === 'gift' && <Gift className="w-7 h-7 text-stone-950" />}
+              {chanceModalInfo.icon === 'compass' && <Compass className="w-7 h-7 text-stone-950" />}
+              {chanceModalInfo.icon === 'anchor' && <Anchor className="w-7 h-7 text-stone-950" />}
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[10px] text-amber-400 uppercase font-black tracking-wider block">
+                {chanceModalInfo.subtitle}
+              </span>
+              <h4 className="text-lg font-serif font-bold text-yellow-300">
+                {chanceModalInfo.title}
+              </h4>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-black/60 border border-amber-600/40 text-xs sm:text-sm font-serif text-stone-200 leading-relaxed">
+              {chanceModalInfo.text}
+            </div>
+
+            {chanceModalInfo.bonusMiles > 0 && (
+              <div className="text-xs font-bold text-cyan-300 font-mono">
+                ✨ Thưởng hải lý: +{chanceModalInfo.bonusMiles} hl
+              </div>
+            )}
+
+            <div className="pt-2">
+              <button
+                onClick={handleCloseChanceModal}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-all"
+              >
+                NHẬN THƯỞNG & ĐI TIẾP
+              </button>
             </div>
 
           </div>
         </div>
       )}
 
-      {/* ================= MODAL: GRAND FINALE (REACHED PÁC BÓ) ================= */}
+      {/* ================= MODAL: GRAND FINALE (REACHED PÁC BÓ & COMPLETED) ================= */}
       {isGrandFinale && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
           <div className="duocsang-card max-w-xl w-full rounded-3xl p-6 sm:p-8 border-2 border-yellow-400 shadow-2xl text-center space-y-5">
@@ -770,27 +1065,31 @@ export default function HaiTrinhVanDamGame() {
             </div>
 
             <div className="space-y-1">
-              <span className="text-xs uppercase font-black tracking-widest text-amber-400 bg-amber-950 px-3 py-1 rounded-full border border-amber-500">
-                VINH DANH ĐẠI HOA TIÊU LỊCH SỬ
+              <span className="text-xs uppercase tracking-widest text-yellow-400 font-bold">
+                HOÀN THÀNH XUẤT SẮC BÀN CỜ HẢI TRÌNH
               </span>
-              <h3 className="text-xl sm:text-2xl font-serif font-black text-amber-100 pt-2">
-                HẢI TRÌNH 30 NĂM ĐÃ HOÀN TẤT VẺ VANG!
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-amber-100">
+                30 Năm Bôn Ba Tìm Đường Cứu Nước
               </h3>
-              <p className="text-xs text-stone-300 font-serif leading-relaxed max-w-md mx-auto pt-1">
-                Chúc mừng bạn đã vượt qua toàn bộ 10 mốc son lịch sử trên khắp thế giới để cùng Người trở về Pác Bó (Cao Bằng) - nơi bình minh độc lập bắt đầu bừng sáng!
-              </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-600/50 text-xs italic text-amber-200 font-serif leading-relaxed">
-              “Sáng ra bờ suối, tối vào hang / Cháo bẹ rau măng vẫn sẵn sàng / Bàn đá chông chênh dịch sử Đảng / Cuộc đời cách mạng thật là sang.”
+            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-700/50 text-xs sm:text-sm text-stone-200 font-serif leading-relaxed space-y-2">
+              <p>
+                Từ người thanh niên Văn Ba mang trong mình bầu nhiệt huyết tại Bến Nhà Rồng năm 1911, trải qua muôn vàn gian nan khắp năm châu bốn biển, Bác Hồ đã trở về Pác Bó (1941) mang lại ánh sáng độc lập tự do cho Tổ quốc!
+              </p>
+              <div className="flex justify-center space-x-4 pt-2 font-mono text-xs">
+                <span className="text-yellow-300 font-bold">🚩 Cắm cờ: {totalClaimedLandmarks} địa danh</span>
+                <span className="text-cyan-300 font-bold">⚓ Tổng: {totalNauticalMiles.toLocaleString()} hải lý</span>
+              </div>
             </div>
 
             <div className="flex justify-center space-x-3 pt-2">
               <button
-                onClick={handleRestartJourney}
-                className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 font-black text-xs tracking-wider uppercase shadow-xl hover:scale-105 transition-all"
+                onClick={handleRestartGame}
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all flex items-center space-x-2"
               >
-                KHÁM PHÁ LẠI TỪ ĐẦU
+                <RotateCcw className="w-4 h-4" />
+                <span>CHƠI LẠI VÒNG MỚI</span>
               </button>
             </div>
           </div>
