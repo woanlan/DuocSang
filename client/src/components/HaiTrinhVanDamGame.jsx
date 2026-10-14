@@ -409,6 +409,7 @@ export default function HaiTrinhVanDamGame() {
   const [diceValue, setDiceValue] = useState(1); // 1 to 6
   const [isRolling, setIsRolling] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
+  const [isWaitingChallenge, setIsWaitingChallenge] = useState(false);
   const [diceTransform, setDiceTransform] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
 
   // Modals
@@ -437,7 +438,7 @@ export default function HaiTrinhVanDamGame() {
 
   // ================= ULTRA SMOOTH 3D DECELERATING DICE ROLL =================
   const handleRollDice = () => {
-    if (isRolling || isMoving || activeChallengeTile || chanceModalInfo || isGrandFinale) return;
+    if (isRolling || isMoving || isWaitingChallenge || activeChallengeTile || chanceModalInfo || isGrandFinale) return;
 
     stopVietnameseVoice();
     setIsRolling(true);
@@ -491,8 +492,12 @@ export default function HaiTrinhVanDamGame() {
       if (currentStep >= stepsRemaining) {
         clearInterval(stepInterval);
         setIsMoving(false);
-        // Landed on target tile!
-        handleLandedOnTile(targetIdx);
+        // Landed on target tile! Wait 2 seconds for player to observe before showing question
+        setIsWaitingChallenge(true);
+        setTimeout(() => {
+          setIsWaitingChallenge(false);
+          handleLandedOnTile(targetIdx);
+        }, 2000);
       }
     }, 280);
   };
@@ -639,6 +644,7 @@ export default function HaiTrinhVanDamGame() {
     setTotalNauticalMiles(0);
     setDiceCount(0);
     setDiceValue(1);
+    setIsWaitingChallenge(false);
     setIsGrandFinale(false);
     setActiveChallengeTile(null);
     setChanceModalInfo(null);
@@ -994,23 +1000,29 @@ export default function HaiTrinhVanDamGame() {
               </div>
 
               <div className="text-[9px] sm:text-[11px] text-amber-200/90 font-serif leading-none">
-                {isRolling ? "Đang lắc xúc xắc..." : isMoving ? "Bác Hồ đang di chuyển..." : `Đã đổ được ${diceValue} bước`}
+                {isRolling 
+                  ? "Đang lắc xúc xắc..." 
+                  : isMoving 
+                    ? "Bác Hồ đang di chuyển..." 
+                    : isWaitingChallenge 
+                      ? "Đã đến địa danh! Chuẩn bị mở câu hỏi..." 
+                      : `Đã đổ được ${diceValue} bước`}
               </div>
             </div>
 
             {/* Bottom of Center: BIG ROLL DICE BUTTON */}
             <div className="w-full max-w-xs space-y-1">
               <button
-                disabled={isRolling || isMoving || Boolean(activeChallengeTile)}
+                disabled={isRolling || isMoving || isWaitingChallenge || Boolean(activeChallengeTile)}
                 onClick={handleRollDice}
                 className={`w-full py-2 sm:py-2.5 px-4 rounded-xl font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-1.5 shadow-lg ${
-                  isRolling || isMoving
+                  isRolling || isMoving || isWaitingChallenge
                     ? 'bg-stone-800 text-stone-500 border border-stone-700 cursor-not-allowed'
                     : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-stone-950 border border-yellow-200 shadow-amber-900/50 hover:scale-105 active:scale-95'
                 }`}
               >
                 <Dices className={`w-4 h-4 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
-                <span>{isRolling ? "ĐANG LẮC..." : isMoving ? "TIẾN BƯỚC..." : "LẮC XÚC XẮC"}</span>
+                <span>{isRolling ? "ĐANG LẮC..." : isMoving ? "TIẾN BƯỚC..." : isWaitingChallenge ? "CHUẨN BỊ..." : "LẮC XÚC XẮC"}</span>
               </button>
 
               <div className="text-[8px] sm:text-[9px] text-stone-400 font-serif leading-none truncate">
