@@ -686,6 +686,7 @@ export default function ManhGhepBiAnGame() {
         tileName: tile.name,
         desc: tile.behindDescription
       });
+      speakVietnameseVoice(`Chi tiết tư liệu: ${tile.behindDescription}`);
       return;
     }
 
@@ -694,6 +695,8 @@ export default function ManhGhepBiAnGame() {
     setSelectedOption(null);
     setShowQuestionResult(false);
     setGuessFeedback(null);
+    // Read the question aloud immediately
+    speakVietnameseVoice(tile.question);
   };
 
   // Answer tile challenge
@@ -1125,12 +1128,23 @@ export default function ManhGhepBiAnGame() {
                 </div>
               </div>
 
-              <button
-                onClick={handleCloseQuestionModal}
-                className="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => speakVietnameseVoice(activeTile.question)}
+                  className="px-2.5 py-1.5 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-yellow-300 hover:text-white transition-all flex items-center space-x-1.5 text-xs shadow-sm hover:scale-105"
+                  title="Nghe lại câu hỏi"
+                >
+                  <Volume2 className="w-3.5 h-3.5 text-yellow-400" />
+                  <span className="font-serif">Đọc lại</span>
+                </button>
+
+                <button
+                  onClick={handleCloseQuestionModal}
+                  className="text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Question Text */}

@@ -289,6 +289,8 @@ export default function HaiTrinhVanDamGame() {
     setSelectedPortModal({ stop, index });
     setChallengeOption(null);
     setIsAnswerChecked(false);
+    // Read the harbor challenge question aloud immediately
+    speakVietnameseVoice(stop.question);
   };
 
   // Submit challenge answer
@@ -648,9 +650,19 @@ export default function HaiTrinhVanDamGame() {
 
             {/* Port Challenge: "Thử Thách Vượt Sóng Cập Cảng" */}
             <div className="pt-2 border-t border-amber-900/60 space-y-3">
-              <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-                <Shield className="w-4 h-4 text-yellow-400" />
-                <span>Thử Thách Cập Cảng Để Nhổ Neo Tiếp Tục Hải Trình</span>
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400">
+                  <Shield className="w-4 h-4 text-yellow-400" />
+                  <span>Thử Thách Cập Cảng Để Nhổ Neo Tiếp Tục Hải Trình</span>
+                </div>
+                <button
+                  onClick={() => speakVietnameseVoice(selectedPortModal.stop.question)}
+                  className="px-2.5 py-1 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-yellow-300 hover:text-white transition-all flex items-center space-x-1.5 text-xs shadow-sm hover:scale-105"
+                  title="Nghe lại câu hỏi"
+                >
+                  <Volume2 className="w-3.5 h-3.5 text-yellow-400" />
+                  <span className="font-serif">Đọc lại</span>
+                </button>
               </div>
 
               <p className="text-xs sm:text-sm font-serif font-semibold text-amber-100">
