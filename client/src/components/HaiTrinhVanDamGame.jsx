@@ -780,11 +780,40 @@ export default function HaiTrinhVanDamGame() {
                   </p>
                 </div>
 
-                {/* Tile Footer: Token Presence Indicator */}
+                {/* ================= BUSINESS TOUR 3D CHARACTER TOKEN: BÁC HỒ ================= */}
                 {isCurrentPos && (
-                  <div className="w-full py-0.5 bg-yellow-400 text-stone-950 rounded text-[8px] sm:text-[10px] font-black uppercase tracking-wider text-center flex items-center justify-center space-x-1 shadow animate-pulse">
-                    <Ship className="w-3 h-3 text-stone-950 fill-stone-950" />
-                    <span>TÀU Ở ĐÂY</span>
+                  <div className="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none">
+                    {/* Character Token Container with Jump/Hop Animation */}
+                    <div className={`relative flex flex-col items-center transition-all duration-300 ${
+                      isMoving ? 'scale-125 -translate-y-3.5 sm:-translate-y-5 drop-shadow-[0_15px_15px_rgba(0,0,0,0.8)]' : 'scale-105 translate-y-0'
+                    }`}>
+                      
+                      {/* Name Tag Badge Pill */}
+                      <div className="px-2 py-0.5 rounded-full bg-gradient-to-r from-red-700 via-amber-600 to-red-700 text-yellow-200 border-2 border-yellow-300 text-[8px] sm:text-[10px] font-black uppercase tracking-wider shadow-[0_4px_10px_rgba(0,0,0,0.6)] mb-0.5 flex items-center space-x-1 animate-pulse shrink-0">
+                        <span className="text-yellow-300 text-[8px]">★</span>
+                        <span>BÁC HỒ</span>
+                        <span className="text-yellow-300 text-[8px]">★</span>
+                      </div>
+
+                      {/* 3D Round Standee Token of Uncle Ho with Golden Rim */}
+                      <div className="relative w-11 h-11 sm:w-16 sm:h-16 rounded-full p-0.5 sm:p-1 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 shadow-[0_6px_25px_rgba(251,191,36,0.95)] ring-2 sm:ring-4 ring-red-600/90 flex items-center justify-center">
+                        <div className="w-full h-full rounded-full overflow-hidden bg-stone-900 border border-yellow-200">
+                          <img 
+                            src="/images/ho-chi-minh-portrait.jpg" 
+                            alt="Bác Hồ kính yêu" 
+                            className="w-full h-full object-cover object-top scale-105"
+                          />
+                        </div>
+
+                        {/* Gold Star Pin on avatar */}
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-red-600 border border-yellow-300 flex items-center justify-center text-[8px] sm:text-[10px] text-yellow-300 font-bold shadow-md">
+                          ★
+                        </div>
+                      </div>
+
+                      {/* 3D Standee Pedestal / Glowing Spotlight at base */}
+                      <div className="w-8 sm:w-14 h-2 sm:h-3 rounded-full bg-yellow-400/80 blur-[2px] mt-0.5 animate-pulse" />
+                    </div>
                   </div>
                 )}
               </div>
@@ -799,15 +828,35 @@ export default function HaiTrinhVanDamGame() {
               <Compass className="w-80 h-80 text-amber-400" />
             </div>
 
-            {/* Top Info of Center: Currently Stepped Location */}
-            <div className="w-full space-y-1">
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-[10px] sm:text-xs text-amber-300 font-serif">
-                <MapPin className="w-3 h-3 text-red-500 fill-red-500" />
-                <span>Vị trí hiện tại: <strong>{currentTile.title}</strong> (#{currentTileIdx + 1}/16)</span>
+            {/* Top of Center: Business Tour Character Showcase (Bác Hồ) */}
+            <div className="w-full max-w-md flex items-center justify-between gap-2.5 px-3 py-2 rounded-2xl bg-gradient-to-r from-stone-950/90 via-amber-950/80 to-stone-950/90 border border-amber-500/60 shadow-lg">
+              <div className="flex items-center space-x-2.5">
+                <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 shadow-md shrink-0">
+                  <img 
+                    src="/images/ho-chi-minh-portrait.jpg" 
+                    alt="Bác Hồ" 
+                    className="w-full h-full rounded-full object-cover object-top"
+                  />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-red-600 border border-yellow-300 flex items-center justify-center text-[7px] text-yellow-300 font-bold">
+                    ★
+                  </span>
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-[9px] sm:text-[10px] uppercase font-bold text-amber-400 tracking-wider">Nhân Vật Hải Trình</span>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-red-900 text-yellow-300 font-bold border border-yellow-400/50">Đại Hoa Tiêu</span>
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-bold text-yellow-100 font-serif leading-tight">Chủ tịch Hồ Chí Minh</h4>
+                </div>
               </div>
-              <p className="text-[11px] sm:text-xs text-stone-300 font-serif italic max-w-md mx-auto line-clamp-1">
-                {currentTile.subtitle || currentTile.country || "Hải trình theo chân Bác"}
-              </p>
+
+              {/* Current tile pill */}
+              <div className="text-right">
+                <div className="text-[9px] text-stone-400 font-serif">Đang dừng tại:</div>
+                <div className="text-[11px] sm:text-xs font-bold text-yellow-400 font-serif line-clamp-1">
+                  {currentTile.title}
+                </div>
+              </div>
             </div>
 
             {/* Middle of Center: 3D Animated Dice Area */}
@@ -827,7 +876,7 @@ export default function HaiTrinhVanDamGame() {
               </div>
 
               <div className="text-[11px] sm:text-xs text-amber-200/80 font-serif">
-                {isRolling ? "Xúc xắc đang lăn..." : isMoving ? "Tàu đang di chuyển từng bước..." : `Đã đổ được ${diceValue} bước`}
+                {isRolling ? "Xúc xắc đang lăn..." : isMoving ? "Bác Hồ đang di chuyển từng bước..." : `Đã đổ được ${diceValue} bước`}
               </div>
             </div>
 
@@ -847,7 +896,7 @@ export default function HaiTrinhVanDamGame() {
               </button>
 
               <div className="text-[10px] sm:text-[11px] text-stone-400 font-serif">
-                Nhấp để tung xúc xắc và di chuyển con tàu quanh 16 ô địa danh lịch sử
+                Nhấp để tung xúc xắc và đồng hành cùng Bác Hồ qua 16 ô địa danh lịch sử
               </div>
             </div>
 
