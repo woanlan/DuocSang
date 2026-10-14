@@ -14,6 +14,8 @@ import {
   saveGameScoreApi, 
   fetchLeaderboardApi 
 } from '../services/api';
+import ManhGhepBiAnGame from './ManhGhepBiAnGame';
+import HaiTrinhVanDamGame from './HaiTrinhVanDamGame';
 
 // ================= WEB AUDIO API SOUND SYNTHESIZER =================
 class GameSoundFX {
@@ -606,6 +608,9 @@ const OPTION_STYLES = [
 const TOTAL_QUESTION_TIME = 35; // 35 seconds per question
 
 export default function OngVangGame() {
+  // Active minigame mode: 'puzzle' (Lật mảnh ghép 6 lá cờ) | 'journey' (Bản đồ hải trình) | 'quiz' (Đố vui 35s)
+  const [activeGameTab, setActiveGameTab] = useState('puzzle');
+
   // Game state: 'start' | 'playing' | 'gameover'
   const [gameState, setGameState] = useState('start');
   const [selectedTotalQuestions, setSelectedTotalQuestions] = useState(10);
@@ -1062,22 +1067,80 @@ export default function OngVangGame() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/60 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2 shadow-md">
             <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-            <span>ĐẤU TRƯỜNG QUIZ LỊCH SỬ • NHÌN ẢNH ĐOÁN SỰ KIỆN CÓ GIỌNG NÓI</span>
+            <span>KHU VỰC MINI GAME LỊCH SỬ • TƯƠNG TÁC ĐA DẠNG</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#f5efe6] tracking-tight">
             Đấu Trường Tri Thức Bác Hồ
           </h2>
           <p className="text-stone-300/80 mt-2 text-sm sm:text-base font-serif max-w-2xl mx-auto">
-            Khám phá kho ảnh tư liệu vô giá về Chủ tịch Hồ Chí Minh, lắng nghe giọng nói thuyết minh và chọn đáp án chính xác trong 4 phương án!
+            Lựa chọn trò chơi bạn yêu thích: lật mở 6 lá cờ bí ẩn, thám hiểm hải trình 30 năm trên bản đồ, hoặc thử thách phản xạ với đố vui tốc độ!
           </p>
         </div>
 
-        {/* ================= SCREEN 1: START SCREEN ================= */}
-        {gameState === 'start' && (
-          <div className="duocsang-card rounded-[32px] p-6 sm:p-10 border-2 border-amber-600/50 shadow-2xl space-y-8 animate-fadeIn relative overflow-hidden">
+        {/* ================= 3 MINI GAME NAVIGATION TABS ================= */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mb-8">
+          
+          {/* Tab 1: Mảnh ghép tư liệu bí ẩn (6 lá cờ VN) */}
+          <button
+            onClick={() => {
+              soundFX.playFlip();
+              setActiveGameTab('puzzle');
+            }}
+            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+              activeGameTab === 'puzzle'
+                ? 'bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-stone-950 ring-2 ring-yellow-400 shadow-red-950/70 scale-105'
+                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+            }`}
+          >
+            <Flag className={`w-4 h-4 ${activeGameTab === 'puzzle' ? 'text-yellow-300 fill-yellow-300 animate-bounce' : 'text-amber-400'}`} />
+            <span>1. Lật Mảnh Ghép (6 Lá Cờ VN & Đoán Ngay)</span>
+          </button>
+
+          {/* Tab 2: Bản đồ hải trình vạn dặm */}
+          <button
+            onClick={() => {
+              soundFX.playShipHorn();
+              setActiveGameTab('journey');
+            }}
+            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+              activeGameTab === 'journey'
+                ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 ring-2 ring-yellow-400 shadow-amber-950/70 scale-105'
+                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+            }`}
+          >
+            <Compass className={`w-4 h-4 ${activeGameTab === 'journey' ? 'text-stone-950 animate-spin-slow' : 'text-amber-400'}`} />
+            <span>2. Bản Đồ Hải Trình Vạn Dặm Tương Tác</span>
+          </button>
+
+          {/* Tab 3: Đố vui tốc độ 35s */}
+          <button
+            onClick={() => {
+              soundFX.playFlip();
+              setActiveGameTab('quiz');
+            }}
+            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+              activeGameTab === 'quiz'
+                ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 ring-2 ring-yellow-400 shadow-amber-950/70 scale-105'
+                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+            }`}
+          >
+            <Zap className={`w-4 h-4 ${activeGameTab === 'quiz' ? 'text-stone-950 fill-stone-950' : 'text-yellow-400 fill-yellow-400'}`} />
+            <span>3. Đố Vui Tốc Độ 35s & Điểm Lùi</span>
+          </button>
+
+        </div>
+
+        {/* Content based on selected Tab */}
+        {activeGameTab === 'puzzle' && <ManhGhepBiAnGame />}
+        {activeGameTab === 'journey' && <HaiTrinhVanDamGame />}
+        {activeGameTab === 'quiz' && (
+          <>
+            {/* ================= SCREEN 1: START SCREEN ================= */}
+            {gameState === 'start' && (
+              <div className="duocsang-card rounded-[32px] p-6 sm:p-10 border-2 border-amber-600/50 shadow-2xl space-y-8 animate-fadeIn relative overflow-hidden">
             
             {/* Top Bar: Profile & Leaderboard */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-amber-900/40">
@@ -1725,6 +1788,8 @@ export default function OngVangGame() {
             </div>
 
           </div>
+        )}
+        </>
         )}
 
       </div>
