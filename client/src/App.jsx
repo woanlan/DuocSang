@@ -176,7 +176,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#160e08] text-stone-200 flex flex-col font-sans selection:bg-amber-500 selection:text-stone-950">
+    <div className="min-h-screen bg-[#160e08] text-stone-200 flex flex-col font-sans selection:bg-amber-500 selection:text-stone-950 w-full max-w-[100vw] overflow-x-hidden">
       
       {/* Top Navigation Bar with "Đuốc Sáng" Brand */}
       <Navbar 
@@ -185,7 +185,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
       />
 
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden">
         {/* Hero Section matching the user's uploaded mockup */}
         <HeroSection onExplore={() => handleNavigate('timeline')} />
 
