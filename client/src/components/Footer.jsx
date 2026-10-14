@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flame, Heart, ArrowUp } from 'lucide-react';
+import { Flame, Heart, ArrowUp, ShieldCheck } from 'lucide-react';
 
-export default function Footer({ onNavigate }) {
+export default function Footer({ onNavigate, onOpenAdmin }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -95,15 +95,26 @@ export default function Footer({ onNavigate }) {
 
         </div>
 
-        {/* Bottom Credits */}
+        {/* Bottom Credits & Hidden Admin Access */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-4">
           <p className="font-serif">
             Đời đời nhớ ơn Chủ tịch Hồ Chí Minh vĩ đại!
           </p>
-          <p className="flex items-center space-x-1 font-sans">
-            <span>Dự án Đuốc Sáng • Xây dựng với niềm tự hào dân tộc</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
-          </p>
+          <div className="flex items-center space-x-3 font-sans">
+            <span className="flex items-center space-x-1">
+              <span>Dự án Đuốc Sáng • Xây dựng với niềm tự hào dân tộc</span>
+              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+            </span>
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="text-stone-600 hover:text-amber-400 p-1 rounded-lg transition-colors"
+                title="Khu vực Quản trị viên"
+              >
+                <ShieldCheck className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
 
       </div>

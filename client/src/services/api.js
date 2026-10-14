@@ -252,3 +252,113 @@ export const fetchLeaderboardApi = async () => {
   ];
 };
 
+// ================= ADMIN API FUNCTIONS =================
+export const adminLoginApi = async (username, password) => {
+  const res = await fetch('/api/admin/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+  return res.json();
+};
+
+export const adminUploadImageApi = async (file, token) => {
+  const formData = new FormData();
+  formData.append('image', file);
+  const res = await fetch('/api/admin/upload', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    body: formData
+  });
+  return res.json();
+};
+
+export const adminFetchMultimediaApi = async (token) => {
+  const res = await fetch('/api/admin/multimedia', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+
+export const adminAddMultimediaApi = async (data, token) => {
+  const res = await fetch('/api/admin/multimedia', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const adminDeleteMultimediaApi = async (id, token) => {
+  const res = await fetch(`/api/admin/multimedia/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+
+export const adminAddStoryApi = async (data, token) => {
+  const res = await fetch('/api/admin/stories', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const adminDeleteStoryApi = async (id, token) => {
+  const res = await fetch(`/api/admin/stories/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+
+export const adminAddTimelineApi = async (data, token) => {
+  const res = await fetch('/api/admin/timeline', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const adminDeleteTimelineApi = async (id, token) => {
+  const res = await fetch(`/api/admin/timeline/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+
+export const adminAddTeachingApi = async (data, token) => {
+  const res = await fetch('/api/admin/teachings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+};
+
+export const adminDeleteTributeApi = async (id, token) => {
+  const res = await fetch(`/api/admin/tributes/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  return res.json();
+};
+

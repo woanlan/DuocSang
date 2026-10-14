@@ -1,13 +1,24 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 import apiRoutes from './routes/api.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsDir = path.join(__dirname, 'public/uploads');
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
+
+// Static file serving for uploads
+app.use('/uploads', express.static(uploadsDir));
 
 // Request logger
 app.use((req, res, next) => {
@@ -16,14 +27,8 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/api/admin', adminRoutes);
 app.use('/api', apiRoutes);
-
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const clientDist = path.join(__dirname, '../client/dist');
 
 // Serve built frontend files in production

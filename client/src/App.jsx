@@ -10,6 +10,7 @@ import GallerySection from './components/GallerySection';
 import TributeSection from './components/TributeSection';
 import Footer from './components/Footer';
 import SearchModal from './components/SearchModal';
+import AdminModal from './components/AdminModal';
 
 import {
   fetchTimeline,
@@ -43,6 +44,18 @@ export default function App() {
   const [selectedStory, setSelectedStory] = useState(null);
   const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+
+  // Check URL path /admin or #admin on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const pathname = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (pathname.includes('/admin') || hash.includes('admin')) {
+        setIsAdminOpen(true);
+      }
+    }
+  }, []);
 
   // Load all data on mount
   useEffect(() => {
@@ -216,8 +229,11 @@ export default function App() {
         />
       </main>
 
-      {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
+      {/* Footer with discreet Admin Icon access */}
+      <Footer 
+        onNavigate={handleNavigate} 
+        onOpenAdmin={() => setIsAdminOpen(true)}
+      />
 
       {/* Story Details & TTS Audio Modal */}
       <StoryModal 
@@ -237,6 +253,12 @@ export default function App() {
         onSelectEra={(idx) => {
           handleNavigate('timeline');
         }}
+      />
+
+      {/* Full Admin Management Modal */}
+      <AdminModal 
+        isOpen={isAdminOpen}
+        onClose={() => setIsAdminOpen(false)}
       />
     </div>
   );
