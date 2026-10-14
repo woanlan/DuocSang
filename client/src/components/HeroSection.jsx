@@ -8,77 +8,79 @@ export default function HeroSection({ onExplore }) {
   return (
     <section 
       id="hero" 
-      className="relative w-full flex items-center justify-center overflow-hidden bg-[#120a05] pt-14 xs:pt-16 sm:pt-20 pb-4 sm:pb-8"
+      className="relative w-full overflow-hidden bg-[#120a05] select-none"
     >
-      {/* Banner Container: Preserves 100% of the full panoramic artwork on ALL devices (Mobile, Tablet, Desktop) */}
-      <div className="relative w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6">
-        <div className="relative w-full rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-600/40 shadow-2xl bg-black">
-          
-          {/* Authentic Full Artwork: Natural height so Bác Hồ (left), Soldiers & Flag (right), and Lăng Bác (bottom) are NEVER cropped */}
-          <img 
-            src={bannerCustom} 
-            alt="Hành trình Dựng nước - Cứu nước của Bác Hồ" 
-            className="w-full h-auto block select-none pointer-events-none"
-          />
+      {/* 100% Full-bleed Edge-to-Edge Panoramic Artwork */}
+      <div className="relative w-full select-none overflow-hidden">
+        <img 
+          src={bannerCustom} 
+          alt="Hành trình Dựng nước - Cứu nước của Bác Hồ" 
+          className="w-full h-auto block select-none pointer-events-none"
+        />
 
-          {/* Atmospheric gentle vignette */}
-          <div className="absolute inset-0 bg-radial-gradient opacity-15 pointer-events-none" />
+        {/* Top vignette for Navbar readability */}
+        <div className="absolute inset-x-0 top-0 h-16 sm:h-28 md:h-36 bg-gradient-to-b from-[#100804]/90 via-[#100804]/40 to-transparent pointer-events-none" />
+        
+        {/* Bottom vignette blending seamlessly into the dark background of the page */}
+        <div className="absolute inset-x-0 bottom-0 h-16 sm:h-28 md:h-36 bg-gradient-to-t from-[#160e08] via-[#160e08]/60 to-transparent pointer-events-none" />
 
-          {/* Hero Content Overlay: Strictly centered in the golden parchment paper between Uncle Ho and the Soldiers */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <div className="w-[54%] xs:w-[50%] sm:w-[48%] md:w-[46%] text-center flex flex-col items-center justify-center pointer-events-auto px-1 sm:px-2">
-              
-              {/* Subtitle Badge */}
-              <div className="inline-flex items-center space-x-1 sm:space-x-1.5 px-1.5 xs:px-2 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-[#1b1008]/90 border border-amber-500/60 text-amber-300 text-[6px] xs:text-[7.5px] sm:text-[10.5px] md:text-xs font-semibold tracking-wider uppercase shadow-md mb-0.5 xs:mb-1 sm:mb-2 md:mb-3">
-                <span className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
-                  <Flame className="w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 text-amber-400 fill-amber-400 animate-pulse" />
-                </span>
-                <span className="truncate">NGỌN ĐUỐC SOI ĐƯỜNG NON SÔNG</span>
-              </div>
+        {/* Soft radial focus in center */}
+        <div className="absolute inset-0 bg-radial-gradient opacity-20 pointer-events-none" />
 
-              {/* Titles */}
-              <div className="space-y-0 sm:space-y-0.5 md:space-y-1 mb-0.5 xs:mb-1 sm:mb-2 md:mb-4">
-                <p className="text-amber-200 uppercase tracking-[0.1em] sm:tracking-[0.2em] text-[6.5px] xs:text-[8px] sm:text-xs md:text-sm font-bold">
-                  Hành trình
-                </p>
-                <h1 className="font-serif text-[9.5px] xs:text-[12px] sm:text-xl md:text-3xl lg:text-4xl font-black text-[#fffdf8] leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-                  Dựng nước - Cứu nước
-                </h1>
-                <h2 className="font-serif text-[8.5px] xs:text-[10.5px] sm:text-lg md:text-2xl lg:text-3xl font-black text-[#f8d799] drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] glow-gold leading-tight">
-                  của Bác Hồ
-                </h2>
-              </div>
-
-              {/* Sacred Quote */}
-              <div className="mb-0.5 xs:mb-1.5 sm:mb-2 md:mb-4 max-w-full">
-                <div className="inline-block px-1.5 xs:px-2.5 sm:px-4 py-0.5 rounded-full bg-[#140b05]/90 border border-amber-500/40 text-amber-200 font-serif italic text-[5.5px] xs:text-[7px] sm:text-[10px] md:text-xs shadow-md">
-                  "Không có gì quý hơn độc lập, tự do!"
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center justify-center gap-1 xs:gap-1.5 sm:gap-2.5 md:gap-3">
-                <button
-                  onClick={onExplore}
-                  className="px-2 xs:px-2.5 sm:px-5 md:px-6 py-0.5 xs:py-1 sm:py-2 rounded-full duocsang-btn text-[#fffbf2] font-bold text-[6.5px] xs:text-[8px] sm:text-xs md:text-sm tracking-wider flex items-center space-x-0.5 xs:space-x-1 sm:space-x-1.5 shadow-md hover:scale-105 active:scale-95 transition-all border border-amber-400/60"
-                >
-                  <span>Khám phá ngay</span>
-                  <Compass className="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 text-amber-300 shrink-0" />
-                </button>
-
-                <button
-                  onClick={() => setShowFullBanner(true)}
-                  className="px-1.5 xs:px-2 sm:px-3.5 md:px-4 py-0.5 xs:py-1 sm:py-2 rounded-full bg-[#1c1108]/85 hover:bg-[#28180c] border border-amber-600/50 text-amber-200 text-[6px] xs:text-[7.5px] sm:text-[10.5px] md:text-xs font-medium flex items-center space-x-0.5 xs:space-x-1 transition-all"
-                >
-                  <Maximize2 className="w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 text-amber-400 shrink-0" />
-                  <span>Toàn cảnh</span>
-                </button>
-              </div>
-
+        {/* Hero Content Overlay: Strictly centered in the golden parchment paper between Uncle Ho and the Soldiers */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pt-10 xs:pt-12 sm:pt-16 md:pt-0">
+          <div className="w-[54%] xs:w-[50%] sm:w-[48%] md:w-[46%] text-center flex flex-col items-center justify-center pointer-events-auto px-1 sm:px-2">
+            
+            {/* Subtitle Badge */}
+            <div className="inline-flex items-center space-x-1 sm:space-x-1.5 px-2 xs:px-2.5 sm:px-4 py-0.5 sm:py-1 rounded-full bg-[#1b1008]/90 border border-amber-500/60 text-amber-300 text-[6.5px] xs:text-[8px] sm:text-[11px] md:text-xs font-semibold tracking-wider sm:tracking-widest uppercase shadow-md mb-0.5 xs:mb-1 sm:mb-2 md:mb-3 animate-fadeIn">
+              <span className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
+                <Flame className="w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-2.5 sm:h-2.5 text-amber-400 fill-amber-400 animate-pulse" />
+              </span>
+              <span className="truncate">NGỌN ĐUỐC SOI ĐƯỜNG NON SÔNG</span>
             </div>
-          </div>
 
+            {/* Titles */}
+            <div className="space-y-0 sm:space-y-0.5 md:space-y-1 mb-0.5 xs:mb-1 sm:mb-2 md:mb-4">
+              <p className="text-amber-200 uppercase tracking-[0.1em] sm:tracking-[0.2em] text-[7px] xs:text-[8.5px] sm:text-xs md:text-base font-bold drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                Hành trình
+              </p>
+              <h1 className="font-serif text-[10px] xs:text-[13px] sm:text-2xl md:text-4xl lg:text-5xl font-black text-[#fffdf8] leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+                Dựng nước - Cứu nước
+              </h1>
+              <h2 className="font-serif text-[9px] xs:text-[11.5px] sm:text-xl md:text-3xl lg:text-4xl font-black text-[#f8d799] drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] glow-gold leading-tight">
+                của Bác Hồ
+              </h2>
+            </div>
+
+            {/* Sacred Quote */}
+            <div className="mb-0.5 xs:mb-1.5 sm:mb-2 md:mb-4 max-w-full">
+              <div className="inline-block px-2 xs:px-3 sm:px-5 py-0.5 sm:py-1 rounded-full bg-[#140b05]/90 border border-amber-500/40 text-amber-200 font-serif italic text-[6px] xs:text-[7.5px] sm:text-xs md:text-sm drop-shadow-md shadow-lg">
+                "Không có gì quý hơn độc lập, tự do!"
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-center gap-1 xs:gap-1.5 sm:gap-3 md:gap-4">
+              <button
+                onClick={onExplore}
+                className="px-2 xs:px-3 sm:px-6 md:px-8 py-0.5 xs:py-1 sm:py-2.5 rounded-full duocsang-btn text-[#fffbf2] font-bold text-[7px] xs:text-[8.5px] sm:text-xs md:text-sm tracking-wide sm:tracking-wider flex items-center space-x-0.5 xs:space-x-1 sm:space-x-2 shadow-md hover:scale-105 active:scale-95 transition-all border border-amber-400/60"
+              >
+                <span>Khám phá ngay</span>
+                <Compass className="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
+              </button>
+
+              <button
+                onClick={() => setShowFullBanner(true)}
+                className="px-1.5 xs:px-2.5 sm:px-4 md:px-5 py-0.5 xs:py-1 sm:py-2.5 rounded-full bg-[#1c1108]/85 hover:bg-[#28180c] border border-amber-600/50 text-amber-200 text-[6.5px] xs:text-[8px] sm:text-xs font-medium flex items-center space-x-0.5 xs:space-x-1 transition-all"
+              >
+                <Maximize2 className="w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-3 sm:h-3 text-amber-400 shrink-0" />
+                <span className="hidden xs:inline">Toàn cảnh</span>
+              </button>
+            </div>
+
+          </div>
         </div>
+
       </div>
 
       {/* Fullscreen Banner Lightbox Modal */}
