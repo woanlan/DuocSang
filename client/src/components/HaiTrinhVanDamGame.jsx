@@ -835,12 +835,7 @@ export default function HaiTrinhVanDamGame() {
 
       {/* ================= 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
       <div 
-        className="relative aspect-square mx-auto p-1 xs:p-1.5 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
-        style={{
-          width: 'min(98vw, calc(100vh - 180px), 820px)',
-          height: 'min(98vw, calc(100vh - 180px), 820px)',
-          maxHeight: 'calc(100vh - 180px)'
-        }}
+        className="relative aspect-square w-full max-w-[min(96vw,840px)] mx-auto p-1.5 xs:p-2 sm:p-3 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
       >
         {/* Subtle Map Watermark Texture in background */}
         <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
