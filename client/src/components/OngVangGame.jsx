@@ -2026,115 +2026,280 @@ export default function OngVangGame() {
             {/* Rules Content */}
             {rulesTab === 'puzzle' && (
               <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
-                <div className="p-4 rounded-2xl bg-[#241309] border border-amber-700/50 space-y-2">
-                  <div className="flex items-center space-x-2 text-yellow-300 font-bold text-sm">
-                    <Flag className="w-4 h-4 fill-current" />
-                    <span>Quy Luật: Lật 6 Lá Cờ Việt Nam & Đoán Ngay</span>
+                
+                {/* Visual Illustration Diagram for Game 1 */}
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-amber-500/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
+                  {/* Left: Mini Flag Grid & Reveal Preview */}
+                  <div className="sm:col-span-6 relative aspect-[16/10] rounded-xl overflow-hidden border border-amber-500/60 bg-black shadow-md">
+                    <img 
+                      src="/images/gallery/tuyen-ngon-doc-lap.jpg" 
+                      alt="Ảnh tư liệu mẫu" 
+                      className="w-full h-full object-cover" 
+                    />
+                    {/* Simulated 6-flag Grid */}
+                    <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-1 p-1 bg-black/40">
+                      <div className="bg-[#da251d] rounded-md flex items-center justify-center border border-amber-400/50 shadow-sm">
+                        <span className="text-yellow-300 text-base drop-shadow">★</span>
+                      </div>
+                      <div className="bg-[#da251d] rounded-md flex items-center justify-center border border-amber-400/50 shadow-sm">
+                        <span className="text-yellow-300 text-base drop-shadow">★</span>
+                      </div>
+                      {/* One revealed piece */}
+                      <div className="rounded-md border border-emerald-400/80 bg-emerald-950/30 flex items-center justify-center">
+                        <span className="text-[10px] text-emerald-300 font-bold bg-black/80 px-1.5 py-0.5 rounded border border-emerald-500/50">
+                          Đã mở ✓
+                        </span>
+                      </div>
+                      <div className="bg-[#da251d] rounded-md flex items-center justify-center border border-amber-400/50 shadow-sm">
+                        <span className="text-yellow-300 text-base drop-shadow">★</span>
+                      </div>
+                      <div className="bg-[#da251d] rounded-md flex items-center justify-center border border-yellow-300 shadow-lg animate-pulse">
+                        <span className="text-yellow-300 text-base drop-shadow">★</span>
+                      </div>
+                      <div className="bg-[#da251d] rounded-md flex items-center justify-center border border-amber-400/50 shadow-sm">
+                        <span className="text-yellow-300 text-base drop-shadow">★</span>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-1 left-1 right-1 bg-black/85 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-200 text-center font-serif font-bold border border-amber-500/40">
+                      👆 Nhấp vào lá cờ để trả lời câu hỏi mở khóa mảnh ảnh
+                    </div>
                   </div>
-                  <p>Mỗi bức ảnh tư liệu lịch sử bí ẩn được che phủ bởi một lưới gồm <strong>6 lá cờ Việt Nam (Cờ đỏ sao vàng)</strong>.</p>
+
+                  {/* Right: Instant Guessing Simulation Mockup */}
+                  <div className="sm:col-span-6 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#261408] to-[#1a0e06] border border-amber-600/50 shadow-sm">
+                    <div className="flex items-center space-x-1.5 text-xs font-bold text-amber-300">
+                      <Zap className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                      <span>Tính năng độc đáo: Đoán ngay đáp án</span>
+                    </div>
+                    
+                    <div className="p-2 rounded-lg bg-stone-900 border border-amber-700/60 text-xs text-stone-200 font-sans flex items-center justify-between">
+                      <span className="text-stone-400 italic">Nhập:</span>
+                      <span className="text-yellow-300 font-bold">Tuyên ngôn độc lập</span>
+                    </div>
+
+                    <div className="py-2 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 text-center font-black text-[11px] uppercase tracking-wider shadow">
+                      ⚡ XÁC NHẬN ĐOÁN NGAY (+THƯỞNG LỚN)
+                    </div>
+
+                    <div className="text-[11px] text-emerald-300 font-serif leading-tight">
+                      ✓ Đoán đúng sẽ mở tung toàn bộ 6 lá cờ cùng lúc và cộng điểm thưởng tối đa!
+                    </div>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-red-600 text-yellow-300 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-                    <div>
-                      <strong className="text-amber-200 block text-xs">Lật mở từng lá cờ:</strong>
-                      Nhấp vào bất kỳ lá cờ nào từ #1 đến #6 để mở câu hỏi trắc nghiệm. Trả lời đúng sẽ lật mở mảnh ảnh và hé lộ nội dung chi tiết phía sau (+250 điểm).
+                {/* Text summary instructions */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-red-600 text-yellow-300 flex items-center justify-center text-[10px]">1</span>
+                      <span>Lật mở từng lá cờ</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Bấm vào lá cờ bất kỳ để trả lời câu hỏi. Đúng sẽ mở góc ảnh và nghe thuyết minh (+250đ).
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-                    <div>
-                      <strong className="text-yellow-300 block text-xs">Đoán ngay đáp án (Điền trực tiếp):</strong>
-                      Nếu bạn đã nhận ra bức ảnh chụp sự kiện hoặc di tích nào, hãy gõ ngay vào ô <em>"Đoán Ngay Đáp Án"</em> ở cột bên phải (hỗ trợ tiếng Việt có dấu hoặc không dấu).
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-yellow-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-amber-600 text-stone-950 flex items-center justify-center text-[10px]">2</span>
+                      <span>Đoán ngay sự kiện</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Nhận diện được bức ảnh? Gõ ngay tên sự kiện/địa danh vào ô "Đoán Ngay Đáp Án".
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-                    <div>
-                      <strong className="text-emerald-300 block text-xs">Thưởng lớn khi đoán sớm:</strong>
-                      Đoán trúng ngay sẽ mở tung toàn bộ 6 lá cờ lập tức! Bạn được cộng thêm điểm thưởng lớn cho các lá cờ chưa kịp mở và chuyển sang màn tiếp theo.
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-emerald-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-stone-950 flex items-center justify-center text-[10px]">3</span>
+                      <span>Điểm thưởng kỷ lục</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Đoán trúng càng sớm điểm thưởng càng cao, mở khóa toàn bộ câu chuyện và chuyển vòng mới.
+                    </p>
                   </div>
                 </div>
+
               </div>
             )}
 
             {rulesTab === 'journey' && (
               <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
-                <div className="p-4 rounded-2xl bg-[#131f2b] border border-cyan-800/50 space-y-2">
-                  <div className="flex items-center space-x-2 text-cyan-300 font-bold text-sm">
-                    <Compass className="w-4 h-4" />
-                    <span>Quy Luật: Khám Phá Bản Đồ Hải Trình 30 Năm (1911 - 1941)</span>
+                
+                {/* Visual Illustration Diagram for Game 2 */}
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-cyan-700/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
+                  {/* Left: Historic Vessel Photo Preview */}
+                  <div className="sm:col-span-5 relative aspect-[4/3] rounded-xl overflow-hidden border border-cyan-500/60 bg-black shadow-md">
+                    <img 
+                      src="/images/timeline/tau-latouche-treville.jpg" 
+                      alt="Tàu Amiral Latouche-Tréville" 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute top-2 left-2 bg-black/85 px-2 py-0.5 rounded text-[10px] text-cyan-300 font-bold border border-cyan-400/50 flex items-center space-x-1">
+                      <Ship className="w-3 h-3 text-cyan-300" />
+                      <span>Tàu Latouche-Tréville</span>
+                    </div>
+                    <div className="absolute bottom-1 left-1 right-1 bg-black/85 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-200 text-center font-serif font-bold border border-amber-500/40">
+                      Bến Nhà Rồng, Sài Gòn (05/06/1911)
+                    </div>
                   </div>
-                  <p>Theo dấu chân người thanh niên Nguyễn Tất Thành qua 3 đại dương, 4 châu lục với <strong>10 mốc son lịch sử</strong> từ Bến Nhà Rồng tới Pác Bó.</p>
+
+                  {/* Right: Interactive Route Diagram */}
+                  <div className="sm:col-span-7 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#101b24] to-[#0a1118] border border-cyan-800/60 shadow-sm">
+                    <div className="flex items-center space-x-1.5 text-xs font-bold text-cyan-300">
+                      <Compass className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
+                      <span>Hải trình 10 mốc son vạn dặm:</span>
+                    </div>
+
+                    {/* Step pills */}
+                    <div className="flex items-center space-x-1 overflow-x-auto py-1 text-[10px]">
+                      <span className="px-2 py-1 rounded bg-amber-950 border border-amber-500 text-amber-200 font-bold shrink-0">
+                        1. Sài Gòn ⚓
+                      </span>
+                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
+                      <span className="px-2 py-1 rounded bg-stone-900 border border-stone-700 text-stone-300 shrink-0">
+                        2. Pháp
+                      </span>
+                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
+                      <span className="px-2 py-1 rounded bg-stone-900 border border-stone-700 text-stone-300 shrink-0">
+                        3. Mỹ & Anh
+                      </span>
+                      <span className="text-cyan-400 font-bold shrink-0">➔</span>
+                      <span className="px-2 py-1 rounded bg-emerald-950 border border-emerald-500 text-emerald-200 font-bold shrink-0">
+                        10. Pác Bó 🚩
+                      </span>
+                    </div>
+
+                    <div className="p-2 rounded-lg bg-black/60 border border-cyan-800/40 text-[11px] text-stone-300 space-y-1 font-serif">
+                      <div className="text-amber-300 font-bold">🎯 Cách thức vượt ải:</div>
+                      <div>• Bấm vào trạm có biểu tượng rada phát sáng để mở nhật ký hành trình.</div>
+                      <div>• Trả lời câu hỏi thử thách cập cảng để tích lũy hải lý và nhổ neo sang trạm kế tiếp!</div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-cyan-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-                    <div>
-                      <strong className="text-cyan-200 block text-xs">Cập cảng đang phát sáng:</strong>
-                      Bấm vào biểu tượng mốc son đang nhấp nháy hiệu ứng rada trên bản đồ hải trình để mở nhật ký hành trình của chặng đó.
+                {/* 3 Step Boxes */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-cyan-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-cyan-600 text-stone-950 flex items-center justify-center text-[10px]">1</span>
+                      <span>Cập cảng phát sáng</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Con tàu di chuyển theo từng chặng, nhấp vào trạm đang phát sáng để xem tư liệu.
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-                    <div>
-                      <strong className="text-amber-200 block text-xs">Thử thách vượt sóng:</strong>
-                      Đọc tư liệu, xem ảnh tư liệu gốc và trả lời chính xác câu hỏi thử thách cập cảng.
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-amber-600 text-stone-950 flex items-center justify-center text-[10px]">2</span>
+                      <span>Vượt thử thách cập cảng</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Trả lời câu hỏi lịch sử của cảng đó. Trả lời đúng sẽ kéo còi tàu và cộng hải lý (+300đ).
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-yellow-500 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-                    <div>
-                      <strong className="text-yellow-300 block text-xs">Tích lũy hải lý & Vinh danh:</strong>
-                      Mỗi chặng vượt qua sẽ kéo còi tàu, cộng dồn hải lý tích lũy và mở đường đến cảng tiếp theo. Cập bến Pác Bó để nhận danh hiệu cao quý <em>"Đại Hoa Tiêu Lịch Sử"</em>.
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-emerald-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-stone-950 flex items-center justify-center text-[10px]">3</span>
+                      <span>Đại hoa tiêu lịch sử</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Cập bến mốc 108 Pác Bó để hoàn thành 30 năm bôn ba và vinh danh hoa tiêu xuất sắc.
+                    </p>
                   </div>
                 </div>
+
               </div>
             )}
 
             {rulesTab === 'quiz' && (
               <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
-                <div className="p-4 rounded-2xl bg-[#26150a] border border-amber-700/50 space-y-2">
-                  <div className="flex items-center space-x-2 text-yellow-300 font-bold text-sm">
-                    <Zap className="w-4 h-4 fill-current" />
-                    <span>Quy Luật: Đố Vui Tốc Độ 35 Giây & Giọng Nói Tự Động</span>
+                
+                {/* Visual Illustration Diagram for Game 3 */}
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-black/70 border border-yellow-700/50 shadow-inner grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center">
+                  {/* Left: Historic Photo with Timer */}
+                  <div className="sm:col-span-5 relative aspect-[4/3] rounded-xl overflow-hidden border border-yellow-500/60 bg-black shadow-md">
+                    <img 
+                      src="/images/gallery/chien-dich-bien-gioi.jpg" 
+                      alt="Chiến dịch Biên giới" 
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute top-2 right-2 bg-amber-950/95 border border-amber-400 px-2 py-0.5 rounded text-[11px] font-mono font-bold text-yellow-300 shadow">
+                      ⏱ 35 Giây
+                    </div>
+                    <div className="absolute bottom-1 left-1 right-1 bg-black/85 backdrop-blur-sm px-2 py-1 rounded text-[10px] text-amber-200 text-center font-serif font-bold border border-amber-500/40">
+                      🔊 Giọng nói tự động đọc to câu hỏi & đáp án
+                    </div>
                   </div>
-                  <p>Trắc nghiệm tốc độ trực quan với kho 24 bức ảnh tư liệu lịch sử quý giá, tính điểm theo thời gian thực.</p>
+
+                  {/* Right: 4 Kahoot colored buttons & timer point decay */}
+                  <div className="sm:col-span-7 space-y-2 p-3 rounded-xl bg-gradient-to-b from-[#241408] to-[#170e06] border border-amber-700/50 shadow-sm">
+                    <div className="flex items-center justify-between text-xs font-bold">
+                      <span className="text-yellow-300">Điểm đếm lùi thời gian thực:</span>
+                      <span className="text-amber-400 font-mono">1.000đ ➔ 100đ</span>
+                    </div>
+
+                    {/* 4 Colored Kahoot Answer Cards Mockup */}
+                    <div className="grid grid-cols-2 gap-1.5 text-[11px] font-sans font-bold">
+                      <div className="p-2 rounded-lg bg-rose-600 text-white flex items-center space-x-1.5 shadow">
+                        <span className="w-4 h-4 rounded bg-black/30 flex items-center justify-center text-[10px]">A</span>
+                        <span>Đáp án Đỏ (▲)</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-blue-600 text-white flex items-center space-x-1.5 shadow">
+                        <span className="w-4 h-4 rounded bg-black/30 flex items-center justify-center text-[10px]">B</span>
+                        <span>Đáp án Xanh (◆)</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-amber-500 text-stone-950 flex items-center space-x-1.5 shadow">
+                        <span className="w-4 h-4 rounded bg-black/30 flex items-center justify-center text-[10px]">C</span>
+                        <span>Đáp án Vàng (●)</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-emerald-600 text-white flex items-center space-x-1.5 shadow">
+                        <span className="w-4 h-4 rounded bg-black/30 flex items-center justify-center text-[10px]">D</span>
+                        <span>Đáp án Xanh lá (■)</span>
+                      </div>
+                    </div>
+
+                    <div className="text-[11px] text-emerald-300 font-serif leading-tight">
+                      ✓ Trả lời càng nhanh điểm càng cao! Có quyền trợ giúp 50:50 và Xem gợi ý.
+                    </div>
+                  </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
-                    <div>
-                      <strong className="text-amber-200 block text-xs">35 Giây mỗi câu:</strong>
-                      Mỗi câu hỏi có 35 giây độc lập. Điểm bắt đầu từ 1.000 điểm và giảm dần theo thời gian (trả lời càng nhanh điểm càng cao).
+                {/* 3 Step Boxes */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-amber-600 text-stone-950 flex items-center justify-center text-[10px]">1</span>
+                      <span>35s Riêng mỗi câu</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      Mỗi câu được tính riêng 35 giây độc lập. Điểm bắt đầu từ 1.000 điểm và giảm dần.
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-xs">2</span>
-                    <div>
-                      <strong className="text-blue-200 block text-xs">Giọng nói tự động:</strong>
-                      Hệ thống tự động đọc câu hỏi và thuyết minh kiến thức lịch sử sâu sắc giúp bạn vừa chơi vừa tiếp thu tri thức.
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-blue-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px]">2</span>
+                      <span>Giọng nói tự động</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      AI tự động đọc câu hỏi, đọc to đáp án đúng và thuyết minh ý nghĩa lịch sử sâu sắc.
+                    </p>
                   </div>
 
-                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
-                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
-                    <div>
-                      <strong className="text-emerald-300 block text-xs">4 Thẻ màu Kahoot & Quyền trợ giúp:</strong>
-                      4 thẻ đáp án màu sắc đặc trưng (A: Đỏ, B: Xanh dương, C: Vàng, D: Xanh lá). Có quyền trợ giúp 50:50 và Xem gợi ý nếu gặp câu khó.
+                  <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
+                    <div className="flex items-center space-x-1.5 text-emerald-300 font-bold text-xs">
+                      <span className="w-5 h-5 rounded-full bg-emerald-600 text-stone-950 flex items-center justify-center text-[10px]">3</span>
+                      <span>4 Thẻ Kahoot trực quan</span>
                     </div>
+                    <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
+                      4 màu sắc nổi bật dễ chọn, trợ giúp 50:50 loại trừ 2 phương án sai khi gặp câu khó.
+                    </p>
                   </div>
                 </div>
+
               </div>
             )}
 
