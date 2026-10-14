@@ -610,6 +610,8 @@ const TOTAL_QUESTION_TIME = 35; // 35 seconds per question
 export default function OngVangGame() {
   // Active minigame mode: 'puzzle' (Lật mảnh ghép 6 lá cờ) | 'journey' (Bản đồ hải trình) | 'quiz' (Đố vui 35s)
   const [activeGameTab, setActiveGameTab] = useState('puzzle');
+  const [isRulesModalOpen, setIsRulesModalOpen] = useState(false);
+  const [rulesTab, setRulesTab] = useState('puzzle');
 
   // Game state: 'start' | 'playing' | 'gameover'
   const [gameState, setGameState] = useState('start');
@@ -1066,70 +1068,154 @@ export default function OngVangGame() {
     <section id="quiz" className="py-20 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header with Dignified and Respectful Title */}
         <div className="text-center mb-6">
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/60 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2 shadow-md">
-            <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-            <span>KHU VỰC MINI GAME LỊCH SỬ • TƯƠNG TÁC ĐA DẠNG</span>
+            <Flag className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+            <span>KHÔNG GIAN TƯƠNG TÁC LỊCH SỬ • DI SẢN HỒ CHÍ MINH</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#f5efe6] tracking-tight">
-            Đấu Trường Tri Thức Bác Hồ
+            Hành Trình Di Sản Hồ Chí Minh
           </h2>
-          <p className="text-stone-300/80 mt-2 text-sm sm:text-base font-serif max-w-2xl mx-auto">
-            Lựa chọn trò chơi bạn yêu thích: lật mở 6 lá cờ bí ẩn, thám hiểm hải trình 30 năm trên bản đồ, hoặc thử thách phản xạ với đố vui tốc độ!
+          <p className="text-stone-300/80 mt-2 text-sm sm:text-base font-serif max-w-3xl mx-auto leading-relaxed">
+            Không gian trải nghiệm trực quan, trang trọng giúp thế hệ trẻ tìm hiểu sâu sắc về cuộc đời, sự nghiệp cách mạng vĩ đại và những mốc son lịch sử của Chủ tịch Hồ Chí Minh.
           </p>
         </div>
 
-        {/* ================= 3 MINI GAME NAVIGATION TABS ================= */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mb-8">
-          
-          {/* Tab 1: Mảnh ghép tư liệu bí ẩn (6 lá cờ VN) */}
+        {/* Action Bar: Current Mode Indicator & "CÁCH CHƠI" Button on the Right */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-4 px-1">
+          <div className="flex items-center space-x-2 text-xs text-amber-300 font-serif">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-stone-400">Chọn một trong 3 hình thức trải nghiệm bên dưới:</span>
+          </div>
+
+          {/* Button Cách Chơi at the Right Corner */}
           <button
+            onClick={() => {
+              setRulesTab(activeGameTab);
+              setIsRulesModalOpen(true);
+            }}
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-900/90 via-amber-800/90 to-amber-950/90 hover:from-amber-800 hover:to-amber-900 border border-amber-400/80 text-yellow-200 hover:text-white text-xs font-bold flex items-center space-x-1.5 shadow-lg shadow-amber-950/60 transition-all hover:scale-105 active:scale-95"
+            title="Nhấp để xem hướng dẫn cách chơi chi tiết"
+          >
+            <BookOpen className="w-4 h-4 text-yellow-300" />
+            <span>Hướng Dẫn Cách Chơi</span>
+          </button>
+        </div>
+
+        {/* ================= 3 INTERACTIVE GAME SELECTION CARDS ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          
+          {/* Card Game 1: Lật Mảnh Ghép 6 Lá Cờ VN */}
+          <div
             onClick={() => {
               soundFX.playFlip();
               setActiveGameTab('puzzle');
             }}
-            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'puzzle'
-                ? 'bg-gradient-to-r from-red-600 via-red-500 to-amber-500 text-stone-950 ring-2 ring-yellow-400 shadow-red-950/70 scale-105'
-                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+                ? 'bg-gradient-to-br from-red-950/95 via-[#29130c] to-amber-950/90 border-red-500 ring-2 ring-yellow-400 scale-[1.02] shadow-red-950/80'
+                : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <Flag className={`w-4 h-4 ${activeGameTab === 'puzzle' ? 'text-yellow-300 fill-yellow-300 animate-bounce' : 'text-amber-400'}`} />
-            <span>1. Lật Mảnh Ghép (6 Lá Cờ VN & Đoán Ngay)</span>
-          </button>
+            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+              activeGameTab === 'puzzle'
+                ? 'bg-red-600 border border-yellow-400 text-yellow-300'
+                : 'bg-red-950/80 border border-red-500/50 text-red-300'
+            }`}>
+              <Flag className="w-5 h-5 fill-current" />
+            </div>
+            <div className="flex-grow">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-amber-100 text-sm font-serif">1. Lật Mảnh Ghép Lịch Sử</h4>
+                {activeGameTab === 'puzzle' && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                    Đang chơi
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
+                6 lá cờ Việt Nam che phủ ảnh tư liệu quý. Bấm từng lá cờ để giải mã hoặc điền đoán ngay sự kiện!
+              </p>
+              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
+                <span>{activeGameTab === 'puzzle' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
+              </div>
+            </div>
+          </div>
 
-          {/* Tab 2: Bản đồ hải trình vạn dặm */}
-          <button
+          {/* Card Game 2: Bản Đồ Hải Trình Vạn Dặm Tương Tác */}
+          <div
             onClick={() => {
               soundFX.playShipHorn();
               setActiveGameTab('journey');
             }}
-            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'journey'
-                ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 ring-2 ring-yellow-400 shadow-amber-950/70 scale-105'
-                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+                ? 'bg-gradient-to-br from-amber-950/95 via-[#29160d] to-yellow-950/80 border-amber-400 ring-2 ring-yellow-400 scale-[1.02] shadow-amber-950/80'
+                : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <Compass className={`w-4 h-4 ${activeGameTab === 'journey' ? 'text-stone-950 animate-spin-slow' : 'text-amber-400'}`} />
-            <span>2. Bản Đồ Hải Trình Vạn Dặm Tương Tác</span>
-          </button>
+            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+              activeGameTab === 'journey'
+                ? 'bg-amber-600 border border-yellow-300 text-stone-950'
+                : 'bg-amber-950/80 border border-amber-500/50 text-amber-300'
+            }`}>
+              <Compass className="w-5 h-5 animate-spin-slow" />
+            </div>
+            <div className="flex-grow">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Hải Trình Vạn Dặm</h4>
+                {activeGameTab === 'journey' && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                    Đang chơi
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
+                Bản đồ tương tác 10 mốc son 30 năm (1911 - 1941). Cập cảng, tích lũy hải lý và mở khóa nhật ký.
+              </p>
+              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
+                <span>{activeGameTab === 'journey' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
+              </div>
+            </div>
+          </div>
 
-          {/* Tab 3: Đố vui tốc độ 35s */}
-          <button
+          {/* Card Game 3: Đố Vui Tốc Độ 35s */}
+          <div
             onClick={() => {
               soundFX.playFlip();
               setActiveGameTab('quiz');
             }}
-            className={`px-5 py-3 rounded-2xl font-serif font-bold text-xs sm:text-sm tracking-wide flex items-center space-x-2 transition-all shadow-xl ${
+            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'quiz'
-                ? 'bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 ring-2 ring-yellow-400 shadow-amber-950/70 scale-105'
-                : 'bg-[#1b110a] hover:bg-[#25170e] text-stone-300 border border-amber-900/60'
+                ? 'bg-gradient-to-br from-[#2c1809] via-[#29130c] to-[#1e1007] border-yellow-400 ring-2 ring-yellow-400 scale-[1.02] shadow-yellow-950/80'
+                : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <Zap className={`w-4 h-4 ${activeGameTab === 'quiz' ? 'text-stone-950 fill-stone-950' : 'text-yellow-400 fill-yellow-400'}`} />
-            <span>3. Đố Vui Tốc Độ 35s & Điểm Lùi</span>
-          </button>
+            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+              activeGameTab === 'quiz'
+                ? 'bg-yellow-500 border border-yellow-300 text-stone-950'
+                : 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300'
+            }`}>
+              <Zap className="w-5 h-5 fill-current" />
+            </div>
+            <div className="flex-grow">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-amber-100 text-sm font-serif">3. Đố Vui Tốc Độ 35s</h4>
+                {activeGameTab === 'quiz' && (
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                    Đang chơi
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
+                24 tư liệu lịch sử có giọng nói tự động, 35 giây làm bài với điểm số đếm lùi và 4 màu Kahoot.
+              </p>
+              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
+                <span>{activeGameTab === 'quiz' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -1138,103 +1224,9 @@ export default function OngVangGame() {
         {activeGameTab === 'journey' && <HaiTrinhVanDamGame />}
         {activeGameTab === 'quiz' && (
           <>
-            {/* ================= SCREEN 1: START SCREEN ================= */}
+            {/* ================= SCREEN 1: START SCREEN (CLEANED) ================= */}
             {gameState === 'start' && (
-              <div className="duocsang-card rounded-[32px] p-6 sm:p-10 border-2 border-amber-600/50 shadow-2xl space-y-8 animate-fadeIn relative overflow-hidden">
-            
-            {/* Top Bar: Profile & Leaderboard */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-amber-900/40">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-600/40 to-amber-950 border border-amber-500/60 flex items-center justify-center text-amber-300 shadow-inner">
-                  <Award className="w-6 h-6" />
-                </div>
-                <div>
-                  {currentUser ? (
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-amber-200 text-base">{currentUser.username}</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/70 text-amber-300 border border-amber-500/40">
-                          {currentUser.title || 'Chiến Sĩ Trẻ'}
-                        </span>
-                      </div>
-                      <div className="text-xs text-stone-400 mt-0.5">
-                        Kỷ lục: <strong className="text-amber-400 font-bold">{currentUser.highScore || 0}</strong> điểm • Đã chơi: {currentUser.gamesPlayed || 0} trận
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="font-medium text-stone-300 text-sm">Chế độ: Khách vãng lai</div>
-                      <div className="text-xs text-stone-500">Đăng nhập để lưu điểm & vinh danh Bảng Vàng</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                {currentUser ? (
-                  <button
-                    onClick={handleLogout}
-                    className="px-3.5 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 text-xs flex items-center space-x-1.5 transition-colors"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>Đổi tài khoản</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      setAuthMode('login');
-                      setAuthError('');
-                      setIsAuthModalOpen(true);
-                    }}
-                    className="px-4 py-2 rounded-xl bg-amber-600/30 hover:bg-amber-600/40 border border-amber-500/60 text-amber-200 text-xs font-semibold flex items-center space-x-1.5 transition-all shadow-md"
-                  >
-                    <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Đăng nhập / Đăng ký</span>
-                  </button>
-                )}
-
-                <button
-                  onClick={() => setIsLeaderboardOpen(true)}
-                  className="px-3.5 py-2 rounded-xl bg-amber-950/70 hover:bg-amber-900/70 border border-amber-600/40 text-amber-300 text-xs font-semibold flex items-center space-x-1.5 transition-all shadow-md"
-                >
-                  <Trophy className="w-3.5 h-3.5 text-yellow-400" />
-                  <span>Bảng Vàng</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Feature Spotlight Card */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-2xl bg-[#1d120a] border border-amber-900/60 flex items-start space-x-3.5">
-                <div className="w-10 h-10 rounded-xl bg-rose-950/80 border border-rose-500/50 flex items-center justify-center text-rose-300 shrink-0">
-                  <Landmark className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-amber-100 text-sm">24 Bức Ảnh Tư Liệu</h4>
-                  <p className="text-xs text-stone-400 mt-1">Ảnh tư liệu lịch sử quý giá từ bến Nhà Rồng đến ngày toàn thắng.</p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#1d120a] border border-amber-900/60 flex items-start space-x-3.5">
-                <div className="w-10 h-10 rounded-xl bg-blue-950/80 border border-blue-500/50 flex items-center justify-center text-blue-300 shrink-0">
-                  <Volume2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-amber-100 text-sm">Giọng Nói Tự Động</h4>
-                  <p className="text-xs text-stone-400 mt-1">Tự động đọc to câu hỏi và thuyết minh kiến thức lịch sử sâu sắc.</p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#1d120a] border border-amber-900/60 flex items-start space-x-3.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-500/50 flex items-center justify-center text-emerald-300 shrink-0">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-amber-100 text-sm">4 Thẻ Đáp Án Kahoot</h4>
-                  <p className="text-xs text-stone-400 mt-1">Giao diện trắc nghiệm 4 màu sắc trực quan, tính điểm tốc độ và chuỗi combo.</p>
-                </div>
-              </div>
-            </div>
+              <div className="duocsang-card rounded-[32px] p-6 sm:p-10 border-2 border-amber-600/50 shadow-2xl space-y-6 animate-fadeIn relative overflow-hidden">
 
             {/* Audio Settings Bar */}
             <div className="p-4 rounded-2xl bg-[#1a0f08] border border-amber-800/40 flex flex-wrap items-center justify-between gap-4">
@@ -1968,6 +1960,194 @@ export default function OngVangGame() {
                 Đóng
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: HƯỚNG DẪN CÁCH CHƠI ================= */}
+      {isRulesModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+          <div className="duocsang-card max-w-2xl w-full rounded-3xl p-6 sm:p-8 border-2 border-amber-500/70 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
+            
+            <button
+              onClick={() => setIsRulesModalOpen(false)}
+              className="absolute top-5 right-5 text-stone-400 hover:text-white p-1 rounded-lg hover:bg-stone-800 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Title */}
+            <div className="text-center space-y-1">
+              <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-950 border border-amber-400/80 flex items-center justify-center text-yellow-300 mb-2 shadow-lg">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-serif font-black text-amber-100">
+                Hướng Dẫn Cách Chơi & Trải Nghiệm
+              </h3>
+              <p className="text-xs text-stone-400 font-serif">
+                Quy luật và mẹo đạt điểm cao cho từng hình thức trải nghiệm di sản
+              </p>
+            </div>
+
+            {/* Rule Selector Tabs */}
+            <div className="flex rounded-2xl bg-stone-900/90 p-1 border border-amber-900/60">
+              <button
+                onClick={() => setRulesTab('puzzle')}
+                className={`flex-1 py-2.5 rounded-xl text-xs font-serif font-bold transition-all ${
+                  rulesTab === 'puzzle'
+                    ? 'bg-gradient-to-r from-red-600 to-amber-600 text-stone-950 shadow-md'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                1. Lật Mảnh Ghép
+              </button>
+              <button
+                onClick={() => setRulesTab('journey')}
+                className={`flex-1 py-2.5 rounded-xl text-xs font-serif font-bold transition-all ${
+                  rulesTab === 'journey'
+                    ? 'bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 shadow-md'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                2. Hải Trình Vạn Dặm
+              </button>
+              <button
+                onClick={() => setRulesTab('quiz')}
+                className={`flex-1 py-2.5 rounded-xl text-xs font-serif font-bold transition-all ${
+                  rulesTab === 'quiz'
+                    ? 'bg-gradient-to-r from-amber-600 to-yellow-500 text-stone-950 shadow-md'
+                    : 'text-stone-400 hover:text-stone-200'
+                }`}
+              >
+                3. Đố Vui Tốc Độ 35s
+              </button>
+            </div>
+
+            {/* Rules Content */}
+            {rulesTab === 'puzzle' && (
+              <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
+                <div className="p-4 rounded-2xl bg-[#241309] border border-amber-700/50 space-y-2">
+                  <div className="flex items-center space-x-2 text-yellow-300 font-bold text-sm">
+                    <Flag className="w-4 h-4 fill-current" />
+                    <span>Quy Luật: Lật 6 Lá Cờ Việt Nam & Đoán Ngay</span>
+                  </div>
+                  <p>Mỗi bức ảnh tư liệu lịch sử bí ẩn được che phủ bởi một lưới gồm <strong>6 lá cờ Việt Nam (Cờ đỏ sao vàng)</strong>.</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-red-600 text-yellow-300 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+                    <div>
+                      <strong className="text-amber-200 block text-xs">Lật mở từng lá cờ:</strong>
+                      Nhấp vào bất kỳ lá cờ nào từ #1 đến #6 để mở câu hỏi trắc nghiệm. Trả lời đúng sẽ lật mở mảnh ảnh và hé lộ nội dung chi tiết phía sau (+250 điểm).
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+                    <div>
+                      <strong className="text-yellow-300 block text-xs">Đoán ngay đáp án (Điền trực tiếp):</strong>
+                      Nếu bạn đã nhận ra bức ảnh chụp sự kiện hoặc di tích nào, hãy gõ ngay vào ô <em>"Đoán Ngay Đáp Án"</em> ở cột bên phải (hỗ trợ tiếng Việt có dấu hoặc không dấu).
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+                    <div>
+                      <strong className="text-emerald-300 block text-xs">Thưởng lớn khi đoán sớm:</strong>
+                      Đoán trúng ngay sẽ mở tung toàn bộ 6 lá cờ lập tức! Bạn được cộng thêm điểm thưởng lớn cho các lá cờ chưa kịp mở và chuyển sang màn tiếp theo.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {rulesTab === 'journey' && (
+              <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
+                <div className="p-4 rounded-2xl bg-[#131f2b] border border-cyan-800/50 space-y-2">
+                  <div className="flex items-center space-x-2 text-cyan-300 font-bold text-sm">
+                    <Compass className="w-4 h-4" />
+                    <span>Quy Luật: Khám Phá Bản Đồ Hải Trình 30 Năm (1911 - 1941)</span>
+                  </div>
+                  <p>Theo dấu chân người thanh niên Nguyễn Tất Thành qua 3 đại dương, 4 châu lục với <strong>10 mốc son lịch sử</strong> từ Bến Nhà Rồng tới Pác Bó.</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-cyan-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+                    <div>
+                      <strong className="text-cyan-200 block text-xs">Cập cảng đang phát sáng:</strong>
+                      Bấm vào biểu tượng mốc son đang nhấp nháy hiệu ứng rada trên bản đồ hải trình để mở nhật ký hành trình của chặng đó.
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+                    <div>
+                      <strong className="text-amber-200 block text-xs">Thử thách vượt sóng:</strong>
+                      Đọc tư liệu, xem ảnh tư liệu gốc và trả lời chính xác câu hỏi thử thách cập cảng.
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-yellow-500 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+                    <div>
+                      <strong className="text-yellow-300 block text-xs">Tích lũy hải lý & Vinh danh:</strong>
+                      Mỗi chặng vượt qua sẽ kéo còi tàu, cộng dồn hải lý tích lũy và mở đường đến cảng tiếp theo. Cập bến Pác Bó để nhận danh hiệu cao quý <em>"Đại Hoa Tiêu Lịch Sử"</em>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {rulesTab === 'quiz' && (
+              <div className="space-y-4 text-xs font-serif text-stone-200 leading-relaxed animate-fadeIn">
+                <div className="p-4 rounded-2xl bg-[#26150a] border border-amber-700/50 space-y-2">
+                  <div className="flex items-center space-x-2 text-yellow-300 font-bold text-sm">
+                    <Zap className="w-4 h-4 fill-current" />
+                    <span>Quy Luật: Đố Vui Tốc Độ 35 Giây & Giọng Nói Tự Động</span>
+                  </div>
+                  <p>Trắc nghiệm tốc độ trực quan với kho 24 bức ảnh tư liệu lịch sử quý giá, tính điểm theo thời gian thực.</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-amber-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">1</span>
+                    <div>
+                      <strong className="text-amber-200 block text-xs">35 Giây mỗi câu:</strong>
+                      Mỗi câu hỏi có 35 giây độc lập. Điểm bắt đầu từ 1.000 điểm và giảm dần theo thời gian (trả lời càng nhanh điểm càng cao).
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center shrink-0 text-xs">2</span>
+                    <div>
+                      <strong className="text-blue-200 block text-xs">Giọng nói tự động:</strong>
+                      Hệ thống tự động đọc câu hỏi và thuyết minh kiến thức lịch sử sâu sắc giúp bạn vừa chơi vừa tiếp thu tri thức.
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 p-3 rounded-xl bg-stone-900/60 border border-stone-800">
+                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-stone-950 font-bold flex items-center justify-center shrink-0 text-xs">3</span>
+                    <div>
+                      <strong className="text-emerald-300 block text-xs">4 Thẻ màu Kahoot & Quyền trợ giúp:</strong>
+                      4 thẻ đáp án màu sắc đặc trưng (A: Đỏ, B: Xanh dương, C: Vàng, D: Xanh lá). Có quyền trợ giúp 50:50 và Xem gợi ý nếu gặp câu khó.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Modal Footer */}
+            <div className="text-center pt-2">
+              <button
+                onClick={() => setIsRulesModalOpen(false)}
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-yellow-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all"
+              >
+                ĐÃ HIỂU • TRẢI NGHIỆM NGAY
+              </button>
+            </div>
+
           </div>
         </div>
       )}
