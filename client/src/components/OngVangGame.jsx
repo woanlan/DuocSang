@@ -15,7 +15,7 @@ import {
   fetchLeaderboardApi 
 } from '../services/api';
 import ManhGhepBiAnGame from './ManhGhepBiAnGame';
-import HaiTrinhVanDamGame from './HaiTrinhVanDamGame';
+import HaiTrinhVanDamGame, { VietnamFlagIcon } from './HaiTrinhVanDamGame';
 import { soundFX, stopVietnameseVoice } from '../utils/gameAudio';
 
 // ================= QUIZ QUESTION BANK (24 AUTHENTIC HISTORICAL PHOTOS) =================
@@ -958,28 +958,28 @@ export default function OngVangGame() {
   const totalQuestions = activeQuestions.length;
 
   return (
-    <section id="quiz" className="py-20 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="quiz" className="pt-6 pb-12 sm:pt-10 sm:pb-16 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Section Header with Dignified and Respectful Title */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-950/80 border border-amber-500/60 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2 shadow-md">
+        <div className="text-center mb-3 sm:mb-5">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1 rounded-full bg-amber-950/80 border border-amber-500/60 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1.5 shadow-md">
             <Flag className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
             <span>KHÔNG GIAN TƯƠNG TÁC LỊCH SỬ • DI SẢN HỒ CHÍ MINH</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#f5efe6] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black text-[#f5efe6] tracking-tight">
             Hành Trình Di Sản Hồ Chí Minh
           </h2>
-          <p className="text-stone-300/80 mt-2 text-sm sm:text-base font-serif max-w-3xl mx-auto leading-relaxed">
-            Không gian trải nghiệm trực quan, trang trọng giúp thế hệ trẻ tìm hiểu sâu sắc về cuộc đời, sự nghiệp cách mạng vĩ đại và những mốc son lịch sử của Chủ tịch Hồ Chí Minh.
+          <p className="text-stone-300/80 mt-1 text-xs sm:text-sm font-serif max-w-2xl mx-auto leading-relaxed hidden sm:block">
+            Không gian trải nghiệm trực quan, trang trọng giúp thế hệ trẻ tìm hiểu sâu sắc về cuộc đời, sự nghiệp cách mạng vĩ đại của Chủ tịch Hồ Chí Minh.
           </p>
         </div>
 
         {/* Action Bar: Current Mode Indicator & "CÁCH CHƠI" Button on the Right */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-4 px-1">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-1">
           <div className="flex items-center space-x-2 text-xs text-amber-300 font-serif">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-stone-400">Chọn một trong 3 hình thức trải nghiệm bên dưới:</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-stone-400 text-[11px] sm:text-xs">Chọn 1 trong 3 trò chơi bên dưới:</span>
           </div>
 
           {/* Button Cách Chơi at the Right Corner */}
@@ -988,16 +988,16 @@ export default function OngVangGame() {
               setRulesTab(activeGameTab);
               setIsRulesModalOpen(true);
             }}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-900/90 via-amber-800/90 to-amber-950/90 hover:from-amber-800 hover:to-amber-900 border border-amber-400/80 text-yellow-200 hover:text-white text-xs font-bold flex items-center space-x-1.5 shadow-lg shadow-amber-950/60 transition-all hover:scale-105 active:scale-95"
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-900/90 via-amber-800/90 to-amber-950/90 hover:from-amber-800 hover:to-amber-900 border border-amber-400/80 text-yellow-200 hover:text-white text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-amber-950/60 transition-all hover:scale-105 active:scale-95"
             title="Nhấp để xem hướng dẫn cách chơi chi tiết"
           >
-            <BookOpen className="w-4 h-4 text-yellow-300" />
-            <span>Hướng Dẫn Cách Chơi</span>
+            <BookOpen className="w-3.5 h-3.5 text-yellow-300" />
+            <span>Cách Chơi</span>
           </button>
         </div>
 
         {/* ================= 3 INTERACTIVE GAME SELECTION CARDS ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3.5 mb-4 sm:mb-6">
           
           {/* Card Game 1: Lật Mảnh Ghép 6 Lá Cờ VN */}
           <div
@@ -1008,6 +1008,9 @@ export default function OngVangGame() {
               stopVietnameseVoice();
               try { soundFX.playFlip(); } catch (e) {}
               setActiveGameTab('puzzle');
+              setTimeout(() => {
+                document.getElementById('active-minigame-view')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 50);
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -1018,34 +1021,31 @@ export default function OngVangGame() {
                 setActiveGameTab('puzzle');
               }
             }}
-            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
+            className={`p-2.5 sm:p-3 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-2.5 group select-none shadow-md ${
               activeGameTab === 'puzzle'
-                ? 'bg-gradient-to-br from-red-950/95 via-[#29130c] to-amber-950/90 border-red-500 ring-2 ring-yellow-400 scale-[1.02] shadow-red-950/80'
+                ? 'bg-gradient-to-br from-red-950/95 via-[#29130c] to-amber-950/90 border-red-500 ring-2 ring-yellow-400 scale-[1.01] shadow-red-950/80'
                 : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-105 ${
               activeGameTab === 'puzzle'
                 ? 'bg-red-600 border border-yellow-400 text-yellow-300'
                 : 'bg-red-950/80 border border-red-500/50 text-red-300'
             }`}>
-              <Flag className="w-5 h-5 fill-current" />
+              <Flag className="w-4 h-4 fill-current" />
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-sm font-serif">1. Lật Mảnh Ghép Lịch Sử</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">1. Lật Mảnh Ghép</h4>
                 {activeGameTab === 'puzzle' && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-red-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi
                   </span>
                 )}
               </div>
-              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
-                6 lá cờ Việt Nam che phủ ảnh tư liệu quý. Bấm từng lá cờ để giải mã hoặc điền đoán ngay sự kiện!
+              <p className="text-[11px] text-stone-300/80 mt-0.5 font-serif line-clamp-1">
+                6 lá cờ Tổ quốc che phủ ảnh tư liệu quý. Mở từng mảnh hoặc đoán ngay!
               </p>
-              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
-                <span>{activeGameTab === 'puzzle' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
-              </div>
             </div>
           </div>
 
@@ -1058,6 +1058,9 @@ export default function OngVangGame() {
               stopVietnameseVoice();
               try { soundFX.playShipHorn(); } catch (e) {}
               setActiveGameTab('journey');
+              setTimeout(() => {
+                document.getElementById('active-minigame-view')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 50);
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -1068,34 +1071,31 @@ export default function OngVangGame() {
                 setActiveGameTab('journey');
               }
             }}
-            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
+            className={`p-2.5 sm:p-3 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-2.5 group select-none shadow-md ${
               activeGameTab === 'journey'
-                ? 'bg-gradient-to-br from-amber-950/95 via-[#29160d] to-yellow-950/80 border-amber-400 ring-2 ring-yellow-400 scale-[1.02] shadow-amber-950/80'
+                ? 'bg-gradient-to-br from-amber-950/95 via-[#29160d] to-yellow-950/80 border-amber-400 ring-2 ring-yellow-400 scale-[1.01] shadow-amber-950/80'
                 : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-105 ${
               activeGameTab === 'journey'
                 ? 'bg-amber-600 border border-yellow-300 text-stone-950'
                 : 'bg-amber-950/80 border border-amber-500/50 text-amber-300'
             }`}>
-              <Dices className="w-5 h-5 animate-bounce" />
+              <Dices className="w-4 h-4 animate-bounce" />
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-sm font-serif">2. Hành Trình Theo Chân Bác</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">2. Hành Trình Theo Chân Bác</h4>
                 {activeGameTab === 'journey' && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi
                   </span>
                 )}
               </div>
-              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
-                Đổ xúc xắc đồng hành cùng Bác qua 16 ô địa danh lịch sử, vượt thử thách và cắm đủ 11 lá cờ Tổ quốc trên hành trình tìm đường cứu nước!
+              <p className="text-[11px] text-stone-300/80 mt-0.5 font-serif line-clamp-1">
+                Lắc xúc xắc đồng hành cùng Bác qua 16 ô địa danh, cắm đủ 11 lá cờ Tổ quốc!
               </p>
-              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
-                <span>{activeGameTab === 'journey' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
-              </div>
             </div>
           </div>
 
@@ -1108,6 +1108,9 @@ export default function OngVangGame() {
               stopVietnameseVoice();
               try { soundFX.playFlip(); } catch (e) {}
               setActiveGameTab('quiz');
+              setTimeout(() => {
+                document.getElementById('active-minigame-view')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 50);
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -1118,43 +1121,41 @@ export default function OngVangGame() {
                 setActiveGameTab('quiz');
               }
             }}
-            className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
+            className={`p-2.5 sm:p-3 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-2.5 group select-none shadow-md ${
               activeGameTab === 'quiz'
-                ? 'bg-gradient-to-br from-[#2c1809] via-[#29130c] to-[#1e1007] border-yellow-400 ring-2 ring-yellow-400 scale-[1.02] shadow-yellow-950/80'
+                ? 'bg-gradient-to-br from-[#2c1809] via-[#29130c] to-[#1e1007] border-yellow-400 ring-2 ring-yellow-400 scale-[1.01] shadow-yellow-950/80'
                 : 'bg-[#1d120a] hover:bg-[#27170e] border-amber-900/60 hover:border-amber-600'
             }`}
           >
-            <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-110 ${
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 shadow-md transition-transform group-hover:scale-105 ${
               activeGameTab === 'quiz'
                 ? 'bg-yellow-500 border border-yellow-300 text-stone-950'
                 : 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300'
             }`}>
-              <Zap className="w-5 h-5 fill-current" />
+              <Zap className="w-4 h-4 fill-current" />
             </div>
-            <div className="flex-grow">
+            <div className="flex-grow min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-bold text-amber-100 text-sm font-serif">3. Đố Vui Tốc Độ 35s</h4>
+                <h4 className="font-bold text-amber-100 text-xs sm:text-sm font-serif truncate">3. Đố Vui Tốc Độ 35s</h4>
                 {activeGameTab === 'quiz' && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-900/90 text-yellow-300 font-bold border border-yellow-400/50 shrink-0">
                     Đang chơi
                   </span>
                 )}
               </div>
-              <p className="text-xs text-stone-300/80 mt-1 font-serif leading-relaxed">
-                24 tư liệu lịch sử có giọng nói tự động, 35 giây làm bài với điểm số đếm lùi và 4 màu Kahoot.
+              <p className="text-[11px] text-stone-300/80 mt-0.5 font-serif line-clamp-1">
+                24 tư liệu lịch sử có giọng nói tự động, 35 giây làm bài với điểm số đếm lùi.
               </p>
-              <div className="mt-2 text-[11px] font-bold text-amber-400 group-hover:text-yellow-300 flex items-center space-x-1">
-                <span>{activeGameTab === 'quiz' ? '✓ Đang trải nghiệm' : 'Nhấp để chuyển game ➜'}</span>
-              </div>
             </div>
           </div>
 
         </div>
 
         {/* Content based on selected Tab */}
-        {activeGameTab === 'puzzle' && <ManhGhepBiAnGame />}
-        {activeGameTab === 'journey' && <HaiTrinhVanDamGame />}
-        {activeGameTab === 'quiz' && (
+        <div id="active-minigame-view" className="scroll-mt-16 sm:scroll-mt-20">
+          {activeGameTab === 'puzzle' && <ManhGhepBiAnGame />}
+          {activeGameTab === 'journey' && <HaiTrinhVanDamGame />}
+          {activeGameTab === 'quiz' && (
           <>
             {/* ================= SCREEN 1: START SCREEN (CLEANED) ================= */}
             {gameState === 'start' && (
@@ -1715,6 +1716,7 @@ export default function OngVangGame() {
         )}
         </>
         )}
+        </div>
 
       </div>
 
@@ -2104,7 +2106,11 @@ export default function OngVangGame() {
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">2.</span>
-                        <span>Dừng chân ở ô Địa Danh: Trả lời câu hỏi lịch sử. Đúng sẽ <strong>cắm cờ Tổ quốc 🇻🇳</strong> lên địa danh đó và tích lũy dặm đường!</span>
+                        <span className="flex items-center flex-wrap gap-1">
+                          <span>Dừng chân ở ô Địa Danh: Trả lời câu hỏi lịch sử. Đúng sẽ <strong>cắm cờ Tổ quốc</strong></span>
+                          <VietnamFlagIcon className="w-3.5 h-2.5 inline-block" />
+                          <span>lên địa danh đó và tích lũy dặm đường!</span>
+                        </span>
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">3.</span>
@@ -2112,7 +2118,11 @@ export default function OngVangGame() {
                       </div>
                       <div className="flex items-start space-x-2">
                         <span className="text-yellow-400 font-bold shrink-0">4.</span>
-                        <span><strong>Mục tiêu tối thượng:</strong> Tiếp tục hành trình và cắm đủ <strong>tất cả 11 lá cờ Việt Nam</strong> trên 11 địa danh lịch sử để giành Đại Thắng Toàn Diện!</span>
+                        <span className="flex items-center flex-wrap gap-1">
+                          <span><strong>Mục tiêu tối thượng:</strong> Tiếp tục hành trình và cắm đủ <strong>tất cả 11 lá cờ Việt Nam</strong></span>
+                          <VietnamFlagIcon className="w-3.5 h-2.5 inline-block" />
+                          <span>trên 11 địa danh lịch sử để giành Đại Thắng Toàn Diện!</span>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -2133,7 +2143,10 @@ export default function OngVangGame() {
                   <div className="p-3 rounded-xl bg-stone-900/70 border border-stone-800 space-y-1">
                     <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
                       <span className="w-5 h-5 rounded-full bg-red-600 text-yellow-300 flex items-center justify-center text-[10px]">2</span>
-                      <span>Cắm cờ Việt Nam 🇻🇳</span>
+                      <span className="flex items-center space-x-1">
+                        <span>Cắm cờ Việt Nam</span>
+                        <VietnamFlagIcon className="w-3.5 h-2.5 inline-block" />
+                      </span>
                     </div>
                     <p className="text-[11px] text-stone-300 font-serif leading-relaxed">
                       Trả lời chính xác thử thách lịch sử để cắm cờ Tổ quốc đánh dấu mốc son rực rỡ tại mỗi quốc gia.
