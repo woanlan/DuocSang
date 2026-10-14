@@ -1072,9 +1072,50 @@ export default function HaiTrinhVanDamGame() {
     </div>
 
         {/* ================= RIGHT COLUMN: INTERACTIVE EXPEDITION LOG & REFINED CONTROLS (DESKTOP) ================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
+        <div className="lg:col-span-4 flex flex-col space-y-3 sm:space-y-3.5">
           
-          {/* Card 1: Current Landmark Live Detail */}
+          {/* Card 1: 11 Vietnamese Landmark Flags Tracker (ĐƯỢC ĐƯA LÊN TRÊN ĐẦU) */}
+          <div className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#140b06]/95 border-2 border-amber-600/50 shadow-xl space-y-3">
+            <div className="flex items-center justify-between text-xs sm:text-sm font-serif font-bold border-b border-amber-900/50 pb-2">
+              <span className="text-amber-200 flex items-center space-x-2">
+                <VietnamFlagIcon className="w-4 h-3 rounded-[2px]" />
+                <span className="text-yellow-300">Tiến Độ Cắm Cờ Lịch Sử:</span>
+              </span>
+              <span className="font-mono text-yellow-300 text-sm font-black">{claimedCount} / {totalLandmarks} Mốc</span>
+            </div>
+
+            {/* Grid of 11 small milestone chips */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-1">
+              {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
+                const isPlanted = claimedTiles.includes(lm.id);
+                const isHere = currentTileIdx === lm.id;
+                return (
+                  <div 
+                    key={idx}
+                    onClick={() => {
+                      if (lm.type === 'landmark') handleLandedOnTile(lm.id);
+                    }}
+                    className={`p-2 rounded-xl border text-center cursor-pointer transition-all hover:scale-105 active:scale-95 ${
+                      isPlanted
+                        ? 'bg-gradient-to-b from-red-950 to-[#2a0e08] border-yellow-400 text-yellow-200 shadow-sm ring-1 ring-yellow-400/50'
+                        : isHere
+                          ? 'bg-amber-900/90 border-yellow-300 ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(251,191,36,0.6)]'
+                          : 'bg-stone-900/70 border-stone-800 text-stone-400 hover:border-amber-600'
+                    }`}
+                    title={lm.title}
+                  >
+                    <div className="text-[9px] font-mono font-bold leading-none mb-1 text-amber-300">#{idx + 1}</div>
+                    <div className="text-[10px] sm:text-[11px] font-serif font-semibold truncate leading-tight">{lm.title.split('&')[0]}</div>
+                    <div className={`text-[8px] font-mono font-bold mt-1 ${isPlanted ? 'text-yellow-300 animate-pulse' : 'text-stone-500'}`}>
+                      {isPlanted ? '★ ĐÃ CẮM' : 'Chưa'}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Card 2: Current Landmark Live Detail */}
           <div className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border-2 border-amber-600/50 shadow-xl space-y-3">
             <div className="flex items-center justify-between border-b border-amber-900/50 pb-2.5">
               <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
@@ -1120,47 +1161,6 @@ export default function HaiTrinhVanDamGame() {
                 {currentTile.narrative}
               </p>
             )}
-          </div>
-
-          {/* Card 2: 11 Vietnamese Landmark Flags Tracker */}
-          <div className="p-4 rounded-2xl sm:rounded-3xl bg-[#140b06]/95 border border-amber-800/50 shadow-lg space-y-2.5">
-            <div className="flex items-center justify-between text-xs font-serif font-bold">
-              <span className="text-amber-200 flex items-center space-x-1.5">
-                <VietnamFlagIcon className="w-4 h-2.5" />
-                <span>Tiến Độ Cắm Cờ Lịch Sử:</span>
-              </span>
-              <span className="font-mono text-yellow-300">{claimedCount} / {totalLandmarks} Mốc</span>
-            </div>
-
-            {/* Grid of 11 small milestone chips */}
-            <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-4 gap-1.5 pt-1">
-              {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
-                const isPlanted = claimedTiles.includes(lm.id);
-                const isHere = currentTileIdx === lm.id;
-                return (
-                  <div 
-                    key={idx}
-                    onClick={() => {
-                      if (lm.type === 'landmark') handleLandedOnTile(lm.id);
-                    }}
-                    className={`p-1.5 rounded-lg border text-center cursor-pointer transition-all ${
-                      isPlanted
-                        ? 'bg-red-950/70 border-yellow-400 text-yellow-200 shadow-sm'
-                        : isHere
-                          ? 'bg-amber-900/80 border-yellow-300 ring-2 ring-yellow-400'
-                          : 'bg-stone-900/60 border-stone-800 text-stone-400 hover:border-amber-700'
-                    }`}
-                    title={lm.title}
-                  >
-                    <div className="text-[8px] font-mono font-bold leading-none mb-0.5">#{idx + 1}</div>
-                    <div className="text-[9px] font-serif truncate leading-tight">{lm.title.split('&')[0]}</div>
-                    <div className="text-[7px] text-amber-300/80 font-mono mt-0.5">
-                      {isPlanted ? '★ ĐÃ CẮM' : 'Chưa'}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
 
         </div>
