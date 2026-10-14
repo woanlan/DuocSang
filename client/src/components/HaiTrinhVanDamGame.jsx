@@ -774,36 +774,36 @@ export default function HaiTrinhVanDamGame() {
   };
 
   return (
-    <div id="journey-game-container" className="w-full max-w-7xl mx-auto space-y-2 sm:space-y-3">
+    <div id="journey-game-container" className="w-full max-w-7xl mx-auto space-y-3 sm:space-y-4">
       
       {/* ================= COMPACT HISTORICAL HUD BAR (PROGRESS & STATS) ================= */}
-      <div className="bg-[#17100a]/95 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-amber-600/40 shadow-lg flex items-center justify-between gap-2.5">
+      <div className="bg-[#17100a]/95 backdrop-blur-md px-3 sm:px-5 py-2.5 sm:py-3 rounded-2xl border border-amber-600/40 shadow-lg flex items-center justify-between gap-3">
         
         {/* Left: Title & Subtitle */}
-        <div className="flex items-center space-x-2.5 min-w-0">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center text-stone-950 font-black shadow shrink-0">
-            <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950 animate-spin-slow" />
+        <div className="flex items-center space-x-3 min-w-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center text-stone-950 font-black shadow shrink-0">
+            <Compass className="w-5 h-5 text-stone-950 animate-spin-slow" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-xs sm:text-sm md:text-base font-serif font-bold text-amber-100 leading-tight break-words">
+            <h3 className="text-sm sm:text-base md:text-lg font-serif font-bold text-amber-100 leading-tight break-words">
               Hành Trình Theo Chân Bác
             </h3>
-            <span className="text-[9px] sm:text-[10px] text-amber-400 font-serif block break-words">
-              16 Mốc Son Lịch Sử (1911 - 1941)
+            <span className="text-[10px] sm:text-xs text-amber-400 font-serif block break-words">
+              16 Mốc Son Lịch Sử Giải Phóng Dân Tộc (1911 - 1941)
             </span>
           </div>
         </div>
 
         {/* Center: Vietnam Flag Goal & Progress */}
-        <div className="flex-1 max-w-xs sm:max-w-sm mx-1 sm:mx-3">
-          <div className="flex items-center justify-between text-[10px] sm:text-xs font-serif mb-1 px-0.5">
+        <div className="flex-1 max-w-xs sm:max-w-md mx-2 sm:mx-4">
+          <div className="flex items-center justify-between text-xs font-serif mb-1 px-0.5">
             <span className="text-yellow-300 font-bold flex items-center space-x-1.5 whitespace-nowrap">
               <VietnamFlagIcon className="w-4 h-3 rounded-[2px] shrink-0" />
               <span>Cờ đã cắm: <span className="font-mono text-amber-200">{claimedCount}/{totalLandmarks}</span></span>
             </span>
             <span className="text-amber-300 font-mono font-bold ml-1">{progressPercent}%</span>
           </div>
-          <div className="w-full h-2 rounded-full bg-stone-900 overflow-hidden border border-amber-900/60 p-0.5">
+          <div className="w-full h-2.5 rounded-full bg-stone-900 overflow-hidden border border-amber-900/60 p-0.5">
             <div 
               className="h-full rounded-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 transition-all duration-500 shadow"
               style={{ width: `${progressPercent}%` }}
@@ -812,33 +812,37 @@ export default function HaiTrinhVanDamGame() {
         </div>
 
         {/* Right: Stats & Restart */}
-        <div className="flex items-center space-x-2 shrink-0">
-          <div className="bg-stone-900/90 border border-amber-900/60 px-2.5 py-1 rounded-xl text-center hidden md:block">
-            <span className="text-[9px] text-stone-400 uppercase">Hải Lý: </span>
+        <div className="flex items-center space-x-2.5 shrink-0">
+          <div className="bg-stone-900/90 border border-amber-900/60 px-3 py-1.5 rounded-xl text-center hidden md:block">
+            <span className="text-[10px] text-stone-400 uppercase">Hải Lý: </span>
             <span className="text-xs font-bold font-mono text-cyan-300">{totalNauticalMiles.toLocaleString()} hl</span>
           </div>
 
-          <div className="bg-stone-900/90 border border-amber-900/60 px-2.5 py-1 rounded-xl text-center hidden sm:block">
-            <span className="text-[9px] text-stone-400 uppercase">Lượt: </span>
+          <div className="bg-stone-900/90 border border-amber-900/60 px-3 py-1.5 rounded-xl text-center hidden sm:block">
+            <span className="text-[10px] text-stone-400 uppercase">Lượt đổ: </span>
             <span className="text-xs font-bold font-mono text-amber-200">#{diceCount}</span>
           </div>
 
           <button
             onClick={handleRestartGame}
-            className="p-1.5 sm:p-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
+            className="p-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
             title="Làm mới lại hành trình"
           >
-            <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* ================= 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
-      <div 
-        className="relative aspect-square w-full max-w-[min(96vw,840px)] mx-auto p-1.5 xs:p-2 sm:p-3 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
-      >
-        {/* Subtle Map Watermark Texture in background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
+      {/* ================= MAIN ARENA GRID (FULL-BLEED 2-COLUMN ON DESKTOP, STACKED ON MOBILE) ================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-stretch">
+        
+        {/* ================= LEFT / MAIN: 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
+        <div className="lg:col-span-8 flex justify-center">
+          <div 
+            className="relative aspect-square w-full max-w-[min(96vw,700px)] p-1.5 xs:p-2 sm:p-3 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
+          >
+            {/* Subtle Map Watermark Texture in background */}
+            <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
 
         {/* 5x5 Grid Container */}
         <div className="relative w-full h-full grid grid-cols-5 grid-rows-5 gap-1 sm:gap-1.5">
@@ -1061,6 +1065,121 @@ export default function HaiTrinhVanDamGame() {
               </div>
             </div>
 
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+        {/* ================= RIGHT COLUMN: INTERACTIVE EXPEDITION LOG & REFINED CONTROLS (DESKTOP) ================= */}
+        <div className="lg:col-span-4 flex flex-col justify-between space-y-3">
+          
+          {/* Card 1: Current Landmark Live Detail */}
+          <div className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border-2 border-amber-600/50 shadow-xl space-y-3">
+            <div className="flex items-center justify-between border-b border-amber-900/50 pb-2.5">
+              <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
+                <Compass className="w-3.5 h-3.5 text-yellow-400" />
+                <span>MỐC HIỆN TẠI (#{currentTile.id + 1}/16)</span>
+              </span>
+              <span className={`text-[10px] font-serif font-bold px-2 py-0.5 rounded-full ${
+                claimedTiles.includes(currentTile.id)
+                  ? 'bg-red-900/80 text-yellow-300 border border-yellow-400/60'
+                  : 'bg-stone-900 text-stone-400'
+              }`}>
+                {claimedTiles.includes(currentTile.id) ? 'ĐÃ CẮM CỜ ✓' : 'CHƯA CẮM CỜ'}
+              </span>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              {currentTile.imageUrl ? (
+                <div className="w-20 h-16 rounded-xl overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
+                  <img src={currentTile.imageUrl} alt={currentTile.title} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className="w-16 h-16 rounded-xl bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
+                  <Gift className="w-6 h-6 text-yellow-300" />
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
+                <h4 className="font-serif font-bold text-sm sm:text-base text-yellow-100 leading-tight">
+                  {currentTile.title}
+                </h4>
+                <p className="text-xs text-amber-400 font-serif mt-0.5">
+                  {currentTile.country || currentTile.subtitle}
+                </p>
+                {currentTile.nauticalMiles > 0 && (
+                  <span className="text-[11px] font-mono text-cyan-300 font-semibold block mt-1">
+                    ⚓ {currentTile.nauticalMiles.toLocaleString()} Hải lý
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {currentTile.narrative && (
+              <p className="text-xs text-stone-300 font-serif leading-relaxed line-clamp-3 bg-black/40 p-2.5 rounded-xl border border-amber-900/40">
+                {currentTile.narrative}
+              </p>
+            )}
+          </div>
+
+          {/* Card 2: 11 Vietnamese Landmark Flags Tracker */}
+          <div className="p-4 rounded-2xl sm:rounded-3xl bg-[#140b06]/95 border border-amber-800/50 shadow-lg space-y-2.5">
+            <div className="flex items-center justify-between text-xs font-serif font-bold">
+              <span className="text-amber-200 flex items-center space-x-1.5">
+                <VietnamFlagIcon className="w-4 h-2.5" />
+                <span>Tiến Độ Cắm Cờ Lịch Sử:</span>
+              </span>
+              <span className="font-mono text-yellow-300">{claimedCount} / {totalLandmarks} Mốc</span>
+            </div>
+
+            {/* Grid of 11 small milestone chips */}
+            <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-4 gap-1.5 pt-1">
+              {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
+                const isPlanted = claimedTiles.includes(lm.id);
+                const isHere = currentTileIdx === lm.id;
+                return (
+                  <div 
+                    key={idx}
+                    onClick={() => {
+                      if (lm.type === 'landmark') handleLandedOnTile(lm.id);
+                    }}
+                    className={`p-1.5 rounded-lg border text-center cursor-pointer transition-all ${
+                      isPlanted
+                        ? 'bg-red-950/70 border-yellow-400 text-yellow-200 shadow-sm'
+                        : isHere
+                          ? 'bg-amber-900/80 border-yellow-300 ring-2 ring-yellow-400'
+                          : 'bg-stone-900/60 border-stone-800 text-stone-400 hover:border-amber-700'
+                    }`}
+                    title={lm.title}
+                  >
+                    <div className="text-[8px] font-mono font-bold leading-none mb-0.5">#{idx + 1}</div>
+                    <div className="text-[9px] font-serif truncate leading-tight">{lm.title.split('&')[0]}</div>
+                    <div className="text-[7px] text-amber-300/80 font-mono mt-0.5">
+                      {isPlanted ? '★ ĐÃ CẮM' : 'Chưa'}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Card 3: Big Roll Action Box */}
+          <div className="p-4 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-stone-950 via-amber-950/60 to-stone-950 border border-amber-600/50 shadow-xl space-y-2 text-center">
+            <button
+              disabled={isRolling || isMoving || isWaitingChallenge || Boolean(activeChallengeTile)}
+              onClick={handleRollDice}
+              className={`w-full py-3.5 px-4 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2 shadow-xl ${
+                isRolling || isMoving || isWaitingChallenge
+                  ? 'bg-stone-800 text-stone-500 border border-stone-700 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-stone-950 border-2 border-yellow-200 shadow-[0_0_20px_rgba(251,191,36,0.6)] hover:scale-[1.02] active:scale-95'
+              }`}
+            >
+              <Dices className={`w-5 h-5 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
+              <span>{isRolling ? "ĐANG LẮC XÚC XẮC..." : isMoving ? "BÁC ĐANG DI CHUYỂN..." : "LẮC XÚC XẮC TIẾN BƯỚC"}</span>
+            </button>
+            <p className="text-[10px] text-stone-400 font-serif">
+              Lắc xúc xắc ngẫu nhiên công bằng • Vượt qua 16 ô mốc son
+            </p>
           </div>
 
         </div>
