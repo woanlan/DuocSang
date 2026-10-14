@@ -16,114 +16,7 @@ import {
 } from '../services/api';
 import ManhGhepBiAnGame from './ManhGhepBiAnGame';
 import HaiTrinhVanDamGame from './HaiTrinhVanDamGame';
-
-// ================= WEB AUDIO API SOUND SYNTHESIZER =================
-class GameSoundFX {
-  constructor() {
-    this.ctx = null;
-    this.enabled = true;
-  }
-
-  init() {
-    if (!this.ctx && typeof window !== 'undefined') {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) {
-        this.ctx = new AudioCtx();
-      }
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
-
-  playCorrect() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-      notes.forEach((freq, idx) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.08);
-        gain.gain.setValueAtTime(0.12, this.ctx.currentTime + idx * 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.08 + 0.22);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(this.ctx.currentTime + idx * 0.08);
-        osc.stop(this.ctx.currentTime + idx * 0.08 + 0.22);
-      });
-    } catch (e) {}
-  }
-
-  playWrong() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(180, this.ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(110, this.ctx.currentTime + 0.3);
-      gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.3);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.3);
-    } catch (e) {}
-  }
-
-  playTick() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.05);
-    } catch (e) {}
-  }
-
-  playVictory() {
-    if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const fanfare = [
-        { f: 523.25, t: 0.0, d: 0.15 },
-        { f: 659.25, t: 0.15, d: 0.15 },
-        { f: 783.99, t: 0.3, d: 0.2 },
-        { f: 1046.50, t: 0.5, d: 0.4 },
-        { f: 880.00, t: 0.75, d: 0.15 },
-        { f: 1046.50, t: 0.95, d: 0.5 }
-      ];
-      fanfare.forEach(item => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(item.f, this.ctx.currentTime + item.t);
-        gain.gain.setValueAtTime(0.15, this.ctx.currentTime + item.t);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + item.t + item.d);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(this.ctx.currentTime + item.t);
-        osc.stop(this.ctx.currentTime + item.t + item.d);
-      });
-    } catch (e) {}
-  }
-}
-
-const soundFX = new GameSoundFX();
+import { soundFX, stopVietnameseVoice } from '../utils/gameAudio';
 
 // ================= QUIZ QUESTION BANK (24 AUTHENTIC HISTORICAL PHOTOS) =================
 export const PHOTO_QUIZ_BANK = [
@@ -1108,9 +1001,22 @@ export default function OngVangGame() {
           
           {/* Card Game 1: Lật Mảnh Ghép 6 Lá Cờ VN */}
           <div
+            role="button"
+            tabIndex={0}
             onClick={() => {
-              soundFX.playFlip();
+              stopVoice();
+              stopVietnameseVoice();
+              try { soundFX.playFlip(); } catch (e) {}
               setActiveGameTab('puzzle');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                stopVoice();
+                stopVietnameseVoice();
+                try { soundFX.playFlip(); } catch (err) {}
+                setActiveGameTab('puzzle');
+              }
             }}
             className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'puzzle'
@@ -1145,9 +1051,22 @@ export default function OngVangGame() {
 
           {/* Card Game 2: Bản Đồ Hải Trình Vạn Dặm Tương Tác */}
           <div
+            role="button"
+            tabIndex={0}
             onClick={() => {
-              soundFX.playShipHorn();
+              stopVoice();
+              stopVietnameseVoice();
+              try { soundFX.playShipHorn(); } catch (e) {}
               setActiveGameTab('journey');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                stopVoice();
+                stopVietnameseVoice();
+                try { soundFX.playShipHorn(); } catch (err) {}
+                setActiveGameTab('journey');
+              }
             }}
             className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'journey'
@@ -1182,9 +1101,22 @@ export default function OngVangGame() {
 
           {/* Card Game 3: Đố Vui Tốc Độ 35s */}
           <div
+            role="button"
+            tabIndex={0}
             onClick={() => {
-              soundFX.playFlip();
+              stopVoice();
+              stopVietnameseVoice();
+              try { soundFX.playFlip(); } catch (e) {}
               setActiveGameTab('quiz');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                stopVoice();
+                stopVietnameseVoice();
+                try { soundFX.playFlip(); } catch (err) {}
+                setActiveGameTab('quiz');
+              }
             }}
             className={`p-4 rounded-2xl border cursor-pointer transition-all duration-300 flex items-start space-x-3.5 group select-none shadow-xl ${
               activeGameTab === 'quiz'

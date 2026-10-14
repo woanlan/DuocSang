@@ -1120,7 +1120,7 @@ export default function ManhGhepBiAnGame() {
                     THỬ THÁCH MỞ KHÓA
                   </span>
                   <h4 className="text-sm sm:text-base font-serif font-bold text-amber-100">
-                    {activeTile.name}
+                    Câu Hỏi Mở Khóa Mảnh Ghép
                   </h4>
                 </div>
               </div>
