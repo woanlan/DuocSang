@@ -637,6 +637,25 @@ function normalizeVN(str) {
     .trim();
 }
 
+// Helper to shuffle options so correct answer is randomly distributed among A, B, C, D
+function shuffleTileOptions(tile) {
+  if (!tile || !tile.options) return tile;
+  const indexed = tile.options.map((opt, idx) => ({
+    text: opt,
+    isCorrect: idx === tile.correctIndex
+  }));
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  const newCorrectIndex = indexed.findIndex(item => item.isCorrect);
+  return {
+    ...tile,
+    options: indexed.map(item => item.text),
+    correctIndex: newCorrectIndex
+  };
+}
+
 export default function ManhGhepBiAnGame() {
   const [currentLevelIdx, setCurrentLevelIdx] = useState(0);
   const [revealedTiles, setRevealedTiles] = useState([]); // Array of tile IDs (1 to 6)
@@ -690,13 +709,14 @@ export default function ManhGhepBiAnGame() {
       return;
     }
 
-    // Open question challenge for this tile
-    setActiveTile(tile);
+    // Shuffle options dynamically so correct answer is randomly A, B, C, or D
+    const shuffledTile = shuffleTileOptions(tile);
+    setActiveTile(shuffledTile);
     setSelectedOption(null);
     setShowQuestionResult(false);
     setGuessFeedback(null);
     // Read the question aloud immediately
-    speakVietnameseVoice(tile.question);
+    speakVietnameseVoice(shuffledTile.question);
   };
 
   // Answer tile challenge

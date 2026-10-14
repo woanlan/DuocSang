@@ -262,6 +262,25 @@ export const JOURNEY_STOPS = [
   }
 ];
 
+// Helper to shuffle port challenge options so correct answer is randomly among A, B, C, D
+function shufflePortOptions(stop) {
+  if (!stop || !stop.options) return stop;
+  const indexed = stop.options.map((opt, idx) => ({
+    text: opt,
+    isCorrect: idx === stop.correctIndex
+  }));
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  const newCorrectIndex = indexed.findIndex(item => item.isCorrect);
+  return {
+    ...stop,
+    options: indexed.map(item => item.text),
+    correctIndex: newCorrectIndex
+  };
+}
+
 export default function HaiTrinhVanDamGame() {
   const [currentStopIndex, setCurrentStopIndex] = useState(0); // Current active stop
   const [visitedStops, setVisitedStops] = useState([0]); // Set of unlocked stops (start with stop 0 unlocked)
@@ -286,11 +305,12 @@ export default function HaiTrinhVanDamGame() {
   const handleOpenPort = (stop, index) => {
     stopVietnameseVoice();
     soundFX.playFlip();
-    setSelectedPortModal({ stop, index });
+    const shuffledStop = shufflePortOptions(stop);
+    setSelectedPortModal({ stop: shuffledStop, index });
     setChallengeOption(null);
     setIsAnswerChecked(false);
     // Read the harbor challenge question aloud immediately
-    speakVietnameseVoice(stop.question);
+    speakVietnameseVoice(shuffledStop.question);
   };
 
   // Submit challenge answer
