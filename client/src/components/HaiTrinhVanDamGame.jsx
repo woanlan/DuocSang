@@ -3,7 +3,7 @@ import {
   Anchor, Compass, MapPin, Ship, Award,
   Sparkles, CheckCircle2, Volume2, Trophy, RotateCcw,
   Flag, Shield, Check, X, Dices, Gift, Star,
-  HelpCircle, AlertCircle
+  HelpCircle, AlertCircle, Maximize2, Minimize2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundFX, speakVietnameseVoice, stopVietnameseVoice } from '../utils/gameAudio';
@@ -424,6 +424,9 @@ export default function HaiTrinhVanDamGame() {
   // Grand victory modal (when all 11 flags are planted)
   const [isGrandFinale, setIsGrandFinale] = useState(false);
 
+  // Fullscreen view toggle without scrolling
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   // Clean voice on unmount
   useEffect(() => {
     return () => {
@@ -774,36 +777,42 @@ export default function HaiTrinhVanDamGame() {
   };
 
   return (
-    <div id="journey-game-container" className="w-full max-w-7xl mx-auto space-y-3 sm:space-y-4">
+    <div 
+      id="journey-game-container" 
+      className={isFullscreen 
+        ? "fixed inset-0 z-[100] bg-[#120a06]/98 backdrop-blur-md p-2 sm:p-4 overflow-y-auto flex flex-col justify-start"
+        : "w-full max-w-7xl mx-auto space-y-2 sm:space-y-2.5"
+      }
+    >
       
       {/* ================= COMPACT HISTORICAL HUD BAR (PROGRESS & STATS) ================= */}
-      <div className="bg-[#17100a]/95 backdrop-blur-md px-3 sm:px-5 py-2.5 sm:py-3 rounded-2xl border border-amber-600/40 shadow-lg flex items-center justify-between gap-3">
+      <div className="bg-[#17100a]/95 backdrop-blur-md px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-amber-600/40 shadow-lg flex items-center justify-between gap-2">
         
         {/* Left: Title & Subtitle */}
-        <div className="flex items-center space-x-3 min-w-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center text-stone-950 font-black shadow shrink-0">
-            <Compass className="w-5 h-5 text-stone-950 animate-spin-slow" />
+        <div className="flex items-center space-x-2 min-w-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-amber-600 to-yellow-500 border border-yellow-300 flex items-center justify-center text-stone-950 font-black shadow shrink-0">
+            <Compass className="w-4 h-4 text-stone-950 animate-spin-slow" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-sm sm:text-base md:text-lg font-serif font-bold text-amber-100 leading-tight break-words">
+            <h3 className="text-xs sm:text-sm md:text-base font-serif font-bold text-amber-100 leading-tight truncate">
               Hành Trình Theo Chân Bác
             </h3>
-            <span className="text-[10px] sm:text-xs text-amber-400 font-serif block break-words">
-              16 Mốc Son Lịch Sử Giải Phóng Dân Tộc (1911 - 1941)
+            <span className="text-[9px] sm:text-[10px] text-amber-400 font-serif block truncate">
+              16 Mốc Son Lịch Sử (1911 - 1941)
             </span>
           </div>
         </div>
 
         {/* Center: Vietnam Flag Goal & Progress */}
-        <div className="flex-1 max-w-xs sm:max-w-md mx-2 sm:mx-4">
-          <div className="flex items-center justify-between text-xs font-serif mb-1 px-0.5">
-            <span className="text-yellow-300 font-bold flex items-center space-x-1.5 whitespace-nowrap">
-              <VietnamFlagIcon className="w-4 h-3 rounded-[2px] shrink-0" />
+        <div className="flex-1 max-w-xs sm:max-w-sm mx-1 sm:mx-3">
+          <div className="flex items-center justify-between text-[11px] font-serif mb-0.5 px-0.5">
+            <span className="text-yellow-300 font-bold flex items-center space-x-1 whitespace-nowrap">
+              <VietnamFlagIcon className="w-3.5 h-2.5 rounded-[2px] shrink-0" />
               <span>Cờ đã cắm: <span className="font-mono text-amber-200">{claimedCount}/{totalLandmarks}</span></span>
             </span>
-            <span className="text-amber-300 font-mono font-bold ml-1">{progressPercent}%</span>
+            <span className="text-amber-300 font-mono font-bold text-[11px] ml-1">{progressPercent}%</span>
           </div>
-          <div className="w-full h-2.5 rounded-full bg-stone-900 overflow-hidden border border-amber-900/60 p-0.5">
+          <div className="w-full h-2 rounded-full bg-stone-900 overflow-hidden border border-amber-900/60 p-0.5">
             <div 
               className="h-full rounded-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 transition-all duration-500 shadow"
               style={{ width: `${progressPercent}%` }}
@@ -811,35 +820,47 @@ export default function HaiTrinhVanDamGame() {
           </div>
         </div>
 
-        {/* Right: Stats & Restart */}
-        <div className="flex items-center space-x-2.5 shrink-0">
-          <div className="bg-stone-900/90 border border-amber-900/60 px-3 py-1.5 rounded-xl text-center hidden md:block">
-            <span className="text-[10px] text-stone-400 uppercase">Hải Lý: </span>
-            <span className="text-xs font-bold font-mono text-cyan-300">{totalNauticalMiles.toLocaleString()} hl</span>
+        {/* Right: Stats, Fullscreen & Restart */}
+        <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+          <div className="bg-stone-900/90 border border-amber-900/60 px-2 py-1 rounded-lg text-center hidden md:block">
+            <span className="text-[9px] text-stone-400 uppercase">Hải Lý: </span>
+            <span className="text-[11px] font-bold font-mono text-cyan-300">{totalNauticalMiles.toLocaleString()} hl</span>
           </div>
 
-          <div className="bg-stone-900/90 border border-amber-900/60 px-3 py-1.5 rounded-xl text-center hidden sm:block">
-            <span className="text-[10px] text-stone-400 uppercase">Lượt đổ: </span>
-            <span className="text-xs font-bold font-mono text-amber-200">#{diceCount}</span>
+          <div className="bg-stone-900/90 border border-amber-900/60 px-2 py-1 rounded-lg text-center hidden sm:block">
+            <span className="text-[9px] text-stone-400 uppercase">Lượt: </span>
+            <span className="text-[11px] font-bold font-mono text-amber-200">#{diceCount}</span>
           </div>
 
           <button
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            className="p-1.5 sm:p-2 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
+            title={isFullscreen ? "Thu nhỏ giao diện" : "Xem toàn màn hình không cuộn"}
+          >
+            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5 text-yellow-300" /> : <Maximize2 className="w-3.5 h-3.5 text-amber-300" />}
+          </button>
+
+          <button
             onClick={handleRestartGame}
-            className="p-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
+            className="p-1.5 sm:p-2 rounded-lg bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs"
             title="Làm mới lại hành trình"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
 
       {/* ================= MAIN ARENA GRID (FULL-BLEED 2-COLUMN ON DESKTOP, STACKED ON MOBILE) ================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-3 items-start">
         
         {/* ================= LEFT / MAIN: 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
-        <div className="lg:col-span-8 flex justify-center">
+        <div className="lg:col-span-8 flex justify-center items-center">
           <div 
-            className="relative aspect-square w-full max-w-[min(96vw,700px)] p-1.5 xs:p-2 sm:p-3 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 sm:border-4 border-amber-600/60 shadow-2xl overflow-hidden select-none"
+            className={`relative aspect-square w-full ${
+              isFullscreen 
+                ? 'max-w-[min(90vw,calc(100vh-120px),680px)]' 
+                : 'max-w-[min(100%,calc(100vh-190px),510px)]'
+            } p-1 xs:p-1.5 sm:p-2 rounded-2xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 border-amber-600/60 shadow-2xl overflow-hidden select-none`}
           >
             {/* Subtle Map Watermark Texture in background */}
             <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
@@ -1072,20 +1093,20 @@ export default function HaiTrinhVanDamGame() {
     </div>
 
         {/* ================= RIGHT COLUMN: INTERACTIVE EXPEDITION LOG & REFINED CONTROLS (DESKTOP) ================= */}
-        <div className="lg:col-span-4 flex flex-col space-y-3 sm:space-y-3.5">
+        <div className="lg:col-span-4 flex flex-col space-y-2 sm:space-y-2.5">
           
-          {/* Card 1: 11 Vietnamese Landmark Flags Tracker (ĐƯỢC ĐƯA LÊN TRÊN ĐẦU) */}
-          <div className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-[#140b06]/95 border-2 border-amber-600/50 shadow-xl space-y-3">
-            <div className="flex items-center justify-between text-xs sm:text-sm font-serif font-bold border-b border-amber-900/50 pb-2">
-              <span className="text-amber-200 flex items-center space-x-2">
-                <VietnamFlagIcon className="w-4 h-3 rounded-[2px]" />
-                <span className="text-yellow-300">Tiến Độ Cắm Cờ Lịch Sử:</span>
+          {/* Card 1: 11 Vietnamese Landmark Flags Tracker */}
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#140b06]/95 border border-amber-600/50 shadow-lg space-y-1.5">
+            <div className="flex items-center justify-between text-xs font-serif font-bold border-b border-amber-900/50 pb-1.5">
+              <span className="text-amber-200 flex items-center space-x-1.5">
+                <VietnamFlagIcon className="w-3.5 h-2.5 rounded-[2px]" />
+                <span className="text-yellow-300 text-xs">Tiến Độ Cắm Cờ Lịch Sử:</span>
               </span>
-              <span className="font-mono text-yellow-300 text-sm font-black">{claimedCount} / {totalLandmarks} Mốc</span>
+              <span className="font-mono text-yellow-300 text-xs font-black">{claimedCount} / {totalLandmarks} Mốc</span>
             </div>
 
             {/* Grid of 11 small milestone chips */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-1">
+            <div className="grid grid-cols-4 gap-1 pt-0.5">
               {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
                 const isPlanted = claimedTiles.includes(lm.id);
                 const isHere = currentTileIdx === lm.id;
@@ -1095,18 +1116,18 @@ export default function HaiTrinhVanDamGame() {
                     onClick={() => {
                       if (lm.type === 'landmark') handleLandedOnTile(lm.id);
                     }}
-                    className={`p-2 rounded-xl border text-center cursor-pointer transition-all hover:scale-105 active:scale-95 ${
+                    className={`p-1 sm:p-1.5 rounded-lg border text-center cursor-pointer transition-all hover:scale-105 active:scale-95 ${
                       isPlanted
                         ? 'bg-gradient-to-b from-red-950 to-[#2a0e08] border-yellow-400 text-yellow-200 shadow-sm ring-1 ring-yellow-400/50'
                         : isHere
-                          ? 'bg-amber-900/90 border-yellow-300 ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(251,191,36,0.6)]'
+                          ? 'bg-amber-900/90 border-yellow-300 ring-2 ring-yellow-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]'
                           : 'bg-stone-900/70 border-stone-800 text-stone-400 hover:border-amber-600'
                     }`}
                     title={lm.title}
                   >
-                    <div className="text-[9px] font-mono font-bold leading-none mb-1 text-amber-300">#{idx + 1}</div>
-                    <div className="text-[10px] sm:text-[11px] font-serif font-semibold truncate leading-tight">{lm.title.split('&')[0]}</div>
-                    <div className={`text-[8px] font-mono font-bold mt-1 ${isPlanted ? 'text-yellow-300 animate-pulse' : 'text-stone-500'}`}>
+                    <div className="text-[8px] font-mono font-bold leading-none mb-0.5 text-amber-300">#{idx + 1}</div>
+                    <div className="text-[9px] sm:text-[10px] font-serif font-semibold truncate leading-tight">{lm.title.split('&')[0]}</div>
+                    <div className={`text-[7px] font-mono font-bold mt-0.5 ${isPlanted ? 'text-yellow-300 animate-pulse' : 'text-stone-500'}`}>
                       {isPlanted ? '★ ĐÃ CẮM' : 'Chưa'}
                     </div>
                   </div>
@@ -1116,13 +1137,13 @@ export default function HaiTrinhVanDamGame() {
           </div>
 
           {/* Card 2: Current Landmark Live Detail */}
-          <div className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border-2 border-amber-600/50 shadow-xl space-y-3">
-            <div className="flex items-center justify-between border-b border-amber-900/50 pb-2.5">
-              <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
-                <Compass className="w-3.5 h-3.5 text-yellow-400" />
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border border-amber-600/50 shadow-lg space-y-1.5">
+            <div className="flex items-center justify-between border-b border-amber-900/50 pb-1.5">
+              <span className="text-[9px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
+                <Compass className="w-3 h-3 text-yellow-400" />
                 <span>MỐC HIỆN TẠI (#{currentTile.id + 1}/16)</span>
               </span>
-              <span className={`text-[10px] font-serif font-bold px-2 py-0.5 rounded-full ${
+              <span className={`text-[9px] font-serif font-bold px-1.5 py-0.5 rounded-full ${
                 claimedTiles.includes(currentTile.id)
                   ? 'bg-red-900/80 text-yellow-300 border border-yellow-400/60'
                   : 'bg-stone-900 text-stone-400'
@@ -1131,25 +1152,25 @@ export default function HaiTrinhVanDamGame() {
               </span>
             </div>
 
-            <div className="flex items-start space-x-3">
+            <div className="flex items-start space-x-2.5">
               {currentTile.imageUrl ? (
-                <div className="w-20 h-16 rounded-xl overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
+                <div className="w-14 h-12 rounded-lg overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
                   <img src={currentTile.imageUrl} alt={currentTile.title} className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-16 h-16 rounded-xl bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
-                  <Gift className="w-6 h-6 text-yellow-300" />
+                <div className="w-12 h-12 rounded-lg bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
+                  <Gift className="w-5 h-5 text-yellow-300" />
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <h4 className="font-serif font-bold text-sm sm:text-base text-yellow-100 leading-tight">
+                <h4 className="font-serif font-bold text-xs sm:text-sm text-yellow-100 leading-tight truncate">
                   {currentTile.title}
                 </h4>
-                <p className="text-xs text-amber-400 font-serif mt-0.5">
+                <p className="text-[11px] text-amber-400 font-serif mt-0.5 truncate">
                   {currentTile.country || currentTile.subtitle}
                 </p>
                 {currentTile.nauticalMiles > 0 && (
-                  <span className="text-[11px] font-mono text-cyan-300 font-semibold block mt-1">
+                  <span className="text-[10px] font-mono text-cyan-300 font-semibold block mt-0.5">
                     ⚓ {currentTile.nauticalMiles.toLocaleString()} Hải lý
                   </span>
                 )}
@@ -1157,7 +1178,7 @@ export default function HaiTrinhVanDamGame() {
             </div>
 
             {currentTile.narrative && (
-              <p className="text-xs text-stone-300 font-serif leading-relaxed bg-black/40 p-2.5 rounded-xl border border-amber-900/40">
+              <p className="text-[10px] sm:text-[11px] text-stone-300 font-serif leading-snug bg-black/40 p-1.5 sm:p-2 rounded-lg border border-amber-900/40 max-h-20 sm:max-h-24 overflow-y-auto">
                 {currentTile.narrative}
               </p>
             )}
