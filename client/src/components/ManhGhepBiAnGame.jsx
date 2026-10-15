@@ -1129,8 +1129,8 @@ export default function ManhGhepBiAnGame() {
 
       {/* ================= MODAL: QUESTION CHALLENGE FOR A FLAG TILE ================= */}
       {activeTile && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-          <div className="duocsang-card max-w-xl w-full rounded-3xl p-6 sm:p-8 border-2 border-amber-500/70 shadow-2xl relative space-y-5">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn overflow-y-auto">
+          <div className="duocsang-card max-w-xl w-full rounded-3xl p-4 sm:p-6 border-2 border-amber-500/70 shadow-2xl relative space-y-4 max-h-[90vh] overflow-y-auto my-auto">
             
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-amber-900/60 pb-3">
@@ -1175,7 +1175,7 @@ export default function ManhGhepBiAnGame() {
             </div>
 
             {/* Options list */}
-            <div className="space-y-2.5 pt-1">
+            <div className="space-y-2 pt-0.5">
               {activeTile.options.map((option, idx) => {
                 const isSelected = selectedOption === idx;
                 const isCorrect = idx === activeTile.correctIndex;
@@ -1196,9 +1196,9 @@ export default function ManhGhepBiAnGame() {
                     key={idx}
                     disabled={showQuestionResult}
                     onClick={() => handleAnswerSubmit(idx)}
-                    className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left text-xs sm:text-sm font-sans flex items-start space-x-3 transition-all ${btnStyle}`}
+                    className={`w-full p-2.5 sm:p-3 rounded-xl border text-left text-xs sm:text-sm font-sans flex items-start space-x-2.5 transition-all ${btnStyle}`}
                   >
-                    <span className="w-6 h-6 rounded-lg bg-black/40 border border-amber-600/40 flex items-center justify-center text-xs font-bold text-amber-300 flex-shrink-0 mt-0.5">
+                    <span className="w-5 h-5 rounded-md bg-black/40 border border-amber-600/40 flex items-center justify-center text-xs font-bold text-amber-300 flex-shrink-0 mt-0.5">
                       {String.fromCharCode(65 + idx)}
                     </span>
                     <span className="flex-grow font-serif leading-snug">{option}</span>
