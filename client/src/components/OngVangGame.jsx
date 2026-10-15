@@ -959,7 +959,7 @@ export default function OngVangGame() {
 
   return (
     <section id="quiz" className="pt-2 pb-6 sm:pt-3 sm:pb-8 bg-gradient-to-b from-[#140b06] via-[#201108] to-[#140b06] border-t border-b border-amber-900/50 relative">
-      <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
+      <div className="w-full max-w-[1650px] mx-auto px-2.5 sm:px-6 lg:px-8 xl:px-10">
         
         {/* Compact Header & Navigation Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-2.5">

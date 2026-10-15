@@ -700,8 +700,8 @@ export default function HaiTrinhVanDamGame() {
 
   // Render 3D Dice Pips (All 5-pointed golden stars ★)
   const renderDicePips = (val) => {
-    const StarPip = ({ className = "text-xs sm:text-sm" }) => (
-      <span className={`text-yellow-300 drop-shadow-[0_0_8px_rgba(255,235,59,0.95)] leading-none select-none inline-flex items-center justify-center ${className}`}>
+    const StarPip = ({ className = "text-[10px] sm:text-xs" }) => (
+      <span className={`text-yellow-300 drop-shadow-[0_0_6px_rgba(255,235,59,0.95)] leading-none select-none inline-flex items-center justify-center ${className}`}>
         ★
       </span>
     );
@@ -710,66 +710,66 @@ export default function HaiTrinhVanDamGame() {
       case 1:
         return (
           <div className="flex items-center justify-center w-full h-full">
-            <StarPip className="text-2xl sm:text-3xl md:text-4xl animate-pulse" />
+            <StarPip className="text-xl sm:text-2xl animate-pulse" />
           </div>
         );
       case 2:
         return (
-          <div className="w-full h-full p-2 sm:p-2.5 flex flex-col justify-between">
-            <div className="flex justify-start"><StarPip className="text-sm sm:text-base" /></div>
-            <div className="flex justify-end"><StarPip className="text-sm sm:text-base" /></div>
+          <div className="w-full h-full p-1.5 sm:p-2 flex flex-col justify-between">
+            <div className="flex justify-start"><StarPip className="text-xs sm:text-sm" /></div>
+            <div className="flex justify-end"><StarPip className="text-xs sm:text-sm" /></div>
           </div>
         );
       case 3:
         return (
-          <div className="w-full h-full p-1.5 sm:p-2 flex flex-col justify-between">
-            <div className="flex justify-start"><StarPip className="text-xs sm:text-sm" /></div>
-            <div className="flex justify-center"><StarPip className="text-xs sm:text-sm" /></div>
-            <div className="flex justify-end"><StarPip className="text-xs sm:text-sm" /></div>
+          <div className="w-full h-full p-1 sm:p-1.5 flex flex-col justify-between">
+            <div className="flex justify-start"><StarPip className="text-[10px] sm:text-xs" /></div>
+            <div className="flex justify-center"><StarPip className="text-[10px] sm:text-xs" /></div>
+            <div className="flex justify-end"><StarPip className="text-[10px] sm:text-xs" /></div>
           </div>
         );
       case 4:
         return (
-          <div className="w-full h-full p-1.5 sm:p-2 flex flex-col justify-between">
+          <div className="w-full h-full p-1 sm:p-1.5 flex flex-col justify-between">
             <div className="flex justify-between">
-              <StarPip className="text-xs sm:text-sm" />
-              <StarPip className="text-xs sm:text-sm" />
+              <StarPip className="text-[10px] sm:text-xs" />
+              <StarPip className="text-[10px] sm:text-xs" />
             </div>
             <div className="flex justify-between">
-              <StarPip className="text-xs sm:text-sm" />
-              <StarPip className="text-xs sm:text-sm" />
+              <StarPip className="text-[10px] sm:text-xs" />
+              <StarPip className="text-[10px] sm:text-xs" />
             </div>
           </div>
         );
       case 5:
         return (
-          <div className="w-full h-full p-1.5 sm:p-2 flex flex-col justify-between relative">
+          <div className="w-full h-full p-1 sm:p-1.5 flex flex-col justify-between relative">
             <div className="flex justify-between">
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
             </div>
             <div className="flex justify-center my-auto">
-              <StarPip className="text-xs sm:text-sm" />
+              <StarPip className="text-[10px] sm:text-xs" />
             </div>
             <div className="flex justify-between">
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
             </div>
           </div>
         );
       case 6:
       default:
         return (
-          <div className="w-full h-full p-1.5 sm:p-2 flex justify-between">
+          <div className="w-full h-full p-1 sm:p-1.5 flex justify-between">
             <div className="flex flex-col justify-between">
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
             </div>
             <div className="flex flex-col justify-between">
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
-              <StarPip className="text-[11px] sm:text-xs" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
+              <StarPip className="text-[9px] sm:text-[10px]" />
             </div>
           </div>
         );
@@ -781,7 +781,7 @@ export default function HaiTrinhVanDamGame() {
       id="journey-game-container" 
       className={isFullscreen 
         ? "fixed inset-0 z-[100] bg-[#120a06]/98 backdrop-blur-md p-2 sm:p-4 overflow-y-auto flex flex-col justify-start"
-        : "w-full max-w-7xl mx-auto space-y-2 sm:space-y-2.5"
+        : "w-full max-w-[1650px] mx-auto space-y-2.5 sm:space-y-3"
       }
     >
       
@@ -850,16 +850,16 @@ export default function HaiTrinhVanDamGame() {
         </div>
       </div>
 
-      {/* ================= MAIN ARENA GRID (FULL-BLEED 2-COLUMN ON DESKTOP, STACKED ON MOBILE) ================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-3 items-start">
+      {/* ================= MAIN ARENA GRID (EXPANDED TO EDGES, BALANCED 2-COLUMN) ================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-5 xl:gap-8 items-start">
         
         {/* ================= LEFT / MAIN: 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
-        <div className="lg:col-span-8 flex justify-center items-center">
+        <div className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-start items-center">
           <div 
             className={`relative aspect-square w-full ${
               isFullscreen 
-                ? 'max-w-[min(90vw,calc(100vh-120px),680px)]' 
-                : 'max-w-[min(100%,calc(100vh-190px),510px)]'
+                ? 'max-w-[min(90vw,calc(100vh-120px),700px)]' 
+                : 'max-w-[min(100%,calc(100vh-175px),540px)]'
             } p-1 xs:p-1.5 sm:p-2 rounded-2xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 border-amber-600/60 shadow-2xl overflow-hidden select-none`}
           >
             {/* Subtle Map Watermark Texture in background */}
@@ -1005,42 +1005,44 @@ export default function HaiTrinhVanDamGame() {
               <Compass className="w-64 h-64 text-amber-400" />
             </div>
 
-            {/* Top of Center: Character Showcase (Bác Hồ) */}
-            <div className="w-full max-w-sm flex items-center justify-between gap-1.5 px-2 py-1 rounded-xl bg-gradient-to-r from-stone-950/90 via-amber-950/80 to-stone-950/90 border border-amber-500/60 shadow">
+            {/* Top of Center: Character Showcase (Bác Hồ) - Airy & Clean */}
+            <div className="w-full max-w-[280px] px-2 py-1 rounded-xl bg-gradient-to-r from-stone-950/95 via-amber-950/80 to-stone-950/95 border border-amber-500/50 shadow flex items-center justify-between gap-1.5">
               <div className="flex items-center space-x-1.5 min-w-0">
-                <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 shadow shrink-0 overflow-hidden">
+                <div className="relative w-6 h-6 sm:w-7 sm:h-7 rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 shadow shrink-0 overflow-hidden">
                   <img 
                     src="/images/bac-ho-character.png" 
                     alt="Bác Hồ" 
                     className="w-full h-full object-contain object-top scale-125"
                   />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-600 border border-yellow-300 flex items-center justify-center text-[6px] text-yellow-300 font-bold z-10">
+                  <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-red-600 border border-yellow-300 flex items-center justify-center text-[5px] text-yellow-300 font-bold z-10">
                     ★
                   </span>
                 </div>
                 <div className="text-left min-w-0">
                   <div className="flex items-center space-x-1">
-                    <span className="text-[7px] sm:text-[8px] uppercase font-bold text-amber-400 tracking-wider">Hải Trình</span>
-                    <span className="text-[7px] px-1 py-0.2 rounded-full bg-red-900 text-yellow-300 font-bold border border-yellow-400/50">Hoa Tiêu</span>
+                    <span className="text-[7px] uppercase font-bold text-amber-400 tracking-wider">Hải Trình</span>
+                    <span className="text-[6px] px-1 py-0.2 rounded-full bg-red-900 text-yellow-300 font-bold border border-yellow-400/50">Hoa Tiêu</span>
                   </div>
-                  <h4 className="text-[10px] sm:text-xs font-bold text-yellow-100 font-serif leading-tight whitespace-nowrap">Chủ tịch Hồ Chí Minh</h4>
+                  <h4 className="text-[9px] sm:text-[10px] font-bold text-yellow-100 font-serif leading-none truncate">
+                    Chủ tịch Hồ Chí Minh
+                  </h4>
                 </div>
               </div>
 
-              {/* Current tile status */}
-              <div className="text-right shrink-0">
-                <div className="text-[7px] sm:text-[8px] text-stone-400 font-serif">Đang dừng:</div>
-                <div className="text-[9px] sm:text-[10px] font-bold text-yellow-400 font-serif leading-tight">
+              {/* Current tile status - separated and right-aligned */}
+              <div className="text-right shrink-0 pl-1.5 border-l border-amber-900/50">
+                <div className="text-[7px] text-stone-400 font-serif leading-none">Đang ở:</div>
+                <div className="text-[8px] sm:text-[9px] font-bold text-yellow-400 font-serif leading-tight max-w-[95px] truncate">
                   {currentTile.title}
                 </div>
               </div>
             </div>
 
-            {/* Middle of Center: Smooth 3D Animated Dice */}
-            <div className="my-auto py-1 flex flex-col items-center justify-center space-y-1">
+            {/* Middle of Center: Smooth 3D Animated Dice (Scaled down 30-40% to breathe) */}
+            <div className="my-auto py-0.5 flex flex-col items-center justify-center space-y-0.5">
               <div 
-                className={`relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-red-600 via-red-700 to-rose-900 border border-yellow-300 shadow-[0_6px_20px_rgba(220,38,38,0.6)] flex items-center justify-center select-none transition-transform duration-100 ${
-                  isRolling ? 'scale-110 shadow-[0_0_25px_rgba(251,191,36,0.9)]' : 'hover:scale-105'
+                className={`relative w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-red-600 via-red-700 to-rose-900 border border-yellow-300 shadow-[0_4px_14px_rgba(220,38,38,0.55)] flex items-center justify-center select-none transition-transform duration-100 ${
+                  isRolling ? 'scale-110 shadow-[0_0_20px_rgba(251,191,36,0.9)]' : 'hover:scale-105'
                 }`}
                 style={{
                   transform: `rotateX(${diceTransform.rotateX}deg) rotateY(${diceTransform.rotateY}deg) scale(${diceTransform.scale})`,
@@ -1051,7 +1053,7 @@ export default function HaiTrinhVanDamGame() {
                 {renderDicePips(diceValue)}
               </div>
 
-              <div className="text-[9px] sm:text-[11px] text-amber-200/90 font-serif leading-none flex items-center justify-center">
+              <div className="text-[8px] sm:text-[9px] text-amber-200/90 font-serif leading-none flex items-center justify-center pt-0.5">
                 {isRolling ? (
                   <span>Đang lắc xúc xắc...</span>
                 ) : isMoving ? (
@@ -1060,28 +1062,28 @@ export default function HaiTrinhVanDamGame() {
                   <span className="text-yellow-300 font-bold">Đã đến nơi! Chuẩn bị mở câu hỏi...</span>
                 ) : (
                   <span>
-                    Kết quả: <strong className="text-yellow-300 font-mono text-xs sm:text-sm font-bold">{diceValue} nút</strong> ({diceValue} bước)
+                    Kết quả: <strong className="text-yellow-300 font-mono text-[9px] sm:text-[10px] font-bold">{diceValue} nút</strong> ({diceValue} bước)
                   </span>
                 )}
               </div>
             </div>
 
-            {/* Bottom of Center: BIG ROLL DICE BUTTON */}
-            <div className="w-full max-w-xs space-y-1">
+            {/* Bottom of Center: ROLL DICE BUTTON (Proportionally balanced) */}
+            <div className="w-full max-w-[210px] space-y-0.5">
               <button
                 disabled={isRolling || isMoving || isWaitingChallenge || Boolean(activeChallengeTile)}
                 onClick={handleRollDice}
-                className={`w-full py-2 sm:py-2.5 px-4 rounded-xl font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-1.5 shadow-lg ${
+                className={`w-full py-1.5 sm:py-2 px-3 rounded-xl font-black text-[10px] sm:text-[11px] uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-1.5 shadow-md ${
                   isRolling || isMoving || isWaitingChallenge
                     ? 'bg-stone-800 text-stone-500 border border-stone-700 cursor-not-allowed'
                     : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-stone-950 border border-yellow-200 shadow-amber-900/50 hover:scale-105 active:scale-95'
                 }`}
               >
-                <Dices className={`w-4 h-4 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
+                <Dices className={`w-3.5 h-3.5 text-stone-950 ${isRolling ? 'animate-spin' : ''}`} />
                 <span>{isRolling ? "ĐANG LẮC..." : isMoving ? "TIẾN BƯỚC..." : isWaitingChallenge ? "CHUẨN BỊ..." : "LẮC XÚC XẮC"}</span>
               </button>
 
-              <div className="text-[8px] sm:text-[9px] text-stone-400 font-serif leading-tight text-center">
+              <div className="text-[7px] sm:text-[8px] text-stone-400 font-serif leading-none text-center">
                 Lắc xúc xắc để cắm đủ 11 lá cờ Tổ quốc
               </div>
             </div>
@@ -1093,20 +1095,20 @@ export default function HaiTrinhVanDamGame() {
     </div>
 
         {/* ================= RIGHT COLUMN: INTERACTIVE EXPEDITION LOG & REFINED CONTROLS (DESKTOP) ================= */}
-        <div className="lg:col-span-4 flex flex-col space-y-2 sm:space-y-2.5">
+        <div className="lg:col-span-6 xl:col-span-6 flex flex-col space-y-2.5 sm:space-y-3 w-full">
           
-          {/* Card 1: 11 Vietnamese Landmark Flags Tracker */}
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#140b06]/95 border border-amber-600/50 shadow-lg space-y-1.5">
-            <div className="flex items-center justify-between text-xs font-serif font-bold border-b border-amber-900/50 pb-1.5">
+          {/* Card 1: 11 Vietnamese Landmark Flags Tracker - Expanded Width */}
+          <div className="p-3 sm:p-4 rounded-2xl bg-[#140b06]/95 border border-amber-600/50 shadow-lg space-y-2">
+            <div className="flex items-center justify-between text-xs sm:text-sm font-serif font-bold border-b border-amber-900/50 pb-2">
               <span className="text-amber-200 flex items-center space-x-1.5">
                 <VietnamFlagIcon className="w-3.5 h-2.5 rounded-[2px]" />
-                <span className="text-yellow-300 text-xs">Tiến Độ Cắm Cờ Lịch Sử:</span>
+                <span className="text-yellow-300 text-xs sm:text-sm">Tiến Độ Cắm Cờ Lịch Sử:</span>
               </span>
-              <span className="font-mono text-yellow-300 text-xs font-black">{claimedCount} / {totalLandmarks} Mốc</span>
+              <span className="font-mono text-yellow-300 text-xs sm:text-sm font-black">{claimedCount} / {totalLandmarks} Mốc</span>
             </div>
 
-            {/* Grid of 11 small milestone chips */}
-            <div className="grid grid-cols-4 gap-1 pt-0.5">
+            {/* Grid of 11 small milestone chips - Expanded width for clearer labels */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-1">
               {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
                 const isPlanted = claimedTiles.includes(lm.id);
                 const isHere = currentTileIdx === lm.id;
@@ -1116,18 +1118,18 @@ export default function HaiTrinhVanDamGame() {
                     onClick={() => {
                       if (lm.type === 'landmark') handleLandedOnTile(lm.id);
                     }}
-                    className={`p-1 sm:p-1.5 rounded-lg border text-center cursor-pointer transition-all hover:scale-105 active:scale-95 ${
+                    className={`p-1.5 sm:p-2 rounded-xl border text-center cursor-pointer transition-all hover:scale-105 active:scale-95 ${
                       isPlanted
                         ? 'bg-gradient-to-b from-red-950 to-[#2a0e08] border-yellow-400 text-yellow-200 shadow-sm ring-1 ring-yellow-400/50'
                         : isHere
-                          ? 'bg-amber-900/90 border-yellow-300 ring-2 ring-yellow-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]'
+                          ? 'bg-amber-900/90 border-yellow-300 ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(251,191,36,0.6)]'
                           : 'bg-stone-900/70 border-stone-800 text-stone-400 hover:border-amber-600'
                     }`}
                     title={lm.title}
                   >
-                    <div className="text-[8px] font-mono font-bold leading-none mb-0.5 text-amber-300">#{idx + 1}</div>
-                    <div className="text-[9px] sm:text-[10px] font-serif font-semibold truncate leading-tight">{lm.title.split('&')[0]}</div>
-                    <div className={`text-[7px] font-mono font-bold mt-0.5 ${isPlanted ? 'text-yellow-300 animate-pulse' : 'text-stone-500'}`}>
+                    <div className="text-[8px] sm:text-[9px] font-mono font-bold leading-none mb-0.5 text-amber-300">#{idx + 1}</div>
+                    <div className="text-[10px] sm:text-xs font-serif font-semibold leading-tight line-clamp-2">{lm.title}</div>
+                    <div className={`text-[7px] sm:text-[8px] font-mono font-bold mt-1 ${isPlanted ? 'text-yellow-300 animate-pulse' : 'text-stone-500'}`}>
                       {isPlanted ? '★ ĐÃ CẮM' : 'Chưa'}
                     </div>
                   </div>
@@ -1136,14 +1138,14 @@ export default function HaiTrinhVanDamGame() {
             </div>
           </div>
 
-          {/* Card 2: Current Landmark Live Detail */}
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border border-amber-600/50 shadow-lg space-y-1.5">
-            <div className="flex items-center justify-between border-b border-amber-900/50 pb-1.5">
-              <span className="text-[9px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
-                <Compass className="w-3 h-3 text-yellow-400" />
+          {/* Card 2: Current Landmark Live Detail - Expanded Width */}
+          <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border border-amber-600/50 shadow-lg space-y-2">
+            <div className="flex items-center justify-between border-b border-amber-900/50 pb-2">
+              <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
+                <Compass className="w-3.5 h-3.5 text-yellow-400" />
                 <span>MỐC HIỆN TẠI (#{currentTile.id + 1}/16)</span>
               </span>
-              <span className={`text-[9px] font-serif font-bold px-1.5 py-0.5 rounded-full ${
+              <span className={`text-[10px] font-serif font-bold px-2 py-0.5 rounded-full ${
                 claimedTiles.includes(currentTile.id)
                   ? 'bg-red-900/80 text-yellow-300 border border-yellow-400/60'
                   : 'bg-stone-900 text-stone-400'
@@ -1152,25 +1154,25 @@ export default function HaiTrinhVanDamGame() {
               </span>
             </div>
 
-            <div className="flex items-start space-x-2.5">
+            <div className="flex items-start space-x-3">
               {currentTile.imageUrl ? (
-                <div className="w-14 h-12 rounded-lg overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
+                <div className="w-16 h-14 sm:w-20 sm:h-16 rounded-xl overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
                   <img src={currentTile.imageUrl} alt={currentTile.title} className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-12 h-12 rounded-lg bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
-                  <Gift className="w-5 h-5 text-yellow-300" />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
+                  <Gift className="w-6 h-6 text-yellow-300" />
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <h4 className="font-serif font-bold text-xs sm:text-sm text-yellow-100 leading-tight truncate">
+                <h4 className="font-serif font-bold text-sm sm:text-base text-yellow-100 leading-tight">
                   {currentTile.title}
                 </h4>
-                <p className="text-[11px] text-amber-400 font-serif mt-0.5 truncate">
+                <p className="text-xs text-amber-400 font-serif mt-0.5">
                   {currentTile.country || currentTile.subtitle}
                 </p>
                 {currentTile.nauticalMiles > 0 && (
-                  <span className="text-[10px] font-mono text-cyan-300 font-semibold block mt-0.5">
+                  <span className="text-[11px] font-mono text-cyan-300 font-semibold block mt-1">
                     ⚓ {currentTile.nauticalMiles.toLocaleString()} Hải lý
                   </span>
                 )}
@@ -1178,7 +1180,7 @@ export default function HaiTrinhVanDamGame() {
             </div>
 
             {currentTile.narrative && (
-              <p className="text-[10px] sm:text-[11px] text-stone-300 font-serif leading-snug bg-black/40 p-1.5 sm:p-2 rounded-lg border border-amber-900/40 max-h-20 sm:max-h-24 overflow-y-auto">
+              <p className="text-xs text-stone-300 font-serif leading-relaxed bg-black/40 p-2.5 rounded-xl border border-amber-900/40 max-h-24 overflow-y-auto">
                 {currentTile.narrative}
               </p>
             )}
