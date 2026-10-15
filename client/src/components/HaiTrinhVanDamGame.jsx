@@ -850,23 +850,23 @@ export default function HaiTrinhVanDamGame() {
         </div>
       </div>
 
-      {/* ================= MAIN ARENA GRID (EXPANDED TO EDGES, BALANCED 2-COLUMN) ================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-5 xl:gap-8 items-start">
+      {/* ================= MAIN ARENA GRID (7:3 PROPORTION: 7 PARTS BOARD, 3 PARTS LOG) ================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-10 gap-3.5 sm:gap-5 items-start w-full">
         
-        {/* ================= LEFT / MAIN: 16-TILE HISTORICAL BOARD (5x5 GRID) ================= */}
-        <div className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-start items-center">
+        {/* ================= LEFT / MAIN: 16-TILE HISTORICAL BOARD (7 PARTS / 70% WIDTH) ================= */}
+        <div className="lg:col-span-7 flex flex-col justify-start items-stretch w-full">
           <div 
-            className={`relative aspect-square w-full ${
+            className={`relative w-full ${
               isFullscreen 
-                ? 'max-w-[min(90vw,calc(100vh-120px),700px)]' 
-                : 'max-w-[min(100%,calc(100vh-175px),540px)]'
-            } p-1 xs:p-1.5 sm:p-2 rounded-2xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 border-amber-600/60 shadow-2xl overflow-hidden select-none`}
+                ? 'max-w-[min(92vw,calc(100vh-120px),820px)] aspect-square mx-auto' 
+                : 'w-full'
+            } p-1 xs:p-1.5 sm:p-2 rounded-2xl bg-gradient-to-br from-[#120a06] via-[#1c100a] to-[#0c0604] border-2 border-amber-600/60 shadow-2xl select-none`}
           >
             {/* Subtle Map Watermark Texture in background */}
-            <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] opacity-15 pointer-events-none rounded-2xl" />
 
         {/* 5x5 Grid Container */}
-        <div className="relative w-full h-full grid grid-cols-5 grid-rows-5 gap-1 sm:gap-1.5">
+        <div className="relative w-full grid grid-cols-5 grid-rows-5 gap-1 sm:gap-1.5">
           
           {/* RENDER THE 16 PERIMETER TILES */}
           {BOARD_TILES.map((tile) => {
@@ -887,7 +887,7 @@ export default function HaiTrinhVanDamGame() {
                     handleLandedOnTile(tile.id);
                   }
                 }}
-                className={`relative rounded-lg sm:rounded-xl border transition-all duration-300 flex flex-col justify-between p-1 sm:p-1.5 cursor-pointer overflow-hidden ${
+                className={`relative rounded-lg sm:rounded-xl border transition-all duration-300 flex flex-col justify-between px-1 py-1 sm:px-1.5 sm:py-1 cursor-pointer min-h-[96px] xs:min-h-[102px] sm:min-h-[110px] md:min-h-[118px] ${
                   isCurrentPos 
                     ? 'ring-2 sm:ring-4 ring-yellow-400 border-yellow-300 bg-gradient-to-b from-amber-800/95 to-amber-950 z-20 scale-[1.02] shadow-[0_0_20px_rgba(251,191,36,0.7)]' 
                     : isClaimed
@@ -902,8 +902,8 @@ export default function HaiTrinhVanDamGame() {
                 }`}
               >
                 {/* Tile Header Bar */}
-                <div className="flex items-center justify-between gap-0.5 z-10 leading-none">
-                  <span className={`text-[7px] sm:text-[9px] font-mono font-bold px-1 py-0.2 rounded shrink-0 ${
+                <div className="flex items-center justify-between gap-0.5 z-10 leading-none mb-0.5">
+                  <span className={`text-[7px] sm:text-[8px] font-mono font-bold px-1 py-0.2 rounded shrink-0 ${
                     isCorner ? 'bg-amber-600 text-stone-950' : 'bg-black/60 text-amber-300'
                   }`}>
                     #{tile.id + 1}
@@ -912,28 +912,28 @@ export default function HaiTrinhVanDamGame() {
                   {/* PROMINENT PLANTED VIETNAMESE FLAG BADGE */}
                   {isClaimed && isLandmark ? (
                     <div className="flex items-center space-x-1 px-1 sm:px-1.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-red-700 border border-yellow-300 text-yellow-200 shadow-sm animate-pulse">
-                      <VietnamFlagIcon className="w-2.5 h-1.5 sm:w-3 sm:h-2" />
-                      <span className="text-[6px] sm:text-[8px] font-black font-sans uppercase tracking-tighter">ĐÃ CẮM CỜ</span>
+                      <VietnamFlagIcon className="w-2.5 h-1.5" />
+                      <span className="text-[6px] sm:text-[7.5px] font-black font-sans uppercase tracking-tighter">ĐÃ CẮM</span>
                     </div>
                   ) : isLandmark ? (
-                    <span className="text-[6px] sm:text-[8px] font-bold text-stone-400 font-serif whitespace-nowrap">Chưa cắm</span>
+                    <span className="text-[6px] sm:text-[7.5px] font-bold text-stone-400 font-serif whitespace-nowrap">Chưa cắm</span>
                   ) : null}
 
                   {tile.type === 'chance' && (
-                    <span className="text-[8px] sm:text-[9px] text-yellow-300 whitespace-nowrap">🎁 Cơ hội</span>
+                    <span className="text-[7.5px] sm:text-[8.5px] text-yellow-300 whitespace-nowrap">🎁 Cơ hội</span>
                   )}
                   {tile.type === 'fate' && (
-                    <span className="text-[8px] sm:text-[9px] text-purple-300 whitespace-nowrap">⚡ Vận mệnh</span>
+                    <span className="text-[7.5px] sm:text-[8.5px] text-purple-300 whitespace-nowrap">⚡ Vận mệnh</span>
                   )}
                   {tile.type === 'supply' && (
-                    <span className="text-[8px] sm:text-[9px] text-cyan-300 whitespace-nowrap">⚓ Tiếp tế</span>
+                    <span className="text-[7.5px] sm:text-[8.5px] text-cyan-300 whitespace-nowrap">⚓ Tiếp tế</span>
                   )}
                 </div>
 
                 {/* Tile Main Content: Historical Vintage Photo */}
                 <div className="my-auto text-center px-0.5 space-y-0.5">
                   {tile.imageUrl ? (
-                    <div className="w-full aspect-[16/10] max-h-7 xs:max-h-9 sm:max-h-12 md:max-h-16 lg:max-h-20 rounded sm:rounded-md overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner">
+                    <div className="w-full h-8 xs:h-9 sm:h-10 md:h-11 rounded overflow-hidden border border-amber-900/60 mx-auto relative bg-black shadow-inner shrink-0">
                       <img 
                         src={tile.imageUrl} 
                         alt={tile.title} 
@@ -946,22 +946,22 @@ export default function HaiTrinhVanDamGame() {
                       {/* Crisp Vietnam Flag Pin on Image when claimed */}
                       {isClaimed && (
                         <div className="absolute top-0.5 right-0.5 z-10 flex items-center space-x-0.5 px-1 py-0.5 rounded bg-black/85 backdrop-blur-[1px] border border-yellow-400 shadow">
-                          <VietnamFlagIcon className="w-3 h-2" />
+                          <VietnamFlagIcon className="w-2.5 h-1.5" />
                         </div>
                       )}
                     </div>
                   ) : (
-                    <div className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 mx-auto rounded-full bg-black/40 border border-amber-500/40 flex items-center justify-center text-amber-300">
-                      {tile.type === 'chance' && <Gift className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-yellow-300" />}
-                      {tile.type === 'fate' && <Compass className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-purple-300" />}
-                      {tile.type === 'supply' && <Anchor className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-cyan-300" />}
+                    <div className="w-6 h-6 sm:w-7 sm:h-8 mx-auto rounded-full bg-black/40 border border-amber-500/40 flex items-center justify-center text-amber-300 shrink-0">
+                      {tile.type === 'chance' && <Gift className="w-3.5 h-3.5 text-yellow-300" />}
+                      {tile.type === 'fate' && <Compass className="w-3.5 h-3.5 text-purple-300" />}
+                      {tile.type === 'supply' && <Anchor className="w-3.5 h-3.5 text-cyan-300" />}
                     </div>
                   )}
 
-                  <h5 className="font-bold text-[7px] sm:text-[9px] md:text-xs text-amber-100 font-serif leading-tight line-clamp-2 break-words">
+                  <h5 className="font-bold text-[8px] sm:text-[9.5px] md:text-[11px] text-amber-100 font-serif leading-tight break-words mt-0.5">
                     {tile.title}
                   </h5>
-                  <p className="text-[6px] sm:text-[8px] md:text-[9px] text-stone-400 font-serif leading-none line-clamp-1 block">
+                  <p className="text-[6.5px] sm:text-[7.5px] md:text-[8.5px] text-stone-300/90 font-serif leading-snug break-words mt-0.5">
                     {tile.subtitle || tile.country}
                   </p>
                 </div>
@@ -1094,21 +1094,21 @@ export default function HaiTrinhVanDamGame() {
       </div>
     </div>
 
-        {/* ================= RIGHT COLUMN: INTERACTIVE EXPEDITION LOG & REFINED CONTROLS (DESKTOP) ================= */}
-        <div className="lg:col-span-6 xl:col-span-6 flex flex-col space-y-2.5 sm:space-y-3 w-full">
+        {/* ================= RIGHT COLUMN: EXPEDITION LOG & REFINED CONTROLS (3 PARTS / 30% WIDTH) ================= */}
+        <div className="lg:col-span-3 flex flex-col space-y-2.5 sm:space-y-3 w-full">
           
-          {/* Card 1: 11 Vietnamese Landmark Flags Tracker - Expanded Width */}
-          <div className="p-3 sm:p-4 rounded-2xl bg-[#140b06]/95 border border-amber-600/50 shadow-lg space-y-2">
+          {/* Card 1: 11 Vietnamese Landmark Flags Tracker - 3 Columns Grid */}
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-[#140b06]/95 border border-amber-600/50 shadow-lg space-y-2">
             <div className="flex items-center justify-between text-xs sm:text-sm font-serif font-bold border-b border-amber-900/50 pb-2">
               <span className="text-amber-200 flex items-center space-x-1.5">
                 <VietnamFlagIcon className="w-3.5 h-2.5 rounded-[2px]" />
-                <span className="text-yellow-300 text-xs sm:text-sm">Tiến Độ Cắm Cờ Lịch Sử:</span>
+                <span className="text-yellow-300 text-xs sm:text-sm">Tiến Độ Cắm Cờ:</span>
               </span>
               <span className="font-mono text-yellow-300 text-xs sm:text-sm font-black">{claimedCount} / {totalLandmarks} Mốc</span>
             </div>
 
-            {/* Grid of 11 small milestone chips - Expanded width for clearer labels */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-1">
+            {/* Grid of 11 small milestone chips - 3 Columns for readable titles */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2 pt-1">
               {BOARD_TILES.filter(t => t.type === 'landmark').map((lm, idx) => {
                 const isPlanted = claimedTiles.includes(lm.id);
                 const isHere = currentTileIdx === lm.id;
@@ -1138,8 +1138,8 @@ export default function HaiTrinhVanDamGame() {
             </div>
           </div>
 
-          {/* Card 2: Current Landmark Live Detail - Expanded Width */}
-          <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border border-amber-600/50 shadow-lg space-y-2">
+          {/* Card 2: Current Landmark Live Detail */}
+          <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-br from-[#1b1009] via-[#150c06] to-[#0d0704] border border-amber-600/50 shadow-lg space-y-2">
             <div className="flex items-center justify-between border-b border-amber-900/50 pb-2">
               <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-amber-400 flex items-center space-x-1.5">
                 <Compass className="w-3.5 h-3.5 text-yellow-400" />
@@ -1154,25 +1154,25 @@ export default function HaiTrinhVanDamGame() {
               </span>
             </div>
 
-            <div className="flex items-start space-x-3">
+            <div className="flex items-start space-x-2.5">
               {currentTile.imageUrl ? (
-                <div className="w-16 h-14 sm:w-20 sm:h-16 rounded-xl overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
+                <div className="w-16 h-14 sm:w-18 sm:h-16 rounded-xl overflow-hidden border border-amber-600/40 shrink-0 bg-black shadow">
                   <img src={currentTile.imageUrl} alt={currentTile.title} className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
+                <div className="w-14 h-14 rounded-xl bg-amber-950/60 border border-amber-600/40 flex items-center justify-center shrink-0 text-amber-300">
                   <Gift className="w-6 h-6 text-yellow-300" />
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <h4 className="font-serif font-bold text-sm sm:text-base text-yellow-100 leading-tight">
+                <h4 className="font-serif font-bold text-xs sm:text-sm text-yellow-100 leading-tight break-words">
                   {currentTile.title}
                 </h4>
-                <p className="text-xs text-amber-400 font-serif mt-0.5">
+                <p className="text-[11px] text-amber-400 font-serif mt-0.5 break-words">
                   {currentTile.country || currentTile.subtitle}
                 </p>
                 {currentTile.nauticalMiles > 0 && (
-                  <span className="text-[11px] font-mono text-cyan-300 font-semibold block mt-1">
+                  <span className="text-[10px] font-mono text-cyan-300 font-semibold block mt-0.5">
                     ⚓ {currentTile.nauticalMiles.toLocaleString()} Hải lý
                   </span>
                 )}
@@ -1180,7 +1180,7 @@ export default function HaiTrinhVanDamGame() {
             </div>
 
             {currentTile.narrative && (
-              <p className="text-xs text-stone-300 font-serif leading-relaxed bg-black/40 p-2.5 rounded-xl border border-amber-900/40 max-h-24 overflow-y-auto">
+              <p className="text-[11px] sm:text-xs text-stone-300 font-serif leading-relaxed bg-black/40 p-2.5 rounded-xl border border-amber-900/40 break-words max-h-36 overflow-y-auto">
                 {currentTile.narrative}
               </p>
             )}
